@@ -1,0 +1,77 @@
+.immers-info-wrapper {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  padding: 3px;
+  transition: width 0.5s;
+  box-sizing: content-box;
+}
+
+.immers-info-wrapper * {
+  box-sizing: content-box;
+}
+
+
+.immers-info-wrapper:hover {
+  width: 375px;
+  /* extra padding to keep hover open */
+  padding: 35px;
+  /* compensate for padding */
+  transform: translate(-32px, 32px);
+}
+
+.immers-info-container {
+  display: inline-flex;
+  align-content: center;
+  width: 375px;
+}
+
+
+.immers-info-logo {
+  width: 32px;
+  height: 32px;
+  background-image: url('./immers\ logo.png');
+  background-size: contain;
+  margin-right: 10px;
+}
+
+.immers-login-container {
+  display: flex;
+}
+
+.immers-login-container>*:not(:first-child) {
+  margin-left: 10px;
+}
+
+
+.immers-login-button {
+  border-radius: 0;
+  border: 2px solid #5768d5;
+  background-color: transparent;
+  color: #5768d5;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.immers-login-button:hover {
+  background-color: #eaebf1;
+}
+
+.immers-login-button:active {
+  background-color: #eaebf1;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
+.immers-login-input {
+  width: 211px;
+  border-radius: 0;
+  width: 211px;
+  border-radius: 0;
+  border: 2px solid #999;
+}
