@@ -4,9 +4,9 @@ import { catchToken, DestinationOAuthPopup } from './source/authUtils'
 import { immersLoginButton } from './source/html/htmlUtils'
 let scriptArgs
 try {
-  scriptArgs = new URLSearchParams(new URL(document.currentScript.src).search)
+  scriptArgs = Object.fromEntries(new URL(document.currentScript.src).searchParams)
 } catch (err) {
-  scriptArgs = new URLSearchParams()
+  scriptArgs = {}
   console.warn(`Unable to process query arguments to script, ${err.message}`)
 }
 (async function () {
@@ -36,8 +36,8 @@ try {
     })
   }
 
-  if (!scriptArgs.has('noButton')) {
-    const loginDiv = immersLoginButton()
+  if (!scriptArgs.noButton) {
+    const loginDiv = immersLoginButton(scriptArgs.pos ?? 'bottom-left')
     loginDiv.addEventListener('immers-login-event', async ({ detail: { handle } }) => {
       await loginAs(handle)
       document.body.removeChild(loginDiv)
@@ -45,43 +45,6 @@ try {
     document.body.appendChild(loginDiv)
   }
 
-  /*
-  const immersSocket = new ImmersSocket(homeImmer, token)
-  immersSocket.addEventListener('immers-socket-connect', () => {
-    // will also send on reconnect to ensure you show as online
-    activities.arrive()
-    immersSocket.prepareLeaveOnDisconnect(actorObj, place)
-  })
-  immersSocket.addEventListener('immers-socket-friends-update', () => {
-    // if (store.state.profile.id) {
-    //   const profile = store.state.profile
-    //   try {
-    //     friendsCol = await getFriends(profile)
-    //     activities.friends = friendsCol.orderedItems
-    //     remountUI({ friends: friendsCol.orderedItems.filter(act => act.type !== 'Reject'), handle: profile.handle })
-    //   } catch (err) {
-    //     console.warn(err.message)
-    //     remountUI({ friends: [], handle: profile.handle })
-    //   }
-    //   // update follow button for new friends
-    //   const players = window.APP.componentRegistry['player-info']
-    //   players?.forEach(infoComp => setFriendState(infoComp.data.immersId, infoComp.el))
-    // }
-  })
-  immersSocket.addEventListener('immers-socket-inbox-update', ({ detail: activity }) => {
-    // const message = activities.activityAsChat(activity)
-    // if (message.body) {
-    //   if (message.type !== 'activity') {
-    //     // play sound for chat/image/video updates
-    //     scene.systems['hubs-systems'].soundEffectsSystem.playSoundOneShot(SOUND_CHAT_MESSAGE)
-    //   }
-    //   immersMessageDispatch.dispatchEvent(new CustomEvent('message', { detail: message }))
-    //   if (scene.is('vr-mode')) {
-    //     createInWorldLogMessage(message)
-    //   }
-    // }
-  })
-  */
   window.IMMERS_CLIENT ??= {}
   Object.assign(window.IMMERS_CLIENT, {
     loginAs,

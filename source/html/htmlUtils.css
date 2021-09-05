@@ -1,32 +1,35 @@
+.immers-info-wrapper, .immers-info-wrapper * {
+  box-sizing: content-box;
+}
+
 .immers-info-wrapper {
   position: fixed;
+  padding: 3px;
+  display: flex;
+}
+
+.bottom-left .immers-info-wrapper {
   bottom: 10px;
   left: 10px;
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
-  padding: 3px;
-  transition: width 0.5s;
-  box-sizing: content-box;
 }
 
-.immers-info-wrapper * {
-  box-sizing: content-box;
-}
-
-
-.immers-info-wrapper:hover {
-  width: 375px;
-  /* extra padding to keep hover open */
-  padding: 35px;
-  /* compensate for padding */
-  transform: translate(-32px, 32px);
+.top-left .immers-info-wrapper {
+  top: 10px;
+  left: 10px;
 }
 
 .immers-info-container {
   display: inline-flex;
   align-content: center;
-  width: 375px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0s linear 0.5s;
+}
+
+.open .immers-info-container {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s, visibility 0s;
 }
 
 
@@ -35,7 +38,10 @@
   height: 32px;
   background-image: url('./immers\ logo.png');
   background-size: contain;
+  background-repeat: no-repeat;
   margin-right: 10px;
+  cursor: pointer;
+  border-radius: 50px;
 }
 
 .immers-login-container {
@@ -56,15 +62,15 @@
   cursor: pointer;
 }
 
-.immers-login-button:hover {
-  background-color: #eaebf1;
+.immers-login-button:hover, .immers-info-logo:hover {
+  background-color: #f1f3ff;
 }
 
-.immers-login-button:active {
+.immers-login-button:active, .immers-info-logo:active {
   background-color: #eaebf1;
-  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-  box-shadow: inset 0px 0px 5px #c1c1c1;
+  -webkit-box-shadow: inset 0px 0px 5px #b3b7d5;
+  -moz-box-shadow: inset 0px 0px 5px #b3b7d5;
+  box-shadow: inset 0px 0px 5px #b3b7d5;
   outline: none;
 }
 
