@@ -1,7 +1,8 @@
-import { Activities } from './source/activities'
-import { ImmersSocket } from './source/streaming'
-import { catchToken, DestinationOAuthPopup } from './source/authUtils'
-import { immersLoginButton } from './source/html/htmlUtils'
+import { Activities } from './source/activities.mjs'
+import { ImmersSocket } from './source/streaming.mjs'
+import { catchToken, DestinationOAuthPopup } from './source/authUtils.mjs'
+import ImmersHUD from './source/ImmersHUD/ImmersHUD.mjs'
+window.customElements.define('immers-hud', ImmersHUD)
 let scriptArgs
 try {
   scriptArgs = Object.fromEntries(new URL(document.currentScript.src).searchParams)
@@ -25,7 +26,7 @@ try {
   let authorizedScopes, homeImmer, profile, token, streaming, activities
 
   async function loginAs (handle) {
-    ({ authorizedScopes, homeImmer, profile, token } = await DestinationOAuthPopup(place, handle, 'friends'))
+    ({ authorizedScopes, homeImmer, profile, token } = await DestinationOAuthPopup(handle, 'friends'))
     activities = new Activities(profile, homeImmer, place, token)
     streaming = new ImmersSocket(homeImmer, token)
     streaming.addEventListener('immers-socket-connect', () => {
@@ -37,12 +38,14 @@ try {
   }
 
   if (!scriptArgs.noButton) {
-    const loginDiv = immersLoginButton(scriptArgs.pos ?? 'bottom-left')
-    loginDiv.addEventListener('immers-login-event', async ({ detail: { handle } }) => {
+    // const loginDiv = immersLoginButton(scriptArgs.pos ?? 'bottom-left')
+    const hud = document.createElement('immers-hud')
+    hud.setAttribute('position', scriptArgs.position ?? 'bottom-left')
+    document.body.appendChild(hud)
+
+    hud.addEventListener('immers-login-event', async ({ detail: { handle } }) => {
       await loginAs(handle)
-      document.body.removeChild(loginDiv)
     })
-    document.body.appendChild(loginDiv)
   }
 
   window.IMMERS_CLIENT ??= {}

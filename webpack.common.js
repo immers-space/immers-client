@@ -2,10 +2,10 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    destination: './oneLiner.js'
+    destination: './oneLiner.mjs'
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.mjs',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },
@@ -15,27 +15,12 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  targets: ['defaults', 'not ie 11'],
-                  bugfixes: true,
-                  useBuiltIns: 'usage',
-                  corejs: '3.17',
-                  shippedProposals: true,
-                  debug: true
-                }
-              ]
-            ]
-          }
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        use: ['css-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

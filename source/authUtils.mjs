@@ -1,5 +1,5 @@
-import { Activities } from './activities'
-import { parseHandle } from './utils'
+import { Activities } from './activities.mjs'
+import { parseHandle } from './utils.mjs'
 
 export const allScopes = [
   'viewProfile',
@@ -97,13 +97,12 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle 
  * For a standalone destination without its own Immers Server,
  * trigger OAuth flow to a user's home immer via popup window.
  * Must be invoked from a trusted user input event handler to allow the popup.
- * @param {APPlace} place Place object representing this website
  * @param  {string} handle User's Immers Handle (username[home.immer] or username@home.immer)
  * @param  {string} preferredScope Level of access to request (remember the user can alter this before approving)
  * @param  {string} [tokenCatcherURL=window.location] Redirect URI for OAuth, a page on your origin that runs catchToken on load
  * @returns {Promise<AuthResult>}
  */
-export async function DestinationOAuthPopup (place, handle, preferredScope, tokenCatcherURL = window.location) {
+export async function DestinationOAuthPopup (handle, preferredScope, tokenCatcherURL = window.location) {
   const { immer } = parseHandle(handle)
   if (!immer) {
     throw new Error('Invalid handle')
@@ -127,7 +126,6 @@ export async function DestinationOAuthPopup (place, handle, preferredScope, toke
   }
   */
   return oauthPopup(`https://${immer}/auth/authorize`, {
-    // clientId: place.id,
     redirectURI: tokenCatcherURL,
     preferredScope,
     handle
