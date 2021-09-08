@@ -1,7 +1,7 @@
-import { Activities } from './source/activities.mjs'
-import { ImmersSocket } from './source/streaming.mjs'
-import { catchToken, DestinationOAuthPopup } from './source/authUtils.mjs'
-import ImmersHUD from './source/ImmersHUD/ImmersHUD.mjs'
+import { Activities } from './source/activities.js'
+import { ImmersSocket } from './source/streaming.js'
+import { catchToken, DestinationOAuthPopup } from './source/authUtils.js'
+import ImmersHUD from './source/ImmersHUD/ImmersHUD.js'
 window.customElements.define('immers-hud', ImmersHUD)
 let scriptArgs
 try {

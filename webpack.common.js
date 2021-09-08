@@ -2,10 +2,10 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    destination: './oneLiner.mjs'
+    destination: './oneLiner.js'
   },
   output: {
-    filename: '[name].bundle.mjs',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true
   },

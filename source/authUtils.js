@@ -1,5 +1,5 @@
-import { Activities } from './activities.mjs'
-import { parseHandle } from './utils.mjs'
+import { Activities } from './activities.js'
+import { parseHandle } from './utils.js'
 
 export const allScopes = [
   'viewProfile',

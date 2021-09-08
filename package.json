@@ -2,7 +2,7 @@
   "name": "immers-client",
   "version": "0.0.1",
   "description": "Clients-side ActivityPub library for Immers Space",
-  "module": "index.mjs",
+  "module": "index.js",
   "sideEffects": [
     "*.css"
   ],
