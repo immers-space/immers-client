@@ -38,7 +38,6 @@ try {
   }
 
   if (!scriptArgs.noButton) {
-    // const loginDiv = immersLoginButton(scriptArgs.pos ?? 'bottom-left')
     const hud = document.createElement('immers-hud')
     hud.setAttribute('position', scriptArgs.position ?? 'bottom-left')
     document.body.appendChild(hud)
