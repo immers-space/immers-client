@@ -81,4 +81,8 @@ export default class ImmersHUD extends window.HTMLElement {
   static get POSITION_OPTIONS () {
     return ['top-left', 'bottom-left', 'top-right', 'bottom-right']
   }
+
+  static Register () {
+    window.customElements.define('immers-hud', ImmersHUD)
+  }
 }

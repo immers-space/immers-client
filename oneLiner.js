@@ -1,6 +1,6 @@
 import { catchToken, roles } from './source/authUtils.js'
 import ImmersHUD from './source/ImmersHUD/ImmersHUD.js'
-window.customElements.define('immers-hud', ImmersHUD)
+ImmersHUD.Register()
 let scriptArgs
 try {
   scriptArgs = Object.fromEntries(new URL(document.currentScript.src).searchParams)
