@@ -15,12 +15,19 @@
  * @property {string} type
  * @property {IRI} inbox
  * @property {IRI} outbox
+ *
+ * @typedef {Object} APPlace
+ * @property {IRI} id
+ * @property {String} type 'Place'
+ * @property {String} name Title of the destination
+ * @property {String} url link to visit the destination
+ * @property {String} audience who can view this object (generally Activities.PublicAddress)
  */
 
 export class Activities {
-  static JSONLDMime = 'application/activity+json';
-  static PublicAddress = 'as:Public';
-
+  static JSONLDMime = 'application/activity+json'
+  static PublicAddress = 'as:Public'
+  #token
   /**
    * Client-to-server ActivityPub API methods
    * @param  {APActor} actor The user's actor object

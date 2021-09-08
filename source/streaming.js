@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
 export class ImmersSocket extends window.EventTarget {
+  #token
   /**
    * @param  {string} homeImmer
    * @param  {string} token

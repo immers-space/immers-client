@@ -1,6 +1,10 @@
 import { Activities } from './activities.js'
 import { parseHandle } from './utils.js'
 
+/** @constant User account access roles that can be granted.
+    @type {string[]}
+    @default
+*/
 export const allScopes = [
   'viewProfile',
   'viewPublic',
@@ -13,8 +17,16 @@ export const allScopes = [
   'destructive'
 ]
 
+/** @constant User account access levels that can be requested.
+    @type {string[]}
+    @default
+*/
 export const roles = ['public', 'friends', 'modAdditive', 'modFull']
 
+/**
+ * Retrieve OAuth access token and authorization details from URL after
+ * redirect and pass it back to the opening window if in a pop-up
+ */
 export function catchToken () {
   const hashParams = new URLSearchParams(window.location.hash.substring(1))
   if (hashParams.has('access_token')) {
