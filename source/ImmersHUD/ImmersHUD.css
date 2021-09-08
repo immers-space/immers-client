@@ -38,15 +38,16 @@
   width: 32px;
   height: 32px;
   background-image: url('../assets/immers logo.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   margin-right: 10px;
   cursor: pointer;
   border-radius: 50px;
 }
 
-#login-container {
+#login-container, #status-container {
   display: flex;
+  align-items: center;
 }
 
 #login-container>*:not(:first-child) {

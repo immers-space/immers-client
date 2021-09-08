@@ -12,6 +12,8 @@ export default class ImmersHUD extends window.HTMLElement {
     template.innerHTML = htmlTemplate.trim()
     this.shadowRoot.append(styleTag, template.content.cloneNode(true))
     this.container = this.shadowRoot.lastElementChild
+
+    this.queryCache = {}
   }
 
   connectedCallback () {
@@ -57,9 +59,19 @@ export default class ImmersHUD extends window.HTMLElement {
     await this.immersClient.connect(
       this.getAttribute('token-catcher'),
       this.getAttribute('access-role'),
-      this.container.querySelector('#handle-input').value
+      this.el('handle-input').value
     )
-    this.container.querySelector('#login-container').classList.add('removed')
+    this.el('login-container').classList.add('removed')
+    this.el('status-container').classList.remove('removed')
+    // show profile info
+    if (this.immersClient.profile.avatarImage) {
+      this.el('logo').style.backgroundImage = `url(${this.immersClient.profile.avatarImage})`
+    }
+    this.el('username').textContent = this.immersClient.profile.displayName
+  }
+
+  el (id) {
+    return this.queryCache[id] ?? (this.queryCache[id] = this.container.querySelector(`#${id}`))
   }
 
   static get observedAttributes () {

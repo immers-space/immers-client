@@ -6,11 +6,24 @@ import { ImmersSocket } from './streaming.js'
  * @typedef {object} Destination
  * @property {string} name Title of the destination
  * @property {string} url link to visit the destination
+ *
+ * @typedef {object} Profile
+ * @property {string} handle
+ * @property {string} displayName
+ * @property {string} homeImmer
+ * @property {string} username
+ * @property {string} avatarImage
+ * @property {string} avatarGltf
  */
 
 export class ImmersClient {
   activities
   streaming
+  /**
+   * User's Immers profile
+   * @type {Profile}
+   * @public
+   */
   profile
   /**
    * High-level interface to Immers profile and social features
@@ -44,7 +57,15 @@ export class ImmersClient {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }
     const { profile, token, homeImmer, authorizedScopes } = authResult
-    this.profile = profile
+
+    this.profile = {
+      handle,
+      homeImmer,
+      displayName: profile.name,
+      username: profile.preferredUsername,
+      avatarImage: profile.icon?.url?.href ?? profile.icon?.url ?? profile.icon,
+      avatarGltf: profile.avatar?.url?.href ?? profile.avatar?.url
+    }
     this.activities = new Activities(profile, homeImmer, this.place, token)
     this.streaming = new ImmersSocket(homeImmer, token)
     this.streaming.addEventListener('immers-socket-connect', () => {
