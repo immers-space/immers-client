@@ -3,16 +3,36 @@
   display: flex;
 }
 
-:host([position=bottom-left]) {
+:host([position]) {
   position: fixed;
+}
+
+:host([position^=bottom]) {
   bottom: 10px;
+}
+
+:host([position^=top]) {
+  top: 10px;
+}
+
+:host([position$=left]) {
   left: 10px;
 }
 
-:host([position=top-left]) {
-  position: fixed;
-  top: 10px;
-  left: 10px;
+:host([position$=right]) {
+  right: 10px;
+}
+
+:host([position$=right]) .immers-info-wrapper {
+  flex-direction: row-reverse;
+}
+
+:host([position$=left]) .immers-info-wrapper :first-child {
+  margin-right: 10px;
+}
+
+:host([position$=right]) .immers-info-wrapper :first-child {
+  margin-left: 10px;
 }
 
 .immers-info-wrapper {
@@ -40,7 +60,6 @@
   background-image: url('../assets/immers logo.png');
   background-size: cover;
   background-repeat: no-repeat;
-  margin-right: 10px;
   cursor: pointer;
   border-radius: 50px;
 }

@@ -40,7 +40,7 @@ export class Activities {
     this.actor = actor
     this.homeImmer = homeImmer
     this.place = place
-    this.token = token
+    this.#token = token
     this.localImmer = localImmer
     // this.authorizedScopes = null
     this.nextInboxPage = null
@@ -58,8 +58,8 @@ export class Activities {
   async getObject (IRI) {
     if (this.trustedIRI(IRI)) {
       const headers = { Accept: Activities.JSONLDMime }
-      if (this.token) {
-        headers.Authorization = `Bearer ${this.token}`
+      if (this.#token) {
+        headers.Authorization = `Bearer ${this.#token}`
       }
       const result = await window.fetch(IRI, { headers })
       if (!result.ok) {
@@ -79,7 +79,7 @@ export class Activities {
       method: 'POST',
       headers: {
         'Content-Type': Activities.JSONLDMime,
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${this.#token}`
       },
       body: JSON.stringify(activity)
     })

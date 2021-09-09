@@ -8,7 +8,7 @@ export class ImmersSocket extends window.EventTarget {
    */
   constructor (homeImmer, token) {
     super()
-    this.token = token
+    this.#token = token
     this.socket = io(homeImmer, {
       transportOptions: {
         polling: {
@@ -38,7 +38,7 @@ export class ImmersSocket extends window.EventTarget {
     this.socket.emit('entered', {
       // prepare a leave activity to be fired on disconnect
       outbox: actorObj.outbox,
-      authorization: `Bearer ${this.token}`,
+      authorization: `Bearer ${this.#token}`,
       leave: {
         type: 'Leave',
         actor: actorObj.id,
