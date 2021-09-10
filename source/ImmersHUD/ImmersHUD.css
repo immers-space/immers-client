@@ -81,10 +81,7 @@
 #login-container, #status-container {
   display: flex;
   align-items: flex-end;
-}
-
-#login-container>*:not(:first-child) {
-  margin-left: 10px;
+  gap: 10px;
 }
 
 .immers-input, .immers-button {
@@ -130,12 +127,6 @@
   -moz-box-shadow: inset 0px 0px 5px #b3b7d5ff;
   box-shadow: inset 0px 0px 5px #b3b7d5ff;
   outline: none;
-}
-
-
-
-#status-container {
-  flex-direction: column;
 }
 
 #username {
