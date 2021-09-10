@@ -84,6 +84,9 @@ export default class ImmersHUD extends window.HTMLElement {
           console.warn(`immers-hud: unknown position ${newValue}. Valid options are ${ImmersHUD.POSITION_OPTIONS.join(', ')}`)
         }
         break
+      case 'open':
+        this.#el('notification').classList.add('hidden')
+        break
     }
   }
 
@@ -107,6 +110,9 @@ export default class ImmersHUD extends window.HTMLElement {
 
   onFriendsUpdate (friends) {
     this.friends = friends
+    if (this.getAttribute('open') !== 'true') {
+      this.#el('notification').classList.remove('hidden')
+    }
     this.#el('status-message').textContent = `${friends.filter(f => f.isOnline).length}/${friends.length} friends online`
   }
 
@@ -121,7 +127,7 @@ export default class ImmersHUD extends window.HTMLElement {
   }
 
   static get observedAttributes () {
-    return ['position']
+    return ['position', 'open']
   }
 
   static get POSITION_OPTIONS () {
