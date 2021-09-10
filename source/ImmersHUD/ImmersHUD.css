@@ -27,16 +27,17 @@
   flex-direction: row-reverse;
 }
 
-:host([position$=left]) .immers-info-wrapper :first-child {
+:host([position$=left]) .immers-info-wrapper>:first-child {
   margin-right: 10px;
 }
 
-:host([position$=right]) .immers-info-wrapper :first-child {
+:host([position$=right]) .immers-info-wrapper>:first-child {
   margin-left: 10px;
 }
 
 .immers-info-wrapper {
   display: flex;
+  align-items: flex-end;
 }
 
 .immers-info-container {
@@ -55,6 +56,8 @@
 
 
 .immers-info-logo {
+  position: relative;
+  top: 4px;
   width: 32px;
   height: 32px;
   background-image: url('../assets/immers logo.png');
@@ -66,21 +69,44 @@
 
 #login-container, #status-container {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 #login-container>*:not(:first-child) {
   margin-left: 10px;
 }
 
+.immers-input, .immers-button {
+  border-radius: 0;
+  border: 2px solid;
+  background-color: #FFF;
+  font-size: 13px;
+  padding: 1px 4px;
+  box-sizing: border-box;
+}
 
 .immers-button {
-  border-radius: 0;
-  border: 2px solid #5768d5;
-  background-color: #FFF;
+  border-color: #5768d5;
   color: #5768d5;
   font-weight: bold;
+  font-family: monospace;
+  text-decoration: none;
   cursor: pointer;
+}
+
+.immers-input {
+  border-color: #333;
+  color: #333;
+  padding-top: 1.5px;
+  padding-bottom: 1.5px;
+}
+
+.input-label {
+  font-size: 10px;
+}
+
+.immers-login-input {
+  width: 211px;
 }
 
 .immers-button:hover, .immers-info-logo:hover {
@@ -95,14 +121,22 @@
   outline: none;
 }
 
-.immers-login-input {
-  width: 211px;
-  border-radius: 0;
-  width: 211px;
-  border-radius: 0;
-  border: 2px solid #999;
+
+
+#status-container {
+  flex-direction: column;
 }
+
+#username {
+  font-size: 10px;
+}
+
 
 .removed {
   display: none !important;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
 }

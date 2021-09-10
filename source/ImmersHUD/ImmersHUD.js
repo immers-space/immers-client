@@ -62,6 +62,9 @@ export default class ImmersHUD extends window.HTMLElement {
         case 'logo':
           this.setAttribute('open', this.getAttribute('open') !== 'true')
           break
+        case 'exit-button':
+          this.remove()
+          break
       }
     })
   }

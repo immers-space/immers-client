@@ -1,17 +1,22 @@
 <div class="immers-info-wrapper">
   <div id="logo" class="immers-info-logo"></div>
   <div class="immers-info-container">
-    <div id="login-container">
-      <input id="handle-input" class="immers-login-input"
-            type="text" inputMode="email" placeholder="username[home.immer]"
-            autoCapitalize="off" autoCorrect="off" spellCheck="false" />
-      <button id="login" type="button" class="immers-button immers-login-button">Immers Login</button>
-      <button type="button" class="immers-button immers-info-button">&#x2753;</button>
-      <button type="button" class="immers-button immers-exit-button">&#x274C;</button>
-    </div>
+    <form id="login-container">
+      <label class="input-label vertical">
+        Immers handle
+        <input id="handle-input" class="immers-login-input immers-input"
+              type="text" inputMode="email" placeholder="username[home.immer]"
+              autoCapitalize="off" autoCorrect="off" spellCheck="false" />
+      </label>
+      <button id="login" type="submit" class="immers-button immers-login-button">Immers Login</button>
+      <a href="https://web.immers.space/what-is-immers-space" target="_blank" class="immers-button immers-info-button">&#x2753;</a>
+      <!-- <button id="exit-button" type="button" class="immers-button">&#x274C;</button> -->
+    </form>
     <div id="status-container" class="removed">
-      <div id="username"></div>
-      <div id="status-message"></div>
+      <div class="vertical">
+        <div id="username"></div>
+        <div id="status-message"></div>
+      </div>
     </div>
   </div>
 </div>
