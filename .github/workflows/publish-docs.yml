@@ -18,6 +18,9 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
 
+      - name: Install deps
+        run: npm ci
+
       - name: Build docs
         run: npm run doc
 
