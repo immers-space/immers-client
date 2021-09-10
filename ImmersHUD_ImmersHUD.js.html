@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ImmersHUD/ImmersHUD.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ImmersHUD/ImmersHUD.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import htmlTemplate from './ImmersHUD.html'
+import styles from './ImmersHUD.css'
+import { ImmersClient } from '../client'
+
+/**
+ * Web Component heads-up display for Immers profile login.
+ * Unobtrusively connects your Immersive Web experiene to the Immers Space
+ * metaverse, allowing immersers to connect with their profiles from your site
+ * and share your site with their friends. Grants access to profile information
+ * so you can bring users' preferred identity into your experience.
+ *
+ * The HTML attributes are listed in the Properties table below.
+ * Properties you can access from the element object directly are listed under Members.
+ *
+ * @class ImmersHUD
+ *
+ * @fires immers-hud-connected - On successful login, detail.profile will include users {@link Profile}
+ *
+ * @prop {'top-left'|'top-right'|'bottom-left'|'bottom-right'} [position] - Enable overlay positioning.
+ * @prop {string} token-catcher - OAuth redirect URL, a page on your domain that runs {@link catchToken} on load
+ * @prop {string} access-role - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level.
+ * @prop {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
+ * @prop {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
+ * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
+ * @prop {'true'|'false'} open - Toggles between icon and full HUD view
+ *
+ * @example &lt;caption>Registering the custom element so it can be used in HTML&lt;/caption>
+ * import { ImmersHUD } from './source/ImmersHUD/ImmersHUD.js'
+ * ImmersHUD.Register()
+ * @example &lt;caption>Using the custom element in HTML&lt;/caption>
+ * &lt;immers-hud position="bottom-left" access-role="friends"
+ *             destination-name="My Immer" destination-url="https://myimmer.com/"
+ *             token-catcher="https://myimmer.com/">&lt;/immers-hud>
+ *
+ */
+export class ImmersHUD extends window.HTMLElement {
+  #queryCache = {}
+  #container
+  /**
+   * @prop {FriendStatus[]} - Live-updated friends list with current status
+   */
+  friends = []
+  /**
+   * @prop {ImmersClient} - Immers client instance
+   */
+  immersClient
+  constructor () {
+    super()
+    this.attachShadow({ mode: 'open' })
+    const styleTag = document.createElement('style')
+    styleTag.innerHTML = styles
+    const template = document.createElement('template')
+    template.innerHTML = htmlTemplate.trim()
+    this.shadowRoot.append(styleTag, template.content.cloneNode(true))
+    this.#container = this.shadowRoot.lastElementChild
+  }
+
+  connectedCallback () {
+    if (this.immersClient) {
+      // already initialized
+      return
+    }
+    // Immers client setup
+    if (this.getAttribute('local-immer')) {
+      /* todo: fetch local place object and initialize client in full immer mode */
+    } else {
+      this.immersClient = new ImmersClient({
+        id: window.location.href,
+        name: this.getAttribute('destination-name'),
+        url: this.getAttribute('destination-url')
+      })
+      this.immersClient.addEventListener(
+        'immers-client-friends-update',
+        ({ detail: { friends } }) => this.onFriendsUpdate(friends)
+      )
+    }
+
+    this.#container.addEventListener('click', evt => {
+      switch (evt.target.id) {
+        case 'login':
+          evt.preventDefault()
+          this.login()
+          break
+        case 'logo':
+          this.setAttribute('open', this.getAttribute('open') !== 'true')
+          break
+        case 'exit-button':
+          this.remove()
+          break
+      }
+    })
+  }
+
+  attributeChangedCallback (name, oldValue, newValue) {
+    switch (name) {
+      case 'position':
+        if (newValue &amp;&amp; !ImmersHUD.POSITION_OPTIONS.includes(newValue)) {
+          console.warn(`immers-hud: unknown position ${newValue}. Valid options are ${ImmersHUD.POSITION_OPTIONS.join(', ')}`)
+        }
+        break
+      case 'open':
+        this.#el('notification').classList.add('hidden')
+        break
+    }
+  }
+
+  async login () {
+    await this.immersClient.connect(
+      this.getAttribute('token-catcher'),
+      this.getAttribute('access-role'),
+      this.#el('handle-input').value
+    )
+    this.#el('login-container').classList.add('removed')
+    this.#el('status-container').classList.remove('removed')
+    const profile = this.immersClient.profile
+    // show profile info
+    if (profile.avatarImage) {
+      this.#el('logo').style.backgroundImage = `url(${profile.avatarImage})`
+    }
+    this.#el('username').textContent = profile.displayName
+    this.#el('profile-link').setAttribute('href', profile.url)
+    this.#emit('immers-hud-connected', { profile })
+  }
+
+  onFriendsUpdate (friends) {
+    this.friends = friends
+    if (this.getAttribute('open') !== 'true') {
+      this.#el('notification').classList.remove('hidden')
+    }
+    this.#el('status-message').textContent = `${friends.filter(f => f.isOnline).length}/${friends.length} friends online`
+  }
+
+  #el (id) {
+    return this.#queryCache[id] ?? (this.#queryCache[id] = this.#container.querySelector(`#${id}`))
+  }
+
+  #emit (type, data) {
+    this.dispatchEvent(new window.CustomEvent(type, {
+      detail: data
+    }))
+  }
+
+  static get observedAttributes () {
+    return ['position', 'open']
+  }
+
+  static get POSITION_OPTIONS () {
+    return ['top-left', 'bottom-left', 'top-right', 'bottom-right']
+  }
+
+  static Register () {
+    window.customElements.define('immers-hud', ImmersHUD)
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Sep 10 2021 23:38:51 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

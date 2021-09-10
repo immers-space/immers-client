@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><p><img src="readme_files/header.png" alt="Immers Space header"></p>
+<h1>immers-client</h1>
+<p>Client library to connect with Immers servers and Immers Space accounts from the Immersive Web.
+Using the Immers Client, you can enhance your site with social features and let your users
+share your site with their friends. Immers Space is a federated social network, so you're
+not casting in with any one company or community, you're enabling users from any number of
+communities to bring their accounts, identities, and friends with them to your Immersive
+Web experience. <a href="https://web.immers.space/immersive-web-creators-frequently-asked-questions/">Check out our FAQ for Immersive Web content creators</a>.</p>
+<p>View the full API documentation at https://immers-space.github.io/immers-client</p>
+<h1>Features</h1>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Easy to use</strong></td>
+<td>High-level APIs abstract away the complex details of ActivityPub and federated social networks</td>
+</tr>
+<tr>
+<td><strong>Social login without tracking</strong></td>
+<td>Makes <strong>no</strong> network requests unless a user opts to log in</td>
+</tr>
+<tr>
+<td><strong>Lightweight</strong></td>
+<td>Tree-shakable, few dependencies, 100 Kb bundle</td>
+</tr>
+<tr>
+<td><strong>Promote your site</strong></td>
+<td>Immersers share your site with their friends when they login</td>
+</tr>
+</tbody>
+</table>
+<h2>High-level APIs</h2>
+<p>Immers Space is based on the ActivityPub W3C standard for federated social media, but you
+don't need to know any of the details of activity streams to use Immers Space with our
+high-level APIs</p>
+<h3>The one-liner</h3>
+<p>You can add the ability for users to login with their Immers Space accounts and invite their
+friends to visit your site with just a single line of code:</p>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://unpkg.com/immers-client/dist/destination.bundle.js?position=bottom-left&quot;>
+</code></pre>
+<p>This will add the <code>&lt;immers-hud&gt;</code> Web Component floating on the bottom left of your page,
+giving users a GUI to login to their account which will then share your page with all
+of their friends. To change the positioning, set query parameter to <code>top-left</code>, <code>bottom-right</code>, <code>top-right</code>,
+or add your own <code>&lt;immers-hud&gt;</code> in your HTML for custom positioning.</p>
+<h3>immers-hud Web Component</h3>
+<p>Adds an unobtrusive, 32px square icon than can be clicked to open a small GUI that allows for
+OAuth2 authorization with any Immers Server via a pop-up window. Once connected,
+you'll have access to the users's profile to customize your experience with their preferred identity
+and all of their friends will be sent a link to your site.</p>
+<h3>ImmersClient class</h3>
+<p>Connect to user accounts from any Immers Server to access user profiles and enable social features.</p>
+<h2>Low-level APIs</h2>
+<p>For advanced work, you can dip down into the low-level APIs and start
+crafting and sending your own activities</p>
+<h3>Activities</h3>
+<p>Create and retrieve Activities, the unit of communication in federated social networks</p>
+<h3>ImmersSocket</h3>
+<p>Live streaming updates from a users home server let them know when friends come online or send messages.</p>
+<h2>State of this library</h2>
+<p>This library is under active development, the current functionality allows users to login
+and see a live count of how many of their friends are online. You will be able to access their
+profile to get display name and preferred avatar (image and gltf). Additional features
+like metaverse-wide chat and collectible avatars are available in the low-level APIs
+but not yet integrated into the high-level APIs or the <code>&lt;immers-hud&gt;</code> GUI</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Sep 10 2021 23:38:51 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
