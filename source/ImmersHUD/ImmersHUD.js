@@ -3,33 +3,47 @@ import styles from './ImmersHUD.css'
 import { ImmersClient } from '../client'
 
 /**
- * Heads-up display for Immers profile login.
+ * Web Component heads-up display for Immers profile login.
  * Unobtrusively connects your Immersive Web experiene to the Immers Space
  * metaverse, allowing immersers to connect with their profiles from your site
  * and share your site with their friends. Grants access to profile information
  * so you can bring users' preferred identity into your experience.
  *
- * @element immers-hud
+ * The HTML attributes are listed in the Properties table below.
+ * Properties you can access from the element object directly are listed under Members.
+ *
+ * @class ImmersHUD
  *
  * @fires immers-hud-connected - On successful login, detail.profile will include users {@link Profile}
  *
- * @attr {top-left|top-right|bottom-left|bottom-right} [position] - Enable overlay positioning.
- * @attr {string} token-catcher - OAuth redirect URL, a page on your domain that runs {@link catchToken} on load
- * @attr {string} access-role - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level.
- * @attr {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
- * @attr {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
- * @attr {string} [local-immer] Origin of your local Immers Server, if you have one
- * @attr {true|false} open - Toggles between icon and full HUD view
+ * @prop {'top-left'|'top-right'|'bottom-left'|'bottom-right'} [position] - Enable overlay positioning.
+ * @prop {string} token-catcher - OAuth redirect URL, a page on your domain that runs {@link catchToken} on load
+ * @prop {string} access-role - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level.
+ * @prop {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
+ * @prop {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
+ * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
+ * @prop {'true'|'false'} open - Toggles between icon and full HUD view
  *
- * @prop {ImmersClient} immersClient - Immers client instance
+ * @example <caption>Registering the custom element so it can be used in HTML</caption>
+ * import { ImmersHUD } from './source/ImmersHUD/ImmersHUD.js'
+ * ImmersHUD.Register()
+ * @example <caption>Using the custom element in HTML</caption>
+ * <immers-hud position="bottom-left" access-role="friends"
+ *             destination-name="My Immer" destination-url="https://myimmer.com/"
+ *             token-catcher="https://myimmer.com/"></immers-hud>
+ *
  */
-export default class ImmersHUD extends window.HTMLElement {
+export class ImmersHUD extends window.HTMLElement {
   #queryCache = {}
   #container
   /**
    * @prop {FriendStatus[]} - Live-updated friends list with current status
    */
   friends = []
+  /**
+   * @prop {ImmersClient} - Immers client instance
+   */
+  immersClient
   constructor () {
     super()
     this.attachShadow({ mode: 'open' })

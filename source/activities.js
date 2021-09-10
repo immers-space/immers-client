@@ -1,21 +1,25 @@
 /**
  * @typedef {string} IRI String representing a unique resource URL
- *
+ */
+/**
  * @typedef {Object} APObject Object representing an ActivityPub object
  * @property {IRI} id
  * @property {string} type
- *
+ */
+/**
  * @typedef {Object} APActivity Object representing an ActivityPub activity
  * @property {IRI} id
  * @property {string} type
  * @property {APActor} actor
- *
+ */
+/**
  * @typedef {Object} APActor Object representing an ActivityPub actor
  * @property {IRI} id
  * @property {string} type
  * @property {IRI} inbox
  * @property {IRI} outbox
- *
+ */
+/**
  * @typedef {Object} APPlace
  * @property {IRI} id
  * @property {String} type 'Place'
@@ -24,12 +28,12 @@
  * @property {String} audience who can view this object (generally Activities.PublicAddress)
  */
 
+/** Low-level API client-to-server ActivityPub methods */
 export class Activities {
   static JSONLDMime = 'application/activity+json'
   static PublicAddress = 'as:Public'
   #token
   /**
-   * Client-to-server ActivityPub API methods
    * @param  {APActor} actor The user's actor object
    * @param  {string} homeImmer Protocol and domain of user's home Immers server
    * @param  {APObject} place Place-type object representing this Immersive Web experience

@@ -7,7 +7,8 @@
     "*.css"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "standard",
+    "doc": "jsdoc -d doc -r source/. -R README.md && cp -R readme_files doc/",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --open --config webpack.dev.js"
   },
@@ -29,6 +30,7 @@
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.0.6",
+    "jsdoc": "^3.6.7",
     "standard": "^16.0.3",
     "style-loader": "^3.2.1",
     "web-component-analyzer": "^1.1.6",

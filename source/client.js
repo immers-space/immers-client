@@ -6,7 +6,8 @@ import { ImmersSocket } from './streaming.js'
  * @typedef {object} Destination
  * @property {string} name Title of the destination
  * @property {string} url link to visit the destination
- *
+ */
+/**
  * @typedef {object} Profile
  * @property {string} id - Unique identifier (ActivityPub IRI)
  * @property {string} handle
@@ -16,7 +17,8 @@ import { ImmersSocket } from './streaming.js'
  * @property {string} avatarImage
  * @property {string} avatarGltf
  * @property {string} url - Webpage to view full profile
- *
+ */
+/**
  * @typedef {object} FriendStatus
  * @property {Profile} profile - Profile object for friend
  * @property {boolean} isOnline - Currently online anywhere in Immers Space
@@ -27,6 +29,7 @@ import { ImmersSocket } from './streaming.js'
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  */
 
+/** High-level interface to Immers profile and social features */
 export class ImmersClient extends window.EventTarget {
   activities
   streaming
@@ -37,8 +40,8 @@ export class ImmersClient extends window.EventTarget {
    */
   profile
   /**
-   * High-level interface to Immers profile and social features
-   * @param  {(Destination|import('./activities.js').APPlace)} destinationDescription Metadata about this destination used when sharing
+
+   * @param  {(Destination|APPlace)} destinationDescription Metadata about this destination used when sharing
    * @param  {string} [localImmer] Origin of the local Immers Server, if there is one
    */
   constructor (destinationDescription, localImmer) {
@@ -109,7 +112,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Extract friend status information from their most recent location activity
-   * @param  {import('./activities.js').APActivity} activity
+   * @param  {APActivity} activity
    * @returns {FriendStatus}
    */
   static FriendStatusFromActivity (activity) {
@@ -134,7 +137,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Convert ActivityPub Actor format to Immers profile
-   * @param  {import('./activities.js').APActor} actor - ActivityPub Actor object
+   * @param  {APActor} actor - ActivityPub Actor object
    */
   static ProfileFromActor (actor) {
     const { id, name: displayName, preferredUsername: username, icon, avatar, url} = actor
@@ -154,7 +157,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Links in ActivityPub objects can take a variety of forms.
    * Find and return the URL string.
-   * @param  {import('./activities.js').APObject|object|string} prop
+   * @param  {APObject|object|string} prop
    * @returns {string} URL string
    */
   static URLFromProperty (prop) {

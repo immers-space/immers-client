@@ -1,10 +1,10 @@
 import { Activities } from './activities.js'
 import { parseHandle } from './utils.js'
-
-/** @constant User account access roles that can be granted.
-    @type {string[]}
-    @default
-*/
+/**
+ * User account access roles that can be granted.
+ * @constant allScopes
+ * @type {string[]}
+ */
 export const allScopes = [
   'viewProfile',
   'viewPublic',
@@ -17,9 +17,10 @@ export const allScopes = [
   'destructive'
 ]
 
-/** @constant User account access levels that can be requested.
-    @type {string[]}
-    @default
+/**
+ * User account access levels that can be requested.
+ * @constant
+ * @type {string[]}
 */
 export const roles = ['public', 'friends', 'modAdditive', 'modFull']
 
