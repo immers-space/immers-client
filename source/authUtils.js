@@ -51,7 +51,7 @@ export function catchToken () {
 }
 /**
  * @typedef {Object} AuthResult
- * @property {APActor} profile User's profile object
+ * @property {APActor} actor User's ActivityPub profile object
  * @property {string} token OAuth access token
  * @property {string} homeImmer User's home Immers Server origin
  * @property {Array<string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
@@ -97,8 +97,8 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle 
       window.removeEventListener('message', handler)
       // have to close the popup in this thread because, in chrome, having the popup close itself crashes the browser
       popup?.close()
-      tokenToActor(token, homeImmer).then(profile => {
-        resolve({ profile, token, homeImmer, authorizedScopes })
+      tokenToActor(token, homeImmer).then(actor => {
+        resolve({ actor, token, homeImmer, authorizedScopes })
       })
     }
     window.addEventListener('message', handler)

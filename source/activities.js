@@ -211,6 +211,11 @@ export class Activities {
     })
   }
 
+  friends () {
+    const friendsEndpoint = this.actor.endpoints?.friends ?? `${this.actor.id}/friends`
+    return this.getObject(friendsEndpoint)
+  }
+
   image (url, to, audience, summary) {
     const obj = {
       url,

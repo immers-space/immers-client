@@ -8,15 +8,26 @@ import { ImmersSocket } from './streaming.js'
  * @property {string} url link to visit the destination
  *
  * @typedef {object} Profile
+ * @property {string} id - Unique identifier (ActivityPub IRI)
  * @property {string} handle
  * @property {string} displayName
  * @property {string} homeImmer
  * @property {string} username
  * @property {string} avatarImage
  * @property {string} avatarGltf
+ * @property {string} url - Webpage to view full profile
+ *
+ * @typedef {object} FriendStatus
+ * @property {Profile} profile - Profile object for friend
+ * @property {boolean} isOnline - Currently online anywhere in Immers Space
+ * @property {string} [locationName] - Name of current or last immer visited
+ * @property {string} [locationURL] - URL of current or last immer visited
+ * @property {string} statusString - Text description of current status, "Offline" / "Online at..."
+ * @property {string} __unsafeStatusHTML - Unsanitized HTML description of current status with link.
+ * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  */
 
-export class ImmersClient {
+export class ImmersClient extends window.EventTarget {
   activities
   streaming
   /**
@@ -27,10 +38,11 @@ export class ImmersClient {
   profile
   /**
    * High-level interface to Immers profile and social features
-   * @param  {Destination|import('./activities.js').APPlace} destinationDescription Metadata about this destination used when sharing
+   * @param  {(Destination|import('./activities.js').APPlace)} destinationDescription Metadata about this destination used when sharing
    * @param  {string} [localImmer] Origin of the local Immers Server, if there is one
    */
   constructor (destinationDescription, localImmer) {
+    super()
     this.place = Object.assign(
       { type: 'Place', audience: Activities.PublicAddress },
       destinationDescription
@@ -56,23 +68,96 @@ export class ImmersClient {
     } else {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }
-    const { profile, token, homeImmer, authorizedScopes } = authResult
+    const { actor, token, homeImmer, authorizedScopes } = authResult
 
-    this.profile = {
-      handle,
-      homeImmer,
-      displayName: profile.name,
-      username: profile.preferredUsername,
-      avatarImage: profile.icon?.url?.href ?? profile.icon?.url ?? profile.icon,
-      avatarGltf: profile.avatar?.url?.href ?? profile.avatar?.url
-    }
-    this.activities = new Activities(profile, homeImmer, this.place, token)
+    this.profile = ImmersClient.ProfileFromActor(actor)
+    this.activities = new Activities(actor, homeImmer, this.place, token)
     this.streaming = new ImmersSocket(homeImmer, token)
     this.streaming.addEventListener('immers-socket-connect', () => {
       if (authorizedScopes.includes('postLocation')) {
         this.activities.arrive()
-        this.streaming.prepareLeaveOnDisconnect(profile, this.place)
+        this.streaming.prepareLeaveOnDisconnect(actor, this.place)
       }
     })
+    if (authorizedScopes.includes('viewFriends')) {
+      this.#publishFriendsUpdate()
+      this.streaming.addEventListener(
+        'immers-socket-friends-update',
+        () => this.#publishFriendsUpdate()
+      )
+    }
+  }
+
+  /**
+   * Fetch list of friends and their online status and location
+   * @returns {Promise<FriendStatus[]>}
+   */
+  async friendsList () {
+    const friendsCol = await this.activities.friends()
+    return friendsCol.orderedItems
+      .map(ImmersClient.FriendStatusFromActivity)
+  }
+
+  async #publishFriendsUpdate () {
+    const evt = new window.CustomEvent('immers-client-friends-update', {
+      detail: {
+        friends: await this.friendsList()
+      }
+    })
+    this.dispatchEvent(evt)
+  }
+
+  /**
+   * Extract friend status information from their most recent location activity
+   * @param  {import('./activities.js').APActivity} activity
+   * @returns {FriendStatus}
+   */
+  static FriendStatusFromActivity (activity) {
+    const isOnline = activity.type === 'Arrive'
+    const locationName = activity.target?.name
+    const locationURL = activity.target?.url
+    const statusString = isOnline
+      ? `Online at ${locationName} (${locationURL})`
+      : 'Offline'
+    const __unsafeStatusHTML = isOnline
+      ? `<span>Online at <a href="${locationURL}">${locationName}</a></span>`
+      : '<span>Offline</span>'
+    return {
+      profile: ImmersClient.ProfileFromActor(activity.actor),
+      isOnline,
+      locationName,
+      locationURL,
+      statusString,
+      __unsafeStatusHTML
+    }
+  }
+
+  /**
+   * Convert ActivityPub Actor format to Immers profile
+   * @param  {import('./activities.js').APActor} actor - ActivityPub Actor object
+   */
+  static ProfileFromActor (actor) {
+    const { id, name: displayName, preferredUsername: username, icon, avatar, url} = actor
+    const homeImmer = new URL(id).host
+    return {
+      id,
+      handle: `${username}[${homeImmer}]`,
+      homeImmer,
+      displayName,
+      username,
+      avatarImage: ImmersClient.URLFromProperty(icon),
+      avatarModel: ImmersClient.URLFromProperty(avatar),
+      url: url ?? id
+    }
+  }
+
+  /**
+   * Links in ActivityPub objects can take a variety of forms.
+   * Find and return the URL string.
+   * @param  {import('./activities.js').APObject|object|string} prop
+   * @returns {string} URL string
+   */
+  static URLFromProperty (prop) {
+    return prop?.url?.href ?? prop?.url ?? prop
   }
 }

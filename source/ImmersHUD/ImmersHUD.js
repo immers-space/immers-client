@@ -26,6 +26,10 @@ import { ImmersClient } from '../client'
 export default class ImmersHUD extends window.HTMLElement {
   #queryCache = {}
   #container
+  /**
+   * @prop {FriendStatus[]} - Live-updated friends list with current status
+   */
+  friends = []
   constructor () {
     super()
     this.attachShadow({ mode: 'open' })
@@ -51,6 +55,10 @@ export default class ImmersHUD extends window.HTMLElement {
         name: this.getAttribute('destination-name'),
         url: this.getAttribute('destination-url')
       })
+      this.immersClient.addEventListener(
+        'immers-client-friends-update',
+        ({ detail: { friends } }) => this.onFriendsUpdate(friends)
+      )
     }
 
     this.#container.addEventListener('click', evt => {
@@ -93,8 +101,13 @@ export default class ImmersHUD extends window.HTMLElement {
       this.#el('logo').style.backgroundImage = `url(${profile.avatarImage})`
     }
     this.#el('username').textContent = profile.displayName
-
+    this.#el('profile-link').setAttribute('href', profile.url)
     this.#emit('immers-hud-connected', { profile })
+  }
+
+  onFriendsUpdate (friends) {
+    this.friends = friends
+    this.#el('status-message').textContent = `${friends.filter(f => f.isOnline).length}/${friends.length} friends online`
   }
 
   #el (id) {
