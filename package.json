@@ -10,7 +10,8 @@
     "test": "standard",
     "doc": "jsdoc -c jsdoc.config.json -d doc -r source/. -R README.md && cp -R readme_files doc/",
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack serve --open --config webpack.dev.js"
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
