@@ -18,7 +18,7 @@ try {
     if (scriptArgs.position !== 'none' && !document.querySelector('immers-hud')) {
       const hud = document.createElement('immers-hud')
       hud.setAttribute('position', scriptArgs.position ?? 'bottom-left')
-      hud.setAttribute('destination-name', document.title)
+      hud.setAttribute('destination-name', scriptArgs.title ?? document.title)
       hud.setAttribute('destination-url', window.location.href)
       hud.setAttribute('token-catcher', window.location.href)
       hud.setAttribute('access-role', scriptArgs.role ?? roles[1])

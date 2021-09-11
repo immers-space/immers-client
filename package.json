@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "test": "standard",
-    "doc": "jsdoc -d doc -r source/. -R README.md && cp -R readme_files doc/",
+    "doc": "jsdoc -c jsdoc.config.json -d doc -r source/. -R README.md && cp -R readme_files doc/",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack serve --open --config webpack.dev.js"
   },

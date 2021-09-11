@@ -32,14 +32,22 @@ You can add the ability for users to login with their Immers Space accounts and 
 friends to visit your site with just a single line of code:
 
 ```html
-<script src="https://unpkg.com/immers-client/dist/destination.bundle.js?position=bottom-left">
+<script src="https://unpkg.com/immers-client/dist/destination.bundle.js">
 ```
 
 This will add the `<immers-hud>` Web Component floating on the bottom left of your page,
 giving users a GUI to login to their account which will then share your page with all
-of their friends. To change the positioning, set query parameter to `top-left`, `bottom-right`, `top-right`,
-or add your own `<immers-hud>` in your HTML for custom positioning.
+of their friends. You can also customize it by adding the following query parameters
+to the end of the script `src`.
 
+| Parameter | Description | Default |
+| --- | --- | --- |
+| position | Overlay position, one of `bottom-left`, `top-left`, `bottom-right`, `top-right`, `none` | `bottom-left` |
+| title | Name of your site to use when sharing | `document.title` |
+| role | Level of access to request (user can change before accepting, one of `public`, `friends`, `modAdditive`, `modFull` | `friends` |
+
+If you do not want the `<immers-hud>` element to be automatically injected,
+you can add your own `<immers-hud>` anywhere in the document or set the position to `none`.
 
 ### immers-hud Web Component
 
