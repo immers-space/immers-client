@@ -9,7 +9,8 @@ not casting in with any one company or community, you're enabling users from any
 communities to bring their accounts, identities, and friends with them to your Immersive
 Web experience. [Check out our FAQ for Immersive Web content creators](https://web.immers.space/immersive-web-creators-frequently-asked-questions/).
 
-View the full API documentation at https://immers-space.github.io/immers-client
+View the full API documentation at
+[https://immers-space.github.io/immers-client](https://immers-space.github.io/immers-client)
 
 # Features
 
@@ -29,7 +30,8 @@ high-level APIs
 ### The one-liner
 
 You can add the ability for users to login with their Immers Space accounts and invite their
-friends to visit your site with just a single line of code:
+friends to visit your site with just a single line of code.
+[See this live on our documentation pages](https://immers-space.github.io/immers-client).
 
 ```html
 <script src="https://unpkg.com/immers-client/dist/destination.bundle.js">
