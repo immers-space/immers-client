@@ -4,22 +4,40 @@
 
 Client library to connect with Immers servers and Immers Space accounts from the Immersive Web.
 Using the Immers Client, you can enhance your site with social features and let your users
-share your site with their friends. Immers Space is a federated social network, so you're
-not casting in with any one company or community, you're enabling users from any number of
+share your site with their friends. Immers Space is a decentralized and federated social network, so you're
+not casting in with any one company or community; you're enabling users from any number of
 communities to bring their accounts, identities, and friends with them to your Immersive
 Web experience. [Check out our FAQ for Immersive Web content creators](https://web.immers.space/immersive-web-creators-frequently-asked-questions/).
 
 View the full API documentation at
 [https://immers-space.github.io/immers-client](https://immers-space.github.io/immers-client)
 
-# Features
+## Features
 
 | Feature | Description |
 | --- | --- |
-| **Easy to use** | High-level APIs abstract away the complex details of ActivityPub and federated social networks |
-| **Social login without tracking** | Makes **no** network requests unless a user opts to log in |
-| **Lightweight** | Tree-shakable, few dependencies, 100 Kb bundle |
 | **Promote your site** | Immersers share your site with their friends when they login |
+| **Customized user experience** | Profiles give you an immerser's preferred display name, profile picture, and avatar glTF to optionally integrate into your experience |
+| **Make it memorable** | Offer immersers collectible avatars they can add to their profiles and show off on other immers |
+| **Easy to use** | High-level APIs abstract away the complex details of ActivityPub and federated social networks |
+| **Social login without tracking** | No tracking cookies, no tracking pixels, all resources inlined, and no network requests until a user opts to log in |
+| **Lightweight** | Tree-shakable, few dependencies, 100 Kb bundle |
+
+### How to participate in Immers Space
+
+Immers Space is an interconnected network of Immersive Web experiences
+and communities of the immersers who use them.
+The easiest way to join is to be a **destination** - a site that allows immersers
+to bring their own accounts and identities. You can become an Immers Space destination
+just by including [the "one-liner" script tag](#the-one-liner) on your page.
+
+You could also choose to be a full **immer** - an Immersive Web experience that hosts its own
+community of immersers - by running the free software
+[Immers Server](https://github.com/immers-space/immers)
+alongside your WebXR project. As an immer, you would host the user accounts for your
+community of immersers, and they could use those accounts anywhere in the Immers Space metaverse,
+helping to spread awareness of your site.
+
 
 ## High-level APIs
 
@@ -42,7 +60,7 @@ giving users a GUI to login to their account which will then share your page wit
 of their friends. You can also customize it by adding the following query parameters
 to the end of the script `src`.
 
-| Parameter | Description | Default |
+| Query Parameter | Description | Default |
 | --- | --- | --- |
 | position | Overlay position, one of `bottom-left`, `top-left`, `bottom-right`, `top-right`, `none` | `bottom-left` |
 | title | Name of your site to use when sharing | `document.title` |
@@ -78,7 +96,13 @@ Live streaming updates from a users home server let them know when friends come 
 ## State of this library
 
 This library is under active development, the current functionality allows users to login
-and see a live count of how many of their friends are online. You will be able to access their
+to destinations and see a live count of how many of their friends are online.
+You will be able to access their
 profile to get display name and preferred avatar (image and gltf). Additional features
 like metaverse-wide chat and collectible avatars are available in the low-level APIs
-but not yet integrated into the high-level APIs or the `<immers-hud>` GUI
+but not yet integrated into the high-level APIs or the `<immers-hud>` GUI.
+High-level APIs are [well-documented](https://immers-space.github.io/immers-client), but some documentation is incomplete in the low-level APIs.
+
+### Compatibility
+
+For login on destination-only sites, users' home Immer must be running Immers Server v1.3.1 or later

@@ -63,7 +63,7 @@ export function catchToken () {
  */
 function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle }) {
   // center the popup
-  const width = 730
+  const width = 785
   const height = 785
   const left = (window.innerWidth - width) / 2 + window.screenLeft
   const top = (window.innerHeight - height) / 2 + window.screenTop

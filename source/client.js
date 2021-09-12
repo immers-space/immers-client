@@ -140,7 +140,7 @@ export class ImmersClient extends window.EventTarget {
    * @param  {APActor} actor - ActivityPub Actor object
    */
   static ProfileFromActor (actor) {
-    const { id, name: displayName, preferredUsername: username, icon, avatar, url} = actor
+    const { id, name: displayName, preferredUsername: username, icon, avatar, url } = actor
     const homeImmer = new URL(id).host
     return {
       id,
