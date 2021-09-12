@@ -10,7 +10,7 @@
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-    <script src="https://unpkg.com/immers-client/dist/destination.bundle.js?position=top-right&title=immers-client%20Documentation"></script>
+    <script defer src="https://unpkg.com/immers-client/dist/destination.bundle.js?position=top-right&title=immers-client%20Documentation"></script>
 </head>
 
 <body>
@@ -47,13 +47,13 @@
 <h1>immers-client</h1>
 <p>Client library to connect with Immers servers and Immers Space accounts from the Immersive Web.
 Using the Immers Client, you can enhance your site with social features and let your users
-share your site with their friends. Immers Space is a federated social network, so you're
-not casting in with any one company or community, you're enabling users from any number of
+share your site with their friends. Immers Space is a decentralized and federated social network, so you're
+not casting in with any one company or community; you're enabling users from any number of
 communities to bring their accounts, identities, and friends with them to your Immersive
 Web experience. <a href="https://web.immers.space/immersive-web-creators-frequently-asked-questions/">Check out our FAQ for Immersive Web content creators</a>.</p>
 <p>View the full API documentation at
 <a href="https://immers-space.github.io/immers-client">https://immers-space.github.io/immers-client</a></p>
-<h1>Features</h1>
+<h2>Features</h2>
 <table>
 <thead>
 <tr>
@@ -63,23 +63,43 @@ Web experience. <a href="https://web.immers.space/immersive-web-creators-frequen
 </thead>
 <tbody>
 <tr>
+<td><strong>Promote your site</strong></td>
+<td>Immersers share your site with their friends when they login</td>
+</tr>
+<tr>
+<td><strong>Customized user experience</strong></td>
+<td>Profiles give you an immerser's preferred display name, profile picture, and avatar glTF to optionally integrate into your experience</td>
+</tr>
+<tr>
+<td><strong>Make it memorable</strong></td>
+<td>Offer immersers collectible avatars they can add to their profiles and show off on other immers</td>
+</tr>
+<tr>
 <td><strong>Easy to use</strong></td>
 <td>High-level APIs abstract away the complex details of ActivityPub and federated social networks</td>
 </tr>
 <tr>
 <td><strong>Social login without tracking</strong></td>
-<td>Makes <strong>no</strong> network requests unless a user opts to log in</td>
+<td>No tracking cookies, no tracking pixels, all resources inlined, and no network requests until a user opts to log in</td>
 </tr>
 <tr>
 <td><strong>Lightweight</strong></td>
 <td>Tree-shakable, few dependencies, 100 Kb bundle</td>
 </tr>
-<tr>
-<td><strong>Promote your site</strong></td>
-<td>Immersers share your site with their friends when they login</td>
-</tr>
 </tbody>
 </table>
+<h3>How to participate in Immers Space</h3>
+<p>Immers Space is an interconnected network of Immersive Web experiences
+and communities of the immersers who use them.
+The easiest way to join is to be a <strong>destination</strong> - a site that allows immersers
+to bring their own accounts and identities. You can become an Immers Space destination
+just by including <a href="#the-one-liner">the &quot;one-liner&quot; script tag</a> on your page.</p>
+<p>You could also choose to be a full <strong>immer</strong> - an Immersive Web experience that hosts its own
+community of immersers - by running the free software
+<a href="https://github.com/immers-space/immers">Immers Server</a>
+alongside your WebXR project. As an immer, you would host the user accounts for your
+community of immersers, and they could use those accounts anywhere in the Immers Space metaverse,
+helping to spread awareness of your site.</p>
 <h2>High-level APIs</h2>
 <p>Immers Space is based on the ActivityPub W3C standard for federated social media, but you
 don't need to know any of the details of activity streams to use Immers Space with our
@@ -88,7 +108,7 @@ high-level APIs</p>
 <p>You can add the ability for users to login with their Immers Space accounts and invite their
 friends to visit your site with just a single line of code.
 <a href="https://immers-space.github.io/immers-client">See this live on our documentation pages</a>.</p>
-<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://unpkg.com/immers-client/dist/destination.bundle.js&quot;>
+<pre class="prettyprint source lang-html"><code>&lt;script defer src=&quot;https://unpkg.com/immers-client/dist/destination.bundle.js&quot;>
 </code></pre>
 <p>This will add the <code>&lt;immers-hud&gt;</code> Web Component floating on the bottom left of your page,
 giving users a GUI to login to their account which will then share your page with all
@@ -97,7 +117,7 @@ to the end of the script <code>src</code>.</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Query Parameter</th>
 <th>Description</th>
 <th>Default</th>
 </tr>
@@ -138,10 +158,14 @@ crafting and sending your own activities</p>
 <p>Live streaming updates from a users home server let them know when friends come online or send messages.</p>
 <h2>State of this library</h2>
 <p>This library is under active development, the current functionality allows users to login
-and see a live count of how many of their friends are online. You will be able to access their
+to destinations and see a live count of how many of their friends are online.
+You will be able to access their
 profile to get display name and preferred avatar (image and gltf). Additional features
 like metaverse-wide chat and collectible avatars are available in the low-level APIs
-but not yet integrated into the high-level APIs or the <code>&lt;immers-hud&gt;</code> GUI</p></article>
+but not yet integrated into the high-level APIs or the <code>&lt;immers-hud&gt;</code> GUI.
+High-level APIs are <a href="https://immers-space.github.io/immers-client">well-documented</a>, but some documentation is incomplete in the low-level APIs.</p>
+<h3>Compatibility</h3>
+<p>For login on destination-only sites, users' home Immer must be running Immers Server v1.3.1 or later</p></article>
     </section>
 
 
@@ -158,7 +182,7 @@ but not yet integrated into the high-level APIs or the <code>&lt;immers-hud&gt;<
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Sep 11 2021 04:41:01 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Sep 12 2021 23:51:12 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
