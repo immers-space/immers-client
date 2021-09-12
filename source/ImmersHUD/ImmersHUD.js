@@ -4,7 +4,7 @@ import { ImmersClient } from '../client'
 
 /**
  * Web Component heads-up display for Immers profile login.
- * Unobtrusively connects your Immersive Web experiene to the Immers Space
+ * Unobtrusively connects your Immersive Web experience to the Immers Space
  * metaverse, allowing immersers to connect with their profiles from your site
  * and share your site with their friends. Grants access to profile information
  * so you can bring users' preferred identity into your experience.
