@@ -85,6 +85,7 @@
 }
 
 .immers-input, .immers-button {
+  line-height: normal;
   border-radius: 0;
   border: 2px solid;
   background-color: #FFF;
