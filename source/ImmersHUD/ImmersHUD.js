@@ -24,9 +24,8 @@ import { ImmersClient } from '../client'
  * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
  * @prop {'true'|'false'} open - Toggles between icon and full HUD view
  *
- * @example <caption>Registering the custom element so it can be used in HTML</caption>
- * import { ImmersHUD } from './source/ImmersHUD/ImmersHUD.js'
- * ImmersHUD.Register()
+ * @example <caption>Load & register the custom element so it can be used in HTML</caption>
+ * import 'immers-client/dist/ImmersHUD.bundle'
  * @example <caption>Using the custom element in HTML</caption>
  * <immers-hud position="bottom-left" access-role="friends"
  *             destination-name="My Immer" destination-url="https://myimmer.com/"

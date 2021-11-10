@@ -63,6 +63,7 @@ export class ImmersClient extends window.EventTarget {
    * Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.
    * @param  {string} requestedRole Access level to request, see {@link roles} for details
    * @param  {string} [handle] User's immers handle. Optional if you have a local Immers Server
+   * @returns {string} token OAuth2 acess token
    */
   async connect (tokenCatcherURL, requestedRole, handle) {
     let authResult
@@ -89,6 +90,7 @@ export class ImmersClient extends window.EventTarget {
         () => this.#publishFriendsUpdate()
       )
     }
+    return token
   }
 
   /**
