@@ -1,9 +1,18 @@
 const path = require('path')
 
 module.exports = {
+  experiments: {
+    outputModule: true
+  },
   entry: {
     destination: './oneLiner.js',
-    ImmersHUD: './webComponent.js'
+    ImmersHUD: './webComponent.js',
+    esm: {
+      import: './index.js',
+      library: {
+        type: 'module'
+      }
+    }
   },
   output: {
     filename: '[name].bundle.js',
