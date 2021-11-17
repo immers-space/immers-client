@@ -52,7 +52,7 @@ friends to visit your site with just a single line of code.
 [See this live on our documentation pages](https://immers-space.github.io/immers-client).
 
 ```html
-<script defer src="https://unpkg.com/immers-client/dist/destination.bundle.js">
+<script type="module" src="https://unpkg.com/immers-client/dist/destination.bundle.js"></script>
 ```
 
 This will add the `<immers-hud>` Web Component floating on the bottom left of your page,

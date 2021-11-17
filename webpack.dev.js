@@ -12,7 +12,16 @@ module.exports = merge(common, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Test page'
+      title: 'One-liner test page',
+      chunks: ['destination'],
+      scriptLoading: 'module'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Webcomponent test page',
+      chunks: ['ImmersHUD'],
+      scriptLoading: 'module',
+      template: 'WebComponentTest.ejs',
+      filename: 'webcomponent.html'
     })
   ]
 })
