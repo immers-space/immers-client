@@ -56,12 +56,13 @@ export function catchToken () {
  * @property {string} token OAuth access token
  * @property {string} homeImmer User's home Immers Server origin
  * @property {Array<string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
+ * @property {string} deepLink Setting active tab ['Login', 'Register', 'Reset password']
  */
 /**
  * Internal oauth popup handler
  * @returns {Promise<AuthResult>}
  */
-function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle }) {
+function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle, deepLink }) {
   // center the popup
   const width = 785
   const height = 785
@@ -74,7 +75,8 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle 
     redirect_uri: redirectURI,
     response_type: 'token',
     scope: preferredScope,
-    me: handle
+    me: handle, 
+    tab: deepLink
   })
   authURL.search = authURLParams.toString()
   const popup = window.open(authURL, 'immersLoginPopup', features)
@@ -154,12 +156,13 @@ export async function DestinationOAuthPopup (handle, preferredScope, tokenCatche
  * @param  {string} [handle] If known, you can provide the user's handle (username[home.immer]) to pre-fill login forms
  * @returns {Promise<AuthResult>}
  */
-export function ImmerOAuthPopup (localImmer, localImmerId, preferredScope, tokenCatcherURL, handle) {
+export function ImmerOAuthPopup (localImmer, localImmerId, preferredScope, tokenCatcherURL, handle, deepLink) {
   return oauthPopup(`https://${localImmer}/auth/authorize`, {
     clientId: localImmerId,
     redirectURI: tokenCatcherURL,
     preferredScope,
-    handle
+    handle,
+    deepLink
   })
 }
 
