@@ -22,6 +22,7 @@ import { ImmersClient } from '../client'
  * @prop {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
  * @prop {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
  * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
+ * @prop {boolean} [allow-storage] Enable local storage of user identity to reconnect when returning to page
  * @prop {'true'|'false'} open - Toggles between icon and full HUD view
  *
  * @example <caption>Load & register the custom element via import (option 1)</caption>
@@ -69,6 +70,8 @@ export class ImmersHUD extends window.HTMLElement {
         id: window.location.href,
         name: this.getAttribute('destination-name'),
         url: this.getAttribute('destination-url')
+      }, {
+        allowStorage: this.hasAttribute('allow-storage')
       })
       this.immersClient.addEventListener(
         'immers-client-friends-update',
@@ -90,6 +93,17 @@ export class ImmersHUD extends window.HTMLElement {
           break
       }
     })
+
+    if (this.immersClient.handle) {
+      this.#el('handle-input').value = this.immersClient.handle
+      this.immersClient.reconnect().then(connected => {
+        if (!connected) {
+          // user has logged in before, but action required to reconnect
+          // prompt with open, pre-filled login
+          this.setAttribute('open', true)
+        }
+      })
+    }
   }
 
   attributeChangedCallback (name, oldValue, newValue) {

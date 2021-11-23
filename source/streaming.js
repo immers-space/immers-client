@@ -48,4 +48,11 @@ export class ImmersSocket extends window.EventTarget {
       }
     })
   }
+
+  /**
+   * Terminate socket connection
+   */
+  disconnect () {
+    this.socket?.disconnect()
+  }
 }
