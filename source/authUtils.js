@@ -56,7 +56,6 @@ export function catchToken () {
  * @property {string} token OAuth access token
  * @property {string} homeImmer User's home Immers Server origin
  * @property {Array<string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
- * @property {string} deepLink Setting active tab ['Login', 'Register', 'Reset password']
  */
 /**
  * Internal oauth popup handler
@@ -154,6 +153,7 @@ export async function DestinationOAuthPopup (handle, preferredScope, tokenCatche
  * @param  {string} preferredScope Level of access to request (remember the user can alter this before approving)
  * @param  {string} tokenCatcherURL Redirect URI for OAuth, a page on your origin that runs catchToken on load
  * @param  {string} [handle] If known, you can provide the user's handle (username[home.immer]) to pre-fill login forms
+ * @param {'Login'|'Register'|'Reset password'} [deepLink] Set the default tab to be shown on the login page
  * @returns {Promise<AuthResult>}
  */
 export function ImmerOAuthPopup (localImmer, localImmerId, preferredScope, tokenCatcherURL, handle, deepLink) {
