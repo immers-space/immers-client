@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <script type="module" src="./destination.bundle.js?position=top-right&title=immers-client%20Documentation"></script>
+    <script type="module">
+      import { ImmersClient, ImmerOAuthPopup, catchToken } from "./esm.bundle.js"
+      if (!catchToken()) {
+        console.log(ImmerOAuthPopup)
+        window.addEventListener('click', evt => {
+          if (evt.target.id !== 'login') {
+            return
+          }
+          ImmerOAuthPopup('localhost:8081', 'https://localhost:8081/o/immer', 'modAdditive', 'https://localhost:8082/module.html', undefined, 'Register')
+        })
+      }
+    </script>
+    <button id="login">Login</button>
+  </body>
+</html>
