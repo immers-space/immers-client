@@ -77,6 +77,14 @@ export class ImmersHUD extends window.HTMLElement {
         'immers-client-friends-update',
         ({ detail: { friends } }) => this.onFriendsUpdate(friends)
       )
+      this.immersClient.addEventListener(
+        'immers-client-connected',
+        ({ detail: { profile } }) => this.onClientConnected(profile)
+      )
+      this.immersClient.addEventListener(
+        'immers-client-disconnected',
+        () => this.onClientDisconnected()
+      )
     }
 
     this.#container.addEventListener('click', evt => {
@@ -89,7 +97,11 @@ export class ImmersHUD extends window.HTMLElement {
           this.setAttribute('open', this.getAttribute('open') !== 'true')
           break
         case 'exit-button':
+          // TODO: add confirmation modal
           this.remove()
+          break
+        case 'logout':
+          this.immersClient.logout()
           break
       }
     })
@@ -119,15 +131,17 @@ export class ImmersHUD extends window.HTMLElement {
     }
   }
 
-  async login () {
-    await this.immersClient.connect(
+  login () {
+    return this.immersClient.connect(
       this.getAttribute('token-catcher'),
       this.getAttribute('access-role'),
       this.#el('handle-input').value
     )
+  }
+
+  onClientConnected (profile) {
     this.#el('login-container').classList.add('removed')
     this.#el('status-container').classList.remove('removed')
-    const profile = this.immersClient.profile
     // show profile info
     if (profile.avatarImage) {
       this.#el('logo').style.backgroundImage = `url(${profile.avatarImage})`
@@ -135,6 +149,15 @@ export class ImmersHUD extends window.HTMLElement {
     this.#el('username').textContent = profile.displayName
     this.#el('profile-link').setAttribute('href', profile.url)
     this.#emit('immers-hud-connected', { profile })
+  }
+
+  onClientDisconnected () {
+    this.#el('login-container').classList.remove('removed')
+    this.#el('status-container').classList.add('removed')
+    this.#el('handle-input').value = ''
+    this.#el('logo').style.backgroundImage = ''
+    this.#el('username').textContent = ''
+    this.#el('profile-link').setAttribute('href', '#')
   }
 
   onFriendsUpdate (friends) {

@@ -30,7 +30,12 @@ import { clearStore, createStore } from './store.js'
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  */
 
-/** High-level interface to Immers profile and social features */
+/**
+ * High-level interface to Immers profile and social features
+ * @fires immers-client-connected
+ * @fires immers-client-disconnected
+ * @fires immers-client-friends-update
+ */
 export class ImmersClient extends window.EventTarget {
   activities
   streaming
@@ -49,7 +54,7 @@ export class ImmersClient extends window.EventTarget {
   #store
   /**
 
-   * @param  {(Destination|import('./activities').APPlace)} destinationDescription Metadata about this destination used when sharing
+   * @param  {(Destination|APPlace)} destinationDescription Metadata about this destination used when sharing
    * @param  {object} [options]
    * @param  {string} [options.localImmer] Origin of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
@@ -125,14 +130,19 @@ export class ImmersClient extends window.EventTarget {
     this.streaming = undefined
     this.activities = undefined
     this.connected = false
+    /**
+     * Fired when disconnected from immers server or logged out
+     * @event immers-client-disconnected
+     */
+    this.dispatchEvent(new window.CustomEvent('immers-client-disconnected'))
   }
 
   /**
    * Disconnect from User's immer and delete any traces of user identity
    */
   logout () {
-    this.disconnect()
     clearStore(this.#store)
+    this.disconnect()
   }
 
   #setupAfterConnect (actor, homeImmer, token, authorizedScopes) {
@@ -154,6 +164,13 @@ export class ImmersClient extends window.EventTarget {
         () => this.#publishFriendsUpdate()
       )
     }
+    /**
+     * User has connected to the immers server
+     * @event immers-client-connected
+     * @type {object}
+     * @property {Profile} detail.profile the connected user's profile
+     */
+    this.dispatchEvent(new window.CustomEvent('immers-client-connected', { detail: { profile: this.profile } }))
   }
 
   /**
@@ -167,6 +184,12 @@ export class ImmersClient extends window.EventTarget {
   }
 
   async #publishFriendsUpdate () {
+    /**
+     * Friends status/location has changed
+     * @event immers-client-friends-update
+     * @type {object}
+     * @property {FriendStatus[]} detail.friends Current status for each friend
+     */
     const evt = new window.CustomEvent('immers-client-friends-update', {
       detail: {
         friends: await this.friendsList()
