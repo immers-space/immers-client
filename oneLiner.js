@@ -22,6 +22,9 @@ try {
       hud.setAttribute('destination-url', window.location.href)
       hud.setAttribute('token-catcher', window.location.href)
       hud.setAttribute('access-role', scriptArgs.role ?? roles[1])
+      if (scriptArgs.save === 'true') {
+        hud.setAttribute('allow-storage', 'true')
+      }
       document.body.appendChild(hud)
     }
   }
