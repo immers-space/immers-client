@@ -145,6 +145,28 @@ export class ImmersClient extends window.EventTarget {
     this.disconnect()
   }
 
+  /**
+   * Update user's profile description
+   * @param {object} info
+   * @param  {string} [info.displayName] User's preferred shorthand identifier, may contain spaces & symbols
+   * @param  {string} [info.bio] Summary paragraph displayed on user profile
+   */
+  updateProfileInfo ({ displayName, bio }) {
+    let somethingUpdated
+    const update = {}
+    if (displayName) {
+      update.name = displayName
+      somethingUpdated = true
+    }
+    if (bio) {
+      update.summary = bio
+      somethingUpdated = true
+    }
+    if (somethingUpdated) {
+      return this.activities.updateProfile(update)
+    }
+  }
+
   #setupAfterConnect (actor, homeImmer, token, authorizedScopes) {
     this.connected = true
     this.profile = ImmersClient.ProfileFromActor(actor)
