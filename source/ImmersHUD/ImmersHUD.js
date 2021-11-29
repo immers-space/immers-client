@@ -22,6 +22,7 @@ import { ImmersClient } from '../client'
  * @prop {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
  * @prop {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
  * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
+ * @prop {boolean} [allow-storage] Enable local storage of user identity to reconnect when returning to page
  * @prop {'true'|'false'} open - Toggles between icon and full HUD view
  *
  * @example <caption>Load & register the custom element via import (option 1)</caption>
@@ -69,10 +70,20 @@ export class ImmersHUD extends window.HTMLElement {
         id: window.location.href,
         name: this.getAttribute('destination-name'),
         url: this.getAttribute('destination-url')
+      }, {
+        allowStorage: this.hasAttribute('allow-storage')
       })
       this.immersClient.addEventListener(
         'immers-client-friends-update',
         ({ detail: { friends } }) => this.onFriendsUpdate(friends)
+      )
+      this.immersClient.addEventListener(
+        'immers-client-connected',
+        ({ detail: { profile } }) => this.onClientConnected(profile)
+      )
+      this.immersClient.addEventListener(
+        'immers-client-disconnected',
+        () => this.onClientDisconnected()
       )
     }
 
@@ -86,10 +97,25 @@ export class ImmersHUD extends window.HTMLElement {
           this.setAttribute('open', this.getAttribute('open') !== 'true')
           break
         case 'exit-button':
+          // TODO: add confirmation modal
           this.remove()
+          break
+        case 'logout':
+          this.immersClient.logout()
           break
       }
     })
+
+    if (this.immersClient.handle) {
+      this.#el('handle-input').value = this.immersClient.handle
+      this.immersClient.reconnect().then(connected => {
+        if (!connected) {
+          // user has logged in before, but action required to reconnect
+          // prompt with open, pre-filled login
+          this.setAttribute('open', true)
+        }
+      })
+    }
   }
 
   attributeChangedCallback (name, oldValue, newValue) {
@@ -105,15 +131,17 @@ export class ImmersHUD extends window.HTMLElement {
     }
   }
 
-  async login () {
-    await this.immersClient.connect(
+  login () {
+    return this.immersClient.connect(
       this.getAttribute('token-catcher'),
       this.getAttribute('access-role'),
       this.#el('handle-input').value
     )
+  }
+
+  onClientConnected (profile) {
     this.#el('login-container').classList.add('removed')
     this.#el('status-container').classList.remove('removed')
-    const profile = this.immersClient.profile
     // show profile info
     if (profile.avatarImage) {
       this.#el('logo').style.backgroundImage = `url(${profile.avatarImage})`
@@ -121,6 +149,15 @@ export class ImmersHUD extends window.HTMLElement {
     this.#el('username').textContent = profile.displayName
     this.#el('profile-link').setAttribute('href', profile.url)
     this.#emit('immers-hud-connected', { profile })
+  }
+
+  onClientDisconnected () {
+    this.#el('login-container').classList.remove('removed')
+    this.#el('status-container').classList.add('removed')
+    this.#el('handle-input').value = ''
+    this.#el('logo').style.backgroundImage = ''
+    this.#el('username').textContent = ''
+    this.#el('profile-link').setAttribute('href', '#')
   }
 
   onFriendsUpdate (friends) {

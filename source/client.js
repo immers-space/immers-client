@@ -1,6 +1,7 @@
 import { Activities } from './activities.js'
-import { ImmerOAuthPopup, DestinationOAuthPopup } from './authUtils.js'
+import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor } from './authUtils.js'
 import { ImmersSocket } from './streaming.js'
+import { clearStore, createStore } from './store.js'
 
 /**
  * @typedef {object} Destination
@@ -9,13 +10,13 @@ import { ImmersSocket } from './streaming.js'
  */
 /**
  * @typedef {object} Profile
- * @property {string} id - Unique identifier (ActivityPub IRI)
- * @property {string} handle
- * @property {string} displayName
- * @property {string} homeImmer
- * @property {string} username
- * @property {string} avatarImage
- * @property {string} avatarGltf
+ * @property {string} id - Globally unique identifier (ActivityPub IRI)
+ * @property {string} handle - Shorthand globally unique identifier, format: username[home.immer]
+ * @property {string} displayName - User's changeable preferred identifier, may contain spaces & symbols
+ * @property {string} homeImmer - Domain of imme where user account is registered
+ * @property {string} username - User's permanent uniqe identifier within their home immer
+ * @property {string} avatarImage - Profile icon url
+ * @property {string} avatarGltf - Profile avatar 3d model url
  * @property {string} url - Webpage to view full profile
  */
 /**
@@ -29,7 +30,12 @@ import { ImmersSocket } from './streaming.js'
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  */
 
-/** High-level interface to Immers profile and social features */
+/**
+ * High-level interface to Immers profile and social features
+ * @fires immers-client-connected
+ * @fires immers-client-disconnected
+ * @fires immers-client-friends-update
+ */
 export class ImmersClient extends window.EventTarget {
   activities
   streaming
@@ -40,11 +46,20 @@ export class ImmersClient extends window.EventTarget {
    */
   profile
   /**
+   * Is the client connected to the User's immer?
+   * @type {boolean}
+   * @public
+   */
+  connected = false
+  #store
+  /**
 
    * @param  {(Destination|APPlace)} destinationDescription Metadata about this destination used when sharing
-   * @param  {string} [localImmer] Origin of the local Immers Server, if there is one
+   * @param  {object} [options]
+   * @param  {string} [options.localImmer] Origin of the local Immers Server, if there is one
+   * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
    */
-  constructor (destinationDescription, localImmer) {
+  constructor (destinationDescription, options) {
     super()
     this.place = Object.assign(
       { type: 'Place', audience: Activities.PublicAddress },
@@ -54,7 +69,20 @@ export class ImmersClient extends window.EventTarget {
       // fake AP IRI for destinations without their own immer
       this.place.id = this.place.url
     }
-    this.localImmer = localImmer
+    this.localImmer = options?.localImmer
+    this.allowStorage = options?.allowStorage
+    this.#store = createStore(this.allowStorage)
+    try {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1))
+      if (hashParams.has('me')) {
+        this.#store.handle = hashParams.get('me')
+        // restore original hash
+        hashParams.delete('me')
+        window.location.hash = hashParams.toString().replace(/=$/, '')
+      }
+    } catch (err) {
+      console.warn(`Unable to parse handle from URL hash: ${err.message}`)
+    }
   }
 
   /**
@@ -73,8 +101,76 @@ export class ImmersClient extends window.EventTarget {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }
     const { actor, token, homeImmer, authorizedScopes } = authResult
+    this.#store.credential = { token, homeImmer, authorizedScopes }
+    this.#setupAfterConnect(actor, homeImmer, token, authorizedScopes)
+    return token
+  }
 
+  /**
+   * Attempt to restore session from a previously granted token. Requires options.allowStorage
+   * @returns {Promise<boolean>} Was reconnection successful
+   */
+  async reconnect () {
+    try {
+      const { token, homeImmer, authorizedScopes } = this.#store.credential
+      const actor = await tokenToActor(token, homeImmer)
+      if (actor) {
+        this.#setupAfterConnect(actor, homeImmer, token, authorizedScopes)
+        return true
+      }
+    } catch {}
+    return false
+  }
+
+  /**
+   * Disconnect from User's immer, retaining credentials to reconnect
+   */
+  disconnect () {
+    this.streaming.disconnect()
+    this.streaming = undefined
+    this.activities = undefined
+    this.connected = false
+    /**
+     * Fired when disconnected from immers server or logged out
+     * @event immers-client-disconnected
+     */
+    this.dispatchEvent(new window.CustomEvent('immers-client-disconnected'))
+  }
+
+  /**
+   * Disconnect from User's immer and delete any traces of user identity
+   */
+  logout () {
+    clearStore(this.#store)
+    this.disconnect()
+  }
+
+  /**
+   * Update user's profile description
+   * @param {object} info
+   * @param  {string} [info.displayName] User's preferred shorthand identifier, may contain spaces & symbols
+   * @param  {string} [info.bio] Summary paragraph displayed on user profile
+   */
+  updateProfileInfo ({ displayName, bio }) {
+    let somethingUpdated
+    const update = {}
+    if (displayName) {
+      update.name = displayName
+      somethingUpdated = true
+    }
+    if (bio) {
+      update.summary = bio
+      somethingUpdated = true
+    }
+    if (somethingUpdated) {
+      return this.activities.updateProfile(update)
+    }
+  }
+
+  #setupAfterConnect (actor, homeImmer, token, authorizedScopes) {
+    this.connected = true
     this.profile = ImmersClient.ProfileFromActor(actor)
+    this.#store.handle = this.profile.handle
     this.activities = new Activities(actor, homeImmer, this.place, token)
     this.streaming = new ImmersSocket(homeImmer, token)
     this.streaming.addEventListener('immers-socket-connect', () => {
@@ -90,7 +186,13 @@ export class ImmersClient extends window.EventTarget {
         () => this.#publishFriendsUpdate()
       )
     }
-    return token
+    /**
+     * User has connected to the immers server
+     * @event immers-client-connected
+     * @type {object}
+     * @property {Profile} detail.profile the connected user's profile
+     */
+    this.dispatchEvent(new window.CustomEvent('immers-client-connected', { detail: { profile: this.profile } }))
   }
 
   /**
@@ -104,12 +206,26 @@ export class ImmersClient extends window.EventTarget {
   }
 
   async #publishFriendsUpdate () {
+    /**
+     * Friends status/location has changed
+     * @event immers-client-friends-update
+     * @type {object}
+     * @property {FriendStatus[]} detail.friends Current status for each friend
+     */
     const evt = new window.CustomEvent('immers-client-friends-update', {
       detail: {
         friends: await this.friendsList()
       }
     })
     this.dispatchEvent(evt)
+  }
+
+  /**
+   * Users Immers handle, if known. May be available even when logged-out if passed via URL or stored from past login
+   * @type {string}
+   */
+  get handle () {
+    return this.#store.handle
   }
 
   /**

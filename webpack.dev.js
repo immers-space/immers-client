@@ -20,8 +20,15 @@ module.exports = merge(common, {
       title: 'Webcomponent test page',
       chunks: ['ImmersHUD'],
       scriptLoading: 'module',
-      template: 'WebComponentTest.ejs',
+      template: 'test/webpack-dev-templates/WebComponentTest.ejs',
       filename: 'webcomponent.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Module test page',
+      chunks: ['esm'],
+      scriptLoading: 'module',
+      template: 'test/webpack-dev-templates/ModuleTest.ejs',
+      filename: 'module.html'
     })
   ]
 })

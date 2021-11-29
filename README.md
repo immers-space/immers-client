@@ -65,6 +65,7 @@ to the end of the script `src`.
 | position | Overlay position, one of `bottom-left`, `top-left`, `bottom-right`, `top-right`, `none` | `bottom-left` |
 | title | Name of your site to use when sharing | `document.title` |
 | role | Level of access to request (user can change before accepting, one of `public`, `friends`, `modAdditive`, `modFull` | `friends` |
+| save | Should user identity be preserved for easier reconnection on next visit? (It's up to you to request user consent if required) `true`/`false` | `false`
 
 If you do not want the `<immers-hud>` element to be automatically injected,
 you can add your own `<immers-hud>` anywhere in the document or set the position to `none`.
