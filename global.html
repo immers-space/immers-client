@@ -2222,7 +2222,7 @@ as necessary. Must be invoked from a trusted user input event handler to allow t
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line5">line 5</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -2500,7 +2500,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line21">line 21</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -2802,7 +2802,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last">Unique identifier (ActivityPub IRI)</td>
+            <td class="description last">Globally unique identifier (ActivityPub IRI)</td>
         </tr>
 
     
@@ -2825,7 +2825,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Shorthand globally unique identifier, format: username[home.immer]</td>
         </tr>
 
     
@@ -2848,7 +2848,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">User's changeable preferred identifier, may contain spaces & symbols</td>
         </tr>
 
     
@@ -2871,7 +2871,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Domain of imme where user account is registered</td>
         </tr>
 
     
@@ -2894,7 +2894,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">User's permanent uniqe identifier within their home immer</td>
         </tr>
 
     
@@ -2917,7 +2917,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Profile icon url</td>
         </tr>
 
     
@@ -2940,7 +2940,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Profile avatar 3d model url</td>
         </tr>
 
     
@@ -3002,7 +3002,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line10">line 10</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -3022,6 +3022,398 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
 
     
+        <h3 class="subsection-title">Events</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:immers-client-connected">immers-client-connected</h4>
+    
+
+    
+
+
+
+<div class="description">
+    User has connected to the immers server
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>detail.profile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the connected user's profile</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:immers-client-disconnected">immers-client-disconnected</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fired when disconnected from immers server or logged out
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line133">line 133</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:immers-client-friends-update">immers-client-friends-update</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Friends status/location has changed
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>detail.friends</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Current status for each friend</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line209">line 209</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
 </article>
 
 </section>
@@ -3032,13 +3424,13 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Nov 23 2021 19:35:19 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Nov 29 2021 23:35:05 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
