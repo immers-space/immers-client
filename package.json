@@ -1,6 +1,6 @@
 {
   "name": "immers-client",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Clients-side ActivityPub library for Immers Space",
   "module": "dist/esm.bundle.js",
   "sideEffects": [
