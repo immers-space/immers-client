@@ -74,7 +74,7 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle,
     redirect_uri: redirectURI,
     response_type: 'token',
     scope: preferredScope,
-    me: handle, 
+    me: handle,
     tab: deepLink
   })
   authURL.search = authURLParams.toString()
@@ -83,7 +83,14 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle,
     window.alert('Could not open login window. Please check if popup was blocked and allow it')
   } else {
     document.body.classList.add('immers-authorizing')
-    popup.onunload = () => document.body.classList.remove('immers-authorizing')
+    const checkClosed = () => {
+      if (popup.closed) {
+        document.body.classList.remove('immers-authorizing')
+      } else {
+        window.setInterval(checkClosed, 100)
+      }
+    }
+    checkClosed()
   }
 
   return new Promise((resolve, reject) => {
