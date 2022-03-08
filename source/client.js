@@ -61,10 +61,7 @@ export class ImmersClient extends window.EventTarget {
    */
   constructor (destinationDescription, options) {
     super()
-    this.place = Object.assign(
-      { type: 'Place', audience: Activities.PublicAddress },
-      destinationDescription
-    )
+    this.#setPlaceFromDestination(destinationDescription)
     if (!this.place.id) {
       // fake AP IRI for destinations without their own immer
       this.place.id = this.place.url
@@ -86,14 +83,14 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
-   * Connect to user's Immers Space profile, using pop-up window for OAuth if needed
+   * Connect to user's Immers Space profile, using pop-up window for OAuth
    * @param  {string} tokenCatcherURL Page on your domain that runs {@link catchToken} on load to retrieve the granted access token.
    * Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.
    * @param  {string} requestedRole Access level to request, see {@link roles} for details
    * @param  {string} [handle] User's immers handle. Optional if you have a local Immers Server
    * @returns {string} token OAuth2 acess token
    */
-  async connect (tokenCatcherURL, requestedRole, handle) {
+  async login (tokenCatcherURL, requestedRole, handle) {
     let authResult
     if (this.localImmer) {
       authResult = await ImmerOAuthPopup(this.localImmer, this.place.id, requestedRole, tokenCatcherURL, handle)
@@ -102,7 +99,7 @@ export class ImmersClient extends window.EventTarget {
     }
     const { actor, token, homeImmer, authorizedScopes } = authResult
     this.#store.credential = { token, homeImmer, authorizedScopes }
-    this.#setupAfterConnect(actor, homeImmer, token, authorizedScopes)
+    this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes)
     return token
   }
 
@@ -110,16 +107,62 @@ export class ImmersClient extends window.EventTarget {
    * Attempt to restore session from a previously granted token. Requires options.allowStorage
    * @returns {Promise<boolean>} Was reconnection successful
    */
-  async reconnect () {
+  async restoreSession () {
     try {
       const { token, homeImmer, authorizedScopes } = this.#store.credential
       const actor = await tokenToActor(token, homeImmer)
       if (actor) {
-        this.#setupAfterConnect(actor, homeImmer, token, authorizedScopes)
+        this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes)
         return true
       }
     } catch {}
     return false
+  }
+
+  /**
+   * Mark user as "online" at this immer and share the location with their friends.
+   * Must be called after successful {@link login} or {@link restoreSession}
+   */
+  async enter () {
+    if (!this.connected) {
+      throw new Error('Immers login required to udpate location')
+    }
+    const { authorizedScopes } = this.#store.credential
+    const actor = this.activities.actor
+    if (this.streaming.connected) {
+      await this.activities.arrive()
+      this.streaming.prepareLeaveOnDisconnect(actor, this.place)
+    }
+    // also update on future (re)connections
+    this.streaming.addEventListener('immers-socket-connect', () => {
+      if (authorizedScopes.includes('postLocation')) {
+        this.activities.arrive()
+        this.streaming.prepareLeaveOnDisconnect(actor, this.place)
+      }
+    })
+  }
+
+  /**
+   * Update user's current online location and share with friends
+   * @param  {(Destination|APPlace|string)} destinationDescription
+   */
+  async move (destinationDescription) {
+    if (!this.connected) {
+      throw new Error('Immers login required to update location')
+    }
+    await this.activities.leave()
+    this.#setPlaceFromDestination(destinationDescription)
+    return this.enter()
+  }
+
+  /**
+   * Mark user as no longer online at this immer.
+   */
+  exit () {
+    if (!this.connected) {
+      throw new Error('Immers login required to update location')
+    }
+    return this.activities.leave()
   }
 
   /**
@@ -167,18 +210,13 @@ export class ImmersClient extends window.EventTarget {
     }
   }
 
-  #setupAfterConnect (actor, homeImmer, token, authorizedScopes) {
+  #setupAfterLogin (actor, homeImmer, token, authorizedScopes) {
     this.connected = true
     this.profile = ImmersClient.ProfileFromActor(actor)
     this.#store.handle = this.profile.handle
     this.activities = new Activities(actor, homeImmer, this.place, token)
     this.streaming = new ImmersSocket(homeImmer, token)
-    this.streaming.addEventListener('immers-socket-connect', () => {
-      if (authorizedScopes.includes('postLocation')) {
-        this.activities.arrive()
-        this.streaming.prepareLeaveOnDisconnect(actor, this.place)
-      }
-    })
+
     if (authorizedScopes.includes('viewFriends')) {
       this.#publishFriendsUpdate()
       this.streaming.addEventListener(
@@ -280,5 +318,43 @@ export class ImmersClient extends window.EventTarget {
    */
   static URLFromProperty (prop) {
     return prop?.url?.href ?? prop?.url ?? prop
+  }
+
+  #setPlaceFromDestination (destinationDescription) {
+    this.place = Object.assign(
+      { type: 'Place', audience: Activities.PublicAddress },
+      destinationDescription
+    )
+    if (this.activities) {
+      this.activities.place = this.place
+    }
+  }
+
+  /**
+   * Connect to user's Immers Space profile, using pop-up window for OAuth if needed
+   * @param  {string} tokenCatcherURL Page on your domain that runs {@link catchToken} on load to retrieve the granted access token.
+   * Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.
+   * @param  {string} requestedRole Access level to request, see {@link roles} for details
+   * @param  {string} [handle] User's immers handle. Optional if you have a local Immers Server
+   * @deprecated Split into to methods, {@link login} and {@link enter}, for better control over when a user goes online
+   * @returns {string} token OAuth2 acess token
+   */
+  async connect (tokenCatcherURL, requestedRole, handle) {
+    const { token } = await this.login(tokenCatcherURL, requestedRole, handle)
+    this.enter()
+    return token
+  }
+
+  /**
+   * Attempt to restore session from a previously granted token. Requires options.allowStorage
+   * @returns {Promise<boolean>} Was reconnection successful
+   * @deprecated Split into to methods, {@link restoreSession} and {@link enter}, for better control over when a user goes online
+   */
+  async reconnect () {
+    if (await this.restoreSession()) {
+      this.enter()
+      return true
+    }
+    return false
   }
 }

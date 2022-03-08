@@ -3,6 +3,12 @@ import io from 'socket.io-client'
 export class ImmersSocket extends window.EventTarget {
   #token
   /**
+   * Is the socket connection active
+   * @type {boolean}
+   * @public
+   */
+  connected = false
+  /**
    * @param  {string} homeImmer
    * @param  {string} token
    */
@@ -19,6 +25,7 @@ export class ImmersSocket extends window.EventTarget {
       }
     })
     this.socket.on('connect', () => {
+      this.connected = true
       this.dispatchEvent(new window.CustomEvent('immers-socket-connect'))
     })
     this.socket.on('friends-update', () => {
@@ -54,5 +61,6 @@ export class ImmersSocket extends window.EventTarget {
    */
   disconnect () {
     this.socket?.disconnect()
+    this.connected = false
   }
 }
