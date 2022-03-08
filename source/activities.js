@@ -152,7 +152,8 @@ export class Activities {
       type: 'Accept',
       actor: this.actor.id,
       object: follow.id,
-      to: follow.actor
+      to: follow.actor,
+      summary: '<span>Accepted your a friend request</span>'
     })
   }
 
@@ -170,13 +171,23 @@ export class Activities {
     })
   }
 
-  arrive () {
+  arrive (place = this.place) {
     return this.postActivity({
       type: 'Arrive',
       actor: this.actor.id,
-      target: this.place,
+      target: place,
       to: this.actor.followers,
-      summary: `${this.actor.name} arrived at ${this.place.name}.`
+      summary: `<span>Arrived at <a href="${place.url}">${place.name}</a></span>`
+    })
+  }
+
+  leave (place = this.place) {
+    return this.postActivity({
+      type: 'Leave',
+      actor: this.actor.id,
+      target: place,
+      to: this.actor.followers,
+      summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
     })
   }
 
@@ -211,7 +222,8 @@ export class Activities {
       type: 'Follow',
       actor: this.actor.id,
       object: targetId,
-      to: targetId
+      to: targetId,
+      summary: '<span>Sent you a friend request</span>'
     })
   }
 
