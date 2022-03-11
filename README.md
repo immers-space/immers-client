@@ -40,7 +40,7 @@ You could also choose to be a full **immer** - an Immersive Web experience that 
 community of immersers - by running the free software
 [Immers Server](https://github.com/immers-space/immers)
 alongside your WebXR project. As an immer, you would host the user accounts for your
-community of immersers, and they could use those accounts anywhere in the Immers Space metaverse,
+community of immersers, and they could use those accounts anywhere that supports Immers Space,
 helping to spread awareness of your site.
 
 
