@@ -75,11 +75,11 @@ export class Activities {
     }
   }
 
-  postActivity (activity) {
+  async postActivity (activity) {
     if (!this.trustedIRI(this.actor.outbox)) {
       throw new Error('Invalid outbox address')
     }
-    return window.fetch(this.actor.outbox, {
+    const result = await window.fetch(this.actor.outbox, {
       method: 'POST',
       headers: {
         'Content-Type': Activities.JSONLDMime,
@@ -87,6 +87,10 @@ export class Activities {
       },
       body: JSON.stringify(activity)
     })
+    if (!result.ok) {
+      throw new Error(`Error creating avatar: ${result.status} ${result.body}`)
+    }
+    return result.headers.get('Location')
   }
 
   // collection fetchers
@@ -152,7 +156,8 @@ export class Activities {
       type: 'Accept',
       actor: this.actor.id,
       object: follow.id,
-      to: follow.actor
+      to: follow.actor,
+      summary: '<span>Accepted your a friend request</span>'
     })
   }
 
@@ -170,13 +175,23 @@ export class Activities {
     })
   }
 
-  arrive () {
+  arrive (place = this.place) {
     return this.postActivity({
       type: 'Arrive',
       actor: this.actor.id,
-      target: this.place,
+      target: place,
       to: this.actor.followers,
-      summary: `${this.actor.name} arrived at ${this.place.name}.`
+      summary: `<span>Arrived at <a href="${place.url}">${place.name}</a></span>`
+    })
+  }
+
+  leave (place = this.place) {
+    return this.postActivity({
+      type: 'Leave',
+      actor: this.actor.id,
+      target: place,
+      to: this.actor.followers,
+      summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
     })
   }
 
@@ -211,7 +226,8 @@ export class Activities {
       type: 'Follow',
       actor: this.actor.id,
       object: targetId,
-      to: targetId
+      to: targetId,
+      summary: '<span>Sent you a friend request</span>'
     })
   }
 

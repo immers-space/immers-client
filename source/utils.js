@@ -19,3 +19,15 @@ export function parseHandle (handle) {
   }
   return {}
 }
+
+export function desc (prop) {
+  return (a, b) => {
+    if (a[prop] < b[prop]) {
+      return 1
+    }
+    if (b[prop] < a[prop]) {
+      return -1
+    }
+    return 0
+  }
+}
