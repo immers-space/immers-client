@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
 import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor } from './authUtils.js'
-import { desc } from './utils.js'
+import { desc, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
 
@@ -78,7 +78,7 @@ export class ImmersClient extends window.EventTarget {
   #store
   /**
 
-   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing
+   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object
    * @param  {object} [options]
    * @param  {string} [options.localImmer] Origin of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
@@ -303,6 +303,145 @@ export class ImmersClient extends window.EventTarget {
     return this.activities.note(DOMPurify.sanitize(content), to, privacy)
   }
 
+  // Misc utilities
+  /**
+   * Attempt to fetch a cross-domain resource.
+   * Prefers using the local immer's proxy service if available,
+   * falling back to the user's home immer's proxy service if available or plain fetch.
+   * @param  {string} url - resource to GET
+   * @param  {object} headers - fetch headers
+   */
+  async corsProxyFetch (url, headers) {
+    if (this.localImmer) {
+      // prefer direct local fetch or local proxy if possible
+      return window.fetch(
+        url.startsWith(this.localImmer) ? url : `${this.localImmer}/proxy/${url}`,
+        { headers }
+      )
+    }
+    const homeProxy = this.activities?.actor?.endpoints?.proxyUrl
+    if (homeProxy) {
+      try {
+        headers = {
+          ...headers,
+          Authorization: `Bearer ${this.store.credential.token}`
+        }
+        // note this GET proxy is different from the ActivityPub standard POST proxy used for AP objects
+        const result = await window.fetch(`${homeProxy}/${url}`, {
+          headers
+        })
+        if (!result.ok) {
+          throw new Error(`Fetch failed: ${result.statusText} ${result.body}`)
+        }
+        return result
+      } catch (err) {
+        console.log('Home immer CORS proxy failed', err.message)
+      }
+    }
+    console.warn('No local immer nor user-provided proxy available, attempting normal fetch')
+    return window.fetch(url, {
+      headers
+    })
+  }
+
+  /**
+   * Get a user ID/URL from their handle using webfinger
+   * @param  {string} handle - immers handle
+   * @returns {string | undefined} - The profile IRI or undefined if failed
+   */
+  async resolveProfileIRI (handle) {
+    if (this.#store.cachedHandleIRIs?.[handle]) {
+      return this.#store.cachedHandleIRIs[handle]
+    }
+    const { username, immer } = parseHandle(handle)
+    const finger = await this.corsProxyFetch(
+      `https://${immer}/.well-known/webfinger?resource=acct:${username}@${immer}`,
+      { headers: { Accept: 'application/json' } }
+    )
+      .then(res => res.json())
+      .catch(err => {
+        console.error(`Could not resolve profile webfinger ${err.message}`)
+        return undefined
+      })
+    const iri = finger?.links?.find?.((l) => l.rel === 'self')?.href
+    if (iri) {
+      this.#store.cachedHandleIRIs = {
+        ...this.#store.cachedHandleIRIs || {},
+        [handle]: iri
+      }
+    }
+    return iri
+  }
+
+  /**
+   * Get a user's profile object from their handle.
+   * Uses logged-in users's home immer proxy service if available
+   * @param {string} handle - Immers handle
+   * @returns {Profile | undefined} - User profile or undefined if failed
+   */
+  async getProfile (handle) {
+    if (this.#store.cachedActors?.[handle]) {
+      return ImmersClient.ProfileFromActor(this.#store.cachedActors[handle])
+    }
+    let actor
+    const iri = await this.resolveProfileIRI(handle)
+    if (!iri) {
+      return
+    }
+    if (this.connected) {
+      actor = await this.activities.getObject(iri).catch(() => {})
+    }
+    if (!actor) {
+      actor = await this.corsProxyFetch(iri, { Accept: Activities.JSONLDMime })
+        .then(res => res.json())
+        .catch(() => {})
+    }
+    if (actor) {
+      this.#store.cachedActors = {
+        ...this.#store.cachedActors || {},
+        [handle]: actor
+      }
+      return ImmersClient.ProfileFromActor(actor)
+    }
+  }
+
+  async getNodeInfo (handle) {
+    const { immer } = parseHandle(handle)
+    if (this.#store.cachedNodeInfos?.[immer]) {
+      return this.#store.cachedNodeInfos[immer]
+    }
+    const headers = { Accept: 'application/json' }
+    const resource = await this.corsProxyFetch(
+      `https://${immer}/.well-known/nodeinfo`,
+      { headers }
+    )
+      .then(res => res.json())
+      .catch(err => {
+        console.error(`Could not resolve nodeinfo links ${err.message}`)
+        return undefined
+      })
+    const url = (
+      resource?.links?.find((l) => l.rel === Activities.NodeInfoV21) ||
+      resource?.links?.find((l) => l.rel === Activities.NodeInfoV20)
+    )?.href
+    if (!url) {
+      return
+    }
+    const info = await this.corsProxyFetch(url, { headers })
+      .then(res => res.json())
+      .catch(err => {
+        console.error(`Could not resolve nodeinfo ${err.message}`)
+        return undefined
+      })
+    if (info) {
+      this.#store.cachedNodeInfos = {
+        ...this.#store.cachedNodeInfos || {},
+        [immer]: info
+      }
+    }
+    return info
+  }
+
   async #publishFriendsUpdate () {
     /**
      * Friends status/location has changed
@@ -460,11 +599,22 @@ export class ImmersClient extends window.EventTarget {
     return prop?.url?.href ?? prop?.url ?? prop
   }
 
-  #setPlaceFromDestination (destinationDescription) {
-    this.place = Object.assign(
-      { type: 'Place', audience: Activities.PublicAddress },
-      destinationDescription
-    )
+  async #setPlaceFromDestination (destinationDescription) {
+    if (typeof destinationDescription === 'string') {
+      this.place = await window.fetch(destinationDescription, {
+        headers: { Accept: Activities.JSONLDMime }
+      })
+    } else {
+      const basePlace = this.localImmer
+        ? await window.fetch(`${this.localImmer}/o/immer`, {
+            headers: { Accept: Activities.JSONLDMime }
+          })
+        : { type: 'Place', audience: Activities.PublicAddress }
+      this.place = Object.assign(
+        basePlace,
+        destinationDescription
+      )
+    }
     if (this.activities) {
       this.activities.place = this.place
     }
