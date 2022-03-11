@@ -20,6 +20,9 @@ module.exports = {
     clean: true
   },
   module: {
+    parser: {
+      javascript: { importMeta: false }
+    },
     rules: [
       {
         test: /\.m?js$/,
