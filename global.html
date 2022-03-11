@@ -2222,7 +2222,7 @@ as necessary. Must be invoked from a trusted user input event handler to allow t
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line6">line 6</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -2465,6 +2465,35 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>statusHTML</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Sanitize HTML description of current status with link. Safe to insert into DOM.</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -2500,7 +2529,175 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line22">line 22</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="ImmersClientNewMessageEvent">ImmersClientNewMessageEvent</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>detail</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Message">Message</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -2573,6 +2770,343 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="Message">Message</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">URL of original message object, usable as unique id</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Message sender's Profile</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>timestamp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Message sent time</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Describes the message content: 'chat', 'media', 'status', or 'other'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>__unsafeMessageHTML</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Unsanitized HTML message content.
+You must sanitize this string before inserting into the DOM to avoid XSS attacks.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>messageHTML</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Sanitized HTML message content. Safe to insert into DOM. Media wrapped in IMG/VIDEO will have class immers-message-media</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mediaType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">'image' or 'video' if the message is a media object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mediaURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">source url if the message is a media object
+(messageHTML will contain appropriate tags to display the media, but mediaURL can be used if you need custom display)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -3002,7 +3536,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line11">line 11</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -3144,7 +3678,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line189">line 189</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line257">line 257</a>
     </li></ul></dd>
     
 
@@ -3232,7 +3766,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line133">line 133</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line200">line 200</a>
     </li></ul></dd>
     
 
@@ -3382,7 +3916,105 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line209">line 209</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line307">line 307</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:immers-client-new-message">immers-client-new-message</h4>
+    
+
+    
+
+
+
+<div class="description">
+    New chat or status message received
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="global.html#ImmersClientNewMessageEvent">ImmersClientNewMessageEvent</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line327">line 327</a>
     </li></ul></dd>
     
 
@@ -3424,13 +4056,13 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Mar 11 2022 14:59:38 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Mar 11 2022 15:10:17 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
