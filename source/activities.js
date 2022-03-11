@@ -75,11 +75,11 @@ export class Activities {
     }
   }
 
-  postActivity (activity) {
+  async postActivity (activity) {
     if (!this.trustedIRI(this.actor.outbox)) {
       throw new Error('Invalid outbox address')
     }
-    return window.fetch(this.actor.outbox, {
+    const result = await window.fetch(this.actor.outbox, {
       method: 'POST',
       headers: {
         'Content-Type': Activities.JSONLDMime,
@@ -87,6 +87,10 @@ export class Activities {
       },
       body: JSON.stringify(activity)
     })
+    if (!result.ok) {
+      throw new Error(`Error creating avatar: ${result.status} ${result.body}`)
+    }
+    return result.headers.get('Location')
   }
 
   // collection fetchers

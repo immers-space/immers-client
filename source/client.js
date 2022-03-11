@@ -288,6 +288,21 @@ export class ImmersClient extends window.EventTarget {
       .sort(desc('timestamp'))
   }
 
+  /**
+   * Send a message with text content.
+   * Privacy level determines who receives and can acccess the message.
+   * Direct: Only those named in `to` receive the message.
+   * Friends: Direct plus friends list.
+   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * @param {string} content - The text/HTML content. Will be sanitized before sending
+   * @param {string} privacy - 'direct', 'friends', or 'public'
+   * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   * @returns {Promise<string>} Url of newly posted message
+   */
+  async sendChatMessage (content, privacy, to = []) {
+    return this.activities.note(DOMPurify.sanitize(content), to, privacy)
+  }
+
   async #publishFriendsUpdate () {
     /**
      * Friends status/location has changed
