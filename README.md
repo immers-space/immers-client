@@ -1,6 +1,11 @@
 ![Immers Space header](readme_files/header.png)
 
-# immers-client
+# The immers client
+
+[![npm](https://img.shields.io/npm/v/immers-client)](https://www.npmjs.com/package/immers-client)
+[![npm](https://img.shields.io/npm/dm/immers-client)](https://www.npmjs.com/package/immers-client)
+[![Matrix](https://img.shields.io/matrix/immers-space:matrix.org?label=Matrix%20chat)](https://matrix.to/#/#immers-space:matrix.org)
+[![Open Collective](https://opencollective.com/immers-space/tiers/badge.svg)](https://opencollective.com/immers-space)
 
 Client library to connect with Immers servers and Immers Space accounts from the Immersive Web.
 Using the Immers Client, you can enhance your site with social features and let your users
@@ -107,3 +112,12 @@ High-level APIs are [well-documented](https://immers-space.github.io/immers-clie
 ### Compatibility
 
 For login on destination-only sites, users' home Immer must be running Immers Server v1.3.1 or later
+
+## Creator Members
+
+[![Creator members](https://opencollective.com/immers-space/tiers/creator-member.svg?avatarHeight=36&width=600)](https://opencollective.com/immers-space)
+
+
+## Immerser Members
+
+[![Immerser members](https://opencollective.com/immers-space/tiers/immerser-member.svg?avatarHeight=36&width=600)](https://opencollective.com/immers-space)
