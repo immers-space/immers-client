@@ -1,4 +1,4 @@
-Unreleased changes
+2.2.0
 
 * New lookup and fetch utilities in `ImmersClient`
   * `corsProxyFetch` - fetch wrapper to help with cross-origin resources. If using a local immer, its proxy service will be used. If no  local immer but user is logged in, their home immer proxy service will be used. If neither is available, a normal fetch is attempted
