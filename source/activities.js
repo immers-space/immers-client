@@ -32,6 +32,9 @@
 export class Activities {
   static JSONLDMime = 'application/activity+json'
   static PublicAddress = 'as:Public'
+  static NodeInfoV21 = 'http://nodeinfo.diaspora.software/ns/schema/2.1'
+  static NodeInfoV20 = 'http://nodeinfo.diaspora.software/ns/schema/2.0'
+
   #token
   /**
    * @param  {APActor} actor The user's actor object
@@ -60,19 +63,26 @@ export class Activities {
 
   // lower-level utilities
   async getObject (IRI) {
-    if (this.trustedIRI(IRI)) {
-      const headers = { Accept: Activities.JSONLDMime }
-      if (this.#token) {
-        headers.Authorization = `Bearer ${this.#token}`
-      }
-      const result = await window.fetch(IRI, { headers })
-      if (!result.ok) {
-        throw new Error(`Object fetch error ${result.message}`)
-      }
-      return result.json()
-    } else {
-      throw new Error('Object fetch proxy not implemented')
+    let result
+    const headers = { Accept: Activities.JSONLDMime }
+    if (this.#token) {
+      headers.Authorization = `Bearer ${this.#token}`
     }
+    if (this.trustedIRI(IRI)) {
+      result = await window.fetch(IRI, { headers })
+    } else if (this.actor.endpoints?.proxyUrl) {
+      result = await window.fetch(this.actor.endpoints.proxyUrl, {
+        method: 'POST',
+        body: new URLSearchParams({ id: IRI }),
+        headers
+      })
+    } else {
+      throw new Error('Home immer does not support object fetch proxy')
+    }
+    if (!result.ok) {
+      throw new Error(`Object fetch error ${result.message}`)
+    }
+    return result.json()
   }
 
   async postActivity (activity) {
