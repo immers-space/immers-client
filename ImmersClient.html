@@ -117,7 +117,7 @@
 
             
 
-            <td class="description last">Metadata about this destination used when sharing</td>
+            <td class="description last">Metadata about this destination used when sharing or url for the related Place object</td>
         </tr>
 
     
@@ -479,7 +479,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line342">line 342</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line481">line 481</a>
     </li></ul></dd>
     
 
@@ -680,7 +680,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line351">line 351</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line490">line 490</a>
     </li></ul></dd>
     
 
@@ -835,7 +835,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line377">line 377</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line516">line 516</a>
     </li></ul></dd>
     
 
@@ -993,7 +993,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line438">line 438</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line577">line 577</a>
     </li></ul></dd>
     
 
@@ -1155,7 +1155,7 @@ Find and return the URL string.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line459">line 459</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line598">line 598</a>
     </li></ul></dd>
     
 
@@ -1391,7 +1391,7 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line482">line 482</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line632">line 632</a>
     </li></ul></dd>
     
 
@@ -1438,6 +1438,168 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="corsProxyFetch"><span class="type-signature">(async) </span>corsProxyFetch<span class="signature">(url, headers)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Attempt to fetch a cross-domain resource.
+Prefers using the local immer's proxy service if available,
+falling back to the user's home immer's proxy service if available or plain fetch.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">resource to GET</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">fetch headers</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line314">line 314</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1909,6 +2071,169 @@ Must be called after successful login or restoreSession
     <dd>
         
 <span class="param-type">Promise.&lt;Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getProfile"><span class="type-signature">(async) </span>getProfile<span class="signature">(handle)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>|undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a user's profile object from their handle.
+Uses logged-in users's home immer proxy service if available
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Immers handle</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line382">line 382</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - User profile or undefined if failed
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -2445,7 +2770,7 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line493">line 493</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line643">line 643</a>
     </li></ul></dd>
     
 
@@ -2486,6 +2811,168 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     <dd>
         
 <span class="param-type">Promise.&lt;boolean></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resolveProfileIRI"><span class="type-signature">(async) </span>resolveProfileIRI<span class="signature">(handle)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a user ID/URL from their handle using webfinger
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">immers handle</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line352">line 352</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    - The profile IRI or undefined if failed
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -3097,7 +3584,7 @@ Public: Direct plus Friends plus accessible via URL for sharing.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Mar 11 2022 15:27:16 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Mar 12 2022 04:09:50 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
