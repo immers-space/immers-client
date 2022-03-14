@@ -1,3 +1,7 @@
+2.2.1
+
+* Fix missing return value in deprecated `ImmersClient.connect` method
+
 2.2.0
 
 * New lookup and fetch utilities in `ImmersClient`

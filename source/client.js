@@ -630,7 +630,7 @@ export class ImmersClient extends window.EventTarget {
    * @returns {string} token OAuth2 acess token
    */
   async connect (tokenCatcherURL, requestedRole, handle) {
-    const { token } = await this.login(tokenCatcherURL, requestedRole, handle)
+    const token = await this.login(tokenCatcherURL, requestedRole, handle)
     this.enter()
     return token
   }
