@@ -56,6 +56,12 @@ export class ImmersSocket extends window.EventTarget {
     })
   }
 
+  clearLeaveOnDisconnect () {
+    if (this.connected) {
+      this.socket.emit('entered', {})
+    }
+  }
+
   /**
    * Terminate socket connection
    */

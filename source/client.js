@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
-import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor } from './authUtils.js'
+import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES } from './authUtils.js'
 import { desc, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
@@ -61,7 +61,17 @@ import { clearStore, createStore } from './store.js'
  * @fires immers-client-new-message
  */
 export class ImmersClient extends window.EventTarget {
+  /**
+   * Activities instance for access to low-level ActivityPub API
+   * @type {Activities}
+   * @public
+   */
   activities
+  /**
+   * ImmersSocket instance for access to low-level streaming API
+   * @type {ImmersSocket}
+   * @public
+   */
   streaming
   /**
    * User's Immers profile
@@ -85,6 +95,7 @@ export class ImmersClient extends window.EventTarget {
    */
   constructor (destinationDescription, options) {
     super()
+    this.enterBound = this.enter.bind(this)
     this.#setPlaceFromDestination(destinationDescription)
     if (!this.place.id) {
       // fake AP IRI for destinations without their own immer
@@ -151,19 +162,17 @@ export class ImmersClient extends window.EventTarget {
     if (!this.connected) {
       throw new Error('Immers login required to udpate location')
     }
-    const { authorizedScopes } = this.#store.credential
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
     const actor = this.activities.actor
     if (this.streaming.connected) {
       await this.activities.arrive()
       this.streaming.prepareLeaveOnDisconnect(actor, this.place)
     }
     // also update on future (re)connections
-    this.streaming.addEventListener('immers-socket-connect', () => {
-      if (authorizedScopes.includes('postLocation')) {
-        this.activities.arrive()
-        this.streaming.prepareLeaveOnDisconnect(actor, this.place)
-      }
-    })
+    this.streaming.addEventListener('immers-socket-connect', this.enterBound)
   }
 
   /**
@@ -174,7 +183,11 @@ export class ImmersClient extends window.EventTarget {
     if (!this.connected) {
       throw new Error('Immers login required to update location')
     }
-    await this.activities.leave()
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
+    await this.exit()
     this.#setPlaceFromDestination(destinationDescription)
     return this.enter()
   }
@@ -182,11 +195,17 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as no longer online at this immer.
    */
-  exit () {
+  async exit () {
     if (!this.connected) {
       throw new Error('Immers login required to update location')
     }
-    return this.activities.leave()
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
+    await this.activities.leave()
+    this.streaming.clearLeaveOnDisconnect()
+    this.streaming.removeEventListener('immers-socket-connect', this.enterBound)
   }
 
   /**
