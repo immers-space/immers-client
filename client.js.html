@@ -28,7 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
-import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor } from './authUtils.js'
+import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES } from './authUtils.js'
 import { desc, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
@@ -89,7 +89,17 @@ import { clearStore, createStore } from './store.js'
  * @fires immers-client-new-message
  */
 export class ImmersClient extends window.EventTarget {
+  /**
+   * Activities instance for access to low-level ActivityPub API
+   * @type {Activities}
+   * @public
+   */
   activities
+  /**
+   * ImmersSocket instance for access to low-level streaming API
+   * @type {ImmersSocket}
+   * @public
+   */
   streaming
   /**
    * User's Immers profile
@@ -113,6 +123,7 @@ export class ImmersClient extends window.EventTarget {
    */
   constructor (destinationDescription, options) {
     super()
+    this.enterBound = this.enter.bind(this)
     this.#setPlaceFromDestination(destinationDescription)
     if (!this.place.id) {
       // fake AP IRI for destinations without their own immer
@@ -179,19 +190,17 @@ export class ImmersClient extends window.EventTarget {
     if (!this.connected) {
       throw new Error('Immers login required to udpate location')
     }
-    const { authorizedScopes } = this.#store.credential
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
     const actor = this.activities.actor
     if (this.streaming.connected) {
       await this.activities.arrive()
       this.streaming.prepareLeaveOnDisconnect(actor, this.place)
     }
     // also update on future (re)connections
-    this.streaming.addEventListener('immers-socket-connect', () => {
-      if (authorizedScopes.includes('postLocation')) {
-        this.activities.arrive()
-        this.streaming.prepareLeaveOnDisconnect(actor, this.place)
-      }
-    })
+    this.streaming.addEventListener('immers-socket-connect', this.enterBound)
   }
 
   /**
@@ -202,7 +211,11 @@ export class ImmersClient extends window.EventTarget {
     if (!this.connected) {
       throw new Error('Immers login required to update location')
     }
-    await this.activities.leave()
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
+    await this.exit()
     this.#setPlaceFromDestination(destinationDescription)
     return this.enter()
   }
@@ -210,11 +223,17 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as no longer online at this immer.
    */
-  exit () {
+  async exit () {
     if (!this.connected) {
       throw new Error('Immers login required to update location')
     }
-    return this.activities.leave()
+    if (!this.#store.credential.authorizedScopes.includes(SCOPES.postLocation)) {
+      console.info('Not sharing location because not authorized')
+      return
+    }
+    await this.activities.leave()
+    this.streaming.clearLeaveOnDisconnect()
+    this.streaming.removeEventListener('immers-socket-connect', this.enterBound)
   }
 
   /**
@@ -686,13 +705,13 @@ export class ImmersClient extends window.EventTarget {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Mar 14 2022 22:47:23 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Mar 15 2022 14:51:27 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
