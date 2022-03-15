@@ -1,3 +1,7 @@
+2.2.2
+
+* Ensure that the correct Leave activity is posted on disconnect after using `ImmersClient.move` or `ImmersClient.exit`
+
 2.2.1
 
 * Fix missing return value in deprecated `ImmersClient.connect` method
