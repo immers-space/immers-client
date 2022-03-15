@@ -1,5 +1,22 @@
 import { Activities } from './activities.js'
 import { parseHandle } from './utils.js'
+
+/**
+ * Enum of user account access roles than can be granted
+ * @readonly
+ * @enum {string}
+ */
+export const SCOPES = {
+  viewProfile: 'viewProfile',
+  viewPublic: 'viewPublic',
+  viewFriends: 'viewFriends',
+  postLocation: 'postLocation',
+  viewPrivate: 'viewPrivate',
+  creative: 'creative',
+  addFriends: 'addFriends',
+  addBlocks: 'addBlocks',
+  destructive: 'destructive'
+}
 /**
  * User account access roles that can be granted.
  * @constant allScopes
