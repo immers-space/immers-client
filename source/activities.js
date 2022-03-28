@@ -28,6 +28,8 @@
  * @property {String} audience who can view this object (generally Activities.PublicAddress)
  */
 
+import { getURLPart } from './utils'
+
 /** Low-level API client-to-server ActivityPub methods */
 export class Activities {
   static JSONLDMime = 'application/activity+json'
@@ -41,14 +43,14 @@ export class Activities {
    * @param  {string} homeImmer Protocol and domain of user's home Immers server
    * @param  {APObject} place Place-type object representing this Immersive Web experience
    * @param  {string} [token] OAuth2 token for user's home Immers server
-   * @param  {string} [localImmer] Protocol and domain of local Immers server, e.g. https://immers.space
+   * @param  {string} [localImmer] Origin of local Immers server, e.g. https://immers.space
    */
   constructor (actor, homeImmer, place, token, localImmer) {
     this.actor = actor
     this.homeImmer = homeImmer
     this.place = place
     this.#token = token
-    this.localImmer = localImmer
+    this.localImmer = localImmer ? getURLPart(localImmer, 'origin') : undefined
     // this.authorizedScopes = null
     this.nextInboxPage = null
     this.nextOutboxPage = null

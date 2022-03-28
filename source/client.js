@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
 import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES } from './authUtils.js'
-import { desc, parseHandle } from './utils.js'
+import { desc, getURLPart, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
 
@@ -90,18 +90,19 @@ export class ImmersClient extends window.EventTarget {
 
    * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object
    * @param  {object} [options]
-   * @param  {string} [options.localImmer] Origin of the local Immers Server, if there is one
+   * @param  {string} [options.localImmer] Domain (host) of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
    */
   constructor (destinationDescription, options) {
     super()
     this.enterBound = this.enter.bind(this)
-    this.#setPlaceFromDestination(destinationDescription)
-    if (!this.place.id) {
-      // fake AP IRI for destinations without their own immer
-      this.place.id = this.place.url
-    }
-    this.localImmer = options?.localImmer
+    this.#setPlaceFromDestination(destinationDescription).then(() => {
+      if (!this.place.id) {
+        // fake AP IRI for destinations without their own immer
+        this.place.id = this.place.url
+      }
+    })
+    this.localImmer = options?.localImmer ? getURLPart(options.localImmer, 'host') : undefined
     this.allowStorage = options?.allowStorage
     this.#store = createStore(this.allowStorage)
     try {
@@ -188,7 +189,7 @@ export class ImmersClient extends window.EventTarget {
       return
     }
     await this.exit()
-    this.#setPlaceFromDestination(destinationDescription)
+    await this.#setPlaceFromDestination(destinationDescription)
     return this.enter()
   }
 
@@ -257,7 +258,7 @@ export class ImmersClient extends window.EventTarget {
     this.connected = true
     this.profile = ImmersClient.ProfileFromActor(actor)
     this.#store.handle = this.profile.handle
-    this.activities = new Activities(actor, homeImmer, this.place, token)
+    this.activities = new Activities(actor, homeImmer, this.place, token, this.localImmer)
     this.streaming = new ImmersSocket(homeImmer, token)
 
     if (authorizedScopes.includes('viewFriends')) {
@@ -334,7 +335,7 @@ export class ImmersClient extends window.EventTarget {
     if (this.localImmer) {
       // prefer direct local fetch or local proxy if possible
       return window.fetch(
-        url.startsWith(this.localImmer) ? url : `${this.localImmer}/proxy/${url}`,
+        url.startsWith(`https://${this.localImmer}`) ? url : `https://${this.localImmer}/proxy/${url}`,
         { headers }
       )
     }
@@ -622,7 +623,7 @@ export class ImmersClient extends window.EventTarget {
     if (typeof destinationDescription === 'string') {
       this.place = await window.fetch(destinationDescription, {
         headers: { Accept: Activities.JSONLDMime }
-      })
+      }).then(res => res.json())
     } else {
       const basePlace = this.localImmer
         ? await window.fetch(`${this.localImmer}/o/immer`, {
