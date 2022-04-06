@@ -1,6 +1,6 @@
 import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
-import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES } from './authUtils.js'
+import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES, preprocessScopes } from './authUtils.js'
 import { desc, getURLPart, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
@@ -148,11 +148,12 @@ export class ImmersClient extends window.EventTarget {
    * e.g. one obtained through a service account
    * @param  {string} token - OAuth2 Access Token
    * @param  {string} homeImmer - Domain (host) for user's home immer
-   * @param  {string[]} authorizedScopes - Scopes authorized for the token
+   * @param  {(string|string[])} authorizedScopes - Scopes authorized for the token
    * @returns {Promise<boolean>} true if the login was successful
    */
   loginWithToken (token, homeImmer, authorizedScopes) {
     homeImmer = getURLPart(homeImmer, 'origin')
+    authorizedScopes = preprocessScopes(authorizedScopes)
     this.#store.credential = { token, homeImmer, authorizedScopes }
     return this.restoreSession()
   }

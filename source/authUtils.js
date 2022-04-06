@@ -119,7 +119,7 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle,
         return reject(new Error('Not authorized'))
       }
       const { token, homeImmer } = data
-      const authorizedScopes = data.authorizedScopes[0] === '*' ? allScopes : data.authorizedScopes
+      const authorizedScopes = preprocessScopes(data.authorizedScopes)
       window.removeEventListener('message', handler)
       // have to close the popup in this thread because, in chrome, having the popup close itself crashes the browser
       popup?.close()
@@ -203,4 +203,11 @@ export async function tokenToActor (token, homeImmer) {
     throw new Error(`Error fetching actor ${response.status} ${response.statusText}`)
   }
   return response.json()
+}
+
+export function preprocessScopes (authorizedScopes) {
+  if (typeof authorizedScopes === 'string') {
+    authorizedScopes = authorizedScopes.split(' ')
+  }
+  return authorizedScopes[0] === '*' ? allScopes : authorizedScopes
 }
