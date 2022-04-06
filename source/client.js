@@ -88,7 +88,7 @@ export class ImmersClient extends window.EventTarget {
   #store
   /**
 
-   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object
+   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.
    * @param  {object} [options]
    * @param  {string} [options.localImmer] Domain (host) of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
@@ -103,6 +103,10 @@ export class ImmersClient extends window.EventTarget {
       }
     })
     this.localImmer = options?.localImmer ? getURLPart(options.localImmer, 'host') : undefined
+    if (this.localImmer) {
+      // some functionality enabled prior to login when local immer present
+      this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
+    }
     this.allowStorage = options?.allowStorage
     this.#store = createStore(this.allowStorage)
     try {
@@ -137,6 +141,20 @@ export class ImmersClient extends window.EventTarget {
     this.#store.credential = { token, homeImmer, authorizedScopes }
     this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes)
     return token
+  }
+
+  /**
+   * Initialize client with an existing credential,
+   * e.g. one obtained through a service account
+   * @param  {string} token - OAuth2 Access Token
+   * @param  {string} homeImmer - Domain (host) for user's home immer
+   * @param  {string[]} authorizedScopes - Scopes authorized for the token
+   * @returns {Promise<boolean>} true if the login was successful
+   */
+  loginWithToken (token, homeImmer, authorizedScopes) {
+    homeImmer = getURLPart(homeImmer, 'origin')
+    this.#store.credential = { token, homeImmer, authorizedScopes }
+    return this.restoreSession()
   }
 
   /**
@@ -300,7 +318,6 @@ export class ImmersClient extends window.EventTarget {
   async feed () {
     const inboxCol = await this.activities.inbox()
     const outboxCol = await this.activities.outbox()
-    console.log('collections', inboxCol, outboxCol)
     return inboxCol.orderedItems
       .concat(outboxCol.orderedItems)
       .map(ImmersClient.MessageFromActivity)
