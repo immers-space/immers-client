@@ -31,3 +31,23 @@ export function desc (prop) {
     return 0
   }
 }
+/**
+ * Process a url-like input into a fully formed URL in order to fetch
+ * a specific portion via the URL API
+ * @param  {string} input - potentially incomplete origin, e.g. domain/hostname, host, or origin
+ * @param  {string} part - property name from the URL API to return, e.g. 'origin' or 'host'
+ */
+export function getURLPart (input, part) {
+  let url
+  let location = input.toString()
+  if (!/^https?:\/\//.test(location)) {
+    location = `https://${location}`
+  }
+  try {
+    url = new URL(location)
+  } catch (err) {
+    console.debug(err.message)
+    throw new Error(`Invalid URL: ${input}`)
+  }
+  return url[part]
+}
