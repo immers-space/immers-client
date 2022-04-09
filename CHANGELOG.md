@@ -1,3 +1,10 @@
+2.3.0
+
+* New method `ImmersClient.loginWithToken` - allow login without user interaction if credentials acquired through another means (for controlled accounts feature coming soon in immers server)
+* When a local immer is available, `ImmersClient.activities` will now be available immediately upon contstruction to allow interactions with local immer that don't require authentication (e.g. `Activities.getObject` for local, public objects). `ImmersClient.activities` will be replaced with a new instance connected to the user's account upon login
+* Be more flexible with how immer domains are specified - accepts domain (host) or origin and transforms as needed
+* Fix issue with `enter`/`move` location updates not using most recent Destination
+
 2.2.2
 
 * Ensure that the correct Leave activity is posted on disconnect after using `ImmersClient.move` or `ImmersClient.exit`
