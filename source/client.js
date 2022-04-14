@@ -27,6 +27,7 @@ import { clearStore, createStore } from './store.js'
  * @property {boolean} isOnline - Currently online anywhere in Immers Space
  * @property {string} [locationName] - Name of current or last immer visited
  * @property {string} [locationURL] - URL of current or last immer visited
+ * @property {('friend-online'|'friend-offline'|'request-receved'|'none')} status - descriptor of the current relationship to this user
  * @property {string} statusString - Text description of current status, "Offline" / "Online at..."
  * @property {string} __unsafeStatusHTML - Unsanitized HTML description of current status with link.
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
@@ -308,6 +309,9 @@ export class ImmersClient extends window.EventTarget {
    */
   async friendsList () {
     const friendsCol = await this.activities.friends()
+    this.#store.friends = friendsCol.orderedItems
+      .map(ImmersClient.FriendStatusFromActivity)
+    // map it again to avoid shared, mutable objects
     return friendsCol.orderedItems
       .map(ImmersClient.FriendStatusFromActivity)
   }
@@ -337,7 +341,7 @@ export class ImmersClient extends window.EventTarget {
    * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
    * @returns {Promise<string>} Url of newly posted message
    */
-  async sendChatMessage (content, privacy, to = []) {
+  sendChatMessage (content, privacy, to = []) {
     return this.activities.note(DOMPurify.sanitize(content), to, privacy)
   }
 
@@ -526,24 +530,43 @@ export class ImmersClient extends window.EventTarget {
    * @returns {FriendStatus}
    */
   static FriendStatusFromActivity (activity) {
-    const isOnline = activity.type === 'Arrive'
     const locationName = activity.target?.name
     const locationURL = activity.target?.url
-    const statusString = isOnline
-      ? `Online at ${locationName} (${locationURL})`
-      : 'Offline'
-    const __unsafeStatusHTML = isOnline
-      ? `<span>Online at <a href="${locationURL}">${locationName}</a></span>`
-      : '<span>Offline</span>'
-    return {
+    let status = 'none'
+    let statusString = ''
+    let __unsafeStatusHTML = '<span></span>'
+    switch (activity.type.toLowerCase()) {
+      case 'arrive':
+        status = 'friend-online'
+        statusString = `Online at ${locationName} (${locationURL})`
+        __unsafeStatusHTML = `<span>Online at <a href="${locationURL}">${locationName}</a></span>`
+        break
+      case 'leave':
+      case 'accept':
+        status = 'friend-offline'
+        statusString = 'Offline'
+        __unsafeStatusHTML = `<span>${statusString}</span>`
+        break
+      case 'follow':
+        status = 'request-received'
+        statusString = 'Sent you a friend request'
+        __unsafeStatusHTML = `<span>${statusString}</span>`
+        break
+    }
+    const isOnline = status === 'online'
+    const friendStatus = {
       profile: ImmersClient.ProfileFromActor(activity.actor),
       isOnline,
       locationName,
       locationURL,
+
+      status,
       statusString,
       __unsafeStatusHTML,
       statusHTML: DOMPurify.sanitize(__unsafeStatusHTML)
     }
+    Object.defineProperty(friendStatus, '_activity', { enumerable: false, value: activity })
+    return friendStatus
   }
 
   /**
