@@ -345,6 +345,22 @@ export class ImmersClient extends window.EventTarget {
     return this.activities.note(DOMPurify.sanitize(content), to, privacy)
   }
 
+  /**
+   * This method will either initiate a new friend request or,
+   * if a request has already been received from the target user,
+   * accept a pending friend request. To create a friend connection,
+   * both users will need to call this method with the other user's handle.
+   * @param  {string} handle - the target user's immers handle or profile id
+   */
+  async addFriend (handle) {
+    const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
+    const pendingRequest = this.#store.friends?.find(status => status.profile.id === userId && status.status === 'request-received')
+    if (pendingRequest) {
+      return this.activities.accept(pendingRequest._activity)
+    }
+    return this.activities.follow(userId)
+  }
+
   // Misc utilities
   /**
    * Attempt to fetch a cross-domain resource.
