@@ -51,7 +51,7 @@ export class ImmersSocket extends window.EventTarget {
         actor: actorObj.id,
         target: place,
         to: actorObj.followers,
-        summary: `${actorObj.name} left ${place.name}.`
+        summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
       }
     })
   }
