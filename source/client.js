@@ -691,11 +691,12 @@ export class ImmersClient extends window.EventTarget {
         headers: { Accept: Activities.JSONLDMime }
       }).then(res => res.json())
     } else {
+      const defaultPlace = { type: 'Place', audience: Activities.PublicAddress }
       const basePlace = this.localImmer
-        ? await window.fetch(`${this.localImmer}/o/immer`, {
+        ? await window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
             headers: { Accept: Activities.JSONLDMime }
-          })
-        : { type: 'Place', audience: Activities.PublicAddress }
+          }).then(res => res.json()).catch(() => defaultPlace)
+        : defaultPlace
       this.place = Object.assign(
         basePlace,
         destinationDescription
