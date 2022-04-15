@@ -311,8 +311,10 @@ export class ImmersClient extends window.EventTarget {
     const friendsCol = await this.activities.friends()
     this.#store.friends = friendsCol.orderedItems
       .map(ImmersClient.FriendStatusFromActivity)
-    // map it again to avoid shared, mutable objects
     return friendsCol.orderedItems
+      // don't show ex-friends in list
+      .filter(activity => activity.type !== 'Reject')
+      // map it again to avoid shared, mutable objects
       .map(ImmersClient.FriendStatusFromActivity)
   }
 
@@ -359,6 +361,13 @@ export class ImmersClient extends window.EventTarget {
       return this.activities.accept(pendingRequest._activity)
     }
     return this.activities.follow(userId)
+  }
+
+  async removeFriend (handle) {
+    const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
+    // technically reject needs the original follow activity ID, but
+    // immers server will do this lookup for us if we send reject of a user id
+    return this.activities.reject(userId, userId)
   }
 
   // Misc utilities
