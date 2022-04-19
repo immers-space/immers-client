@@ -363,10 +363,18 @@ export class ImmersClient extends window.EventTarget {
     return this.activities.follow(userId)
   }
 
+  /**
+   * Remove an existing friend or reject a pending friend request
+   * @param  {string} handle - the target user's immers handle or profile id
+   */
   async removeFriend (handle) {
     const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
+    const pendingRequest = this.#store.friends?.find(status => status.profile.id === userId && status.status === 'request-received')
+    if (pendingRequest) {
+      return this.activities.reject(pendingRequest._activity.id, userId)
+    }
     // technically reject needs the original follow activity ID, but
-    // immers server will do this lookup for us if we send reject of a user id
+    // immers server will do this lookup for us if we send reject of a friends list user id
     return this.activities.reject(userId, userId)
   }
 
