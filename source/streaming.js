@@ -35,6 +35,10 @@ export class ImmersSocket extends window.EventTarget {
       activity = JSON.parse(activity)
       this.dispatchEvent(new window.CustomEvent('immers-socket-inbox-update', { detail: activity }))
     })
+    this.socket.on('outbox-update', activity => {
+      activity = JSON.parse(activity)
+      this.dispatchEvent(new window.CustomEvent('immers-socket-outbox-update', { detail: activity }))
+    })
   }
 
   /**

@@ -27,7 +27,7 @@ import { clearStore, createStore } from './store.js'
  * @property {boolean} isOnline - Currently online anywhere in Immers Space
  * @property {string} [locationName] - Name of current or last immer visited
  * @property {string} [locationURL] - URL of current or last immer visited
- * @property {('friend-online'|'friend-offline'|'request-receved'|'none')} status - descriptor of the current relationship to this user
+ * @property {('friend-online'|'friend-offline'|'request-receved'|'request-sent'|'none')} status - descriptor of the current relationship to this user
  * @property {string} statusString - Text description of current status, "Offline" / "Online at..."
  * @property {string} __unsafeStatusHTML - Unsanitized HTML description of current status with link.
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
@@ -364,14 +364,23 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
-   * Remove an existing friend or reject a pending friend request
+   * Remove a relationship to another immerser,
+   * either by removing an existing friend,
+   * rejecting a pending incoming friend request,
+   * or canceling a pending outgoing friend request
    * @param  {string} handle - the target user's immers handle or profile id
    */
   async removeFriend (handle) {
     const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
-    const pendingRequest = this.#store.friends?.find(status => status.profile.id === userId && status.status === 'request-received')
+    const pendingRequest = this.#store.friends
+      ?.find(status => status.profile.id === userId && status.status === 'request-received')
     if (pendingRequest) {
       return this.activities.reject(pendingRequest._activity.id, userId)
+    }
+    const pendingOutgoingRequest = this.#store.friends
+      ?.find(status => status.profile.id === userId && status.status === 'request-sent')
+    if (pendingOutgoingRequest) {
+      return this.activities.undo(pendingOutgoingRequest._activity)
     }
     // technically reject needs the original follow activity ID, but
     // immers server will do this lookup for us if we send reject of a friends list user id
@@ -568,6 +577,7 @@ export class ImmersClient extends window.EventTarget {
     let status = 'none'
     let statusString = ''
     let __unsafeStatusHTML = '<span></span>'
+    let actor = activity.actor
     switch (activity.type.toLowerCase()) {
       case 'arrive':
         status = 'friend-online'
@@ -581,18 +591,25 @@ export class ImmersClient extends window.EventTarget {
         __unsafeStatusHTML = `<span>${statusString}</span>`
         break
       case 'follow':
-        status = 'request-received'
-        statusString = 'Sent you a friend request'
-        __unsafeStatusHTML = `<span>${statusString}</span>`
+        if (actor.id) {
+          status = 'request-received'
+          statusString = 'Sent you a friend request'
+          __unsafeStatusHTML = `<span>${statusString}</span>`
+        } else if (activity.object?.id) {
+          // for outgoing request, current user is the actor; we're interested in the object
+          actor = activity.object
+          status = 'request-sent'
+          statusString = 'You sent a friend request'
+          __unsafeStatusHTML = `<span>${statusString}</span>`
+        }
         break
     }
     const isOnline = status === 'online'
     const friendStatus = {
-      profile: ImmersClient.ProfileFromActor(activity.actor),
+      profile: ImmersClient.ProfileFromActor(actor),
       isOnline,
       locationName,
       locationURL,
-
       status,
       statusString,
       __unsafeStatusHTML,
