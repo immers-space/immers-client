@@ -20,6 +20,7 @@ import { clearStore, createStore } from './store.js'
  * @property {string} avatarImage - Profile icon url
  * @property {string} avatarGltf - Profile avatar 3d model url
  * @property {string} url - Webpage to view full profile
+ * @property {object} collections - Map of user collections retrievable with getCollection. Always includes 'blocked' (user blocklist) and 'avatars'
  */
 /**
  * @typedef {object} FriendStatus
@@ -341,6 +342,51 @@ export class ImmersClient extends window.EventTarget {
     return this.activities.note(DOMPurify.sanitize(content), to, privacy)
   }
 
+  /**
+   * Upload a 3d model as an avatar and optionally share it
+   * @param  {string} name - Name/description
+   * @param  {Blob} glb - 3d model gltf binary file
+   * @param  {Blob} icon - Preview image for thumbnails
+   * @param  {string} privacy - 'direct', 'friends', or 'public'
+   * @param  {} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   * @returns {Promise<string>} Url of avatar creation post
+   */
+  createAvatar (name, glb, icon, privacy, to = []) {
+    return this.activities.model(name, glb, icon, to, privacy)
+  }
+
+  /**
+   * Add an existing avatar to a user's personal avatar collection
+   * @param  {(string|APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
+   */
+  addAvatar (sourceActivity) {
+    return this.activities.add(sourceActivity, this.profile.collections.avatars)
+  }
+
+  /**
+   * Update user's avatar in their profile.
+   * @param  {(object|string)} avatar - Model type object or id for one (or activity containing the model as its object)
+   */
+  async useAvatar (avatar) {
+    // if IRI, fetch object
+    if (typeof avatar === 'string') {
+      avatar = await this.activities.getObject(avatar)
+    }
+    // if Activity, extract object
+    if (avatar.object) {
+      avatar = avatar.object
+    }
+    if (!ImmersClient.URLFromProperty(avatar?.url)) {
+      throw new Error('Invalid avatar')
+    }
+    const profileUpdate = { avatar }
+    const icon = ImmersClient.URLFromProperty(avatar.icon)
+    if (icon) {
+      profileUpdate.icon = icon
+    }
+    return this.activities.updateProfile(profileUpdate)
+  }
+
   // Misc utilities
   /**
    * Attempt to fetch a cross-domain resource.
@@ -623,7 +669,8 @@ export class ImmersClient extends window.EventTarget {
       username,
       avatarImage: ImmersClient.URLFromProperty(icon),
       avatarModel: ImmersClient.URLFromProperty(avatar),
-      url: url ?? id
+      url: url ?? id,
+      collections: actor.streams
     }
   }
 
