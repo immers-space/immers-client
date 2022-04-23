@@ -35,6 +35,10 @@ export class ImmersSocket extends window.EventTarget {
       activity = JSON.parse(activity)
       this.dispatchEvent(new window.CustomEvent('immers-socket-inbox-update', { detail: activity }))
     })
+    this.socket.on('outbox-update', activity => {
+      activity = JSON.parse(activity)
+      this.dispatchEvent(new window.CustomEvent('immers-socket-outbox-update', { detail: activity }))
+    })
   }
 
   /**
@@ -51,7 +55,7 @@ export class ImmersSocket extends window.EventTarget {
         actor: actorObj.id,
         target: place,
         to: actorObj.followers,
-        summary: `${actorObj.name} left ${place.name}.`
+        summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
       }
     })
   }

@@ -344,6 +344,15 @@ export class Activities {
     })
   }
 
+  undo (activity) {
+    return this.postActivity({
+      type: 'Undo',
+      actor: this.actor.id,
+      object: activity.id,
+      to: activity.to
+    })
+  }
+
   updateProfile (update) {
     update.id = this.actor.id
     const activity = {
