@@ -1,3 +1,9 @@
+## Unreleased
+
+### Changed
+
+* `ImmersClient.friendsList` sort updated to list online friends first
+
 ## v2.4.0 (2022-04-23)
 ### Friend management
 
