@@ -104,7 +104,7 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle,
       if (popup.closed) {
         document.body.classList.remove('immers-authorizing')
       } else {
-        window.setInterval(checkClosed, 100)
+        window.setTimeout(checkClosed, 100)
       }
     }
     checkClosed()
