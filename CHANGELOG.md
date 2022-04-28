@@ -1,5 +1,4 @@
-## v2.3.0
-
+## v2.4.0 (2022-04-23)
 ### Friend management
 
 New high-level apis to add & remove friends
