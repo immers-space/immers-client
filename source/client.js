@@ -317,6 +317,7 @@ export class ImmersClient extends window.EventTarget {
       .filter(activity => activity.type !== 'Reject')
       // map it again to avoid shared, mutable objects
       .map(ImmersClient.FriendStatusFromActivity)
+      .sort(ImmersClient.FriendsSorter)
   }
 
   /**
@@ -610,6 +611,25 @@ export class ImmersClient extends window.EventTarget {
    */
   get handle () {
     return this.#store.handle
+  }
+
+  /**
+   * Array.sort compareFunction to sort a friends list putting online
+   * friends at the top and the rest by most recent update
+   * @param  {FriendStatus} a
+   * @param  {FriendStatus} b
+   */
+  static FriendsSorter (a, b) {
+    if (a.status === 'friend-online' && b.status !== 'friend-online') {
+      return -1
+    }
+    if (b.status === 'friend-online' && a.status !== 'friend-online') {
+      return 1
+    }
+    if (a._activity.published === b._activity.published) {
+      return 0
+    }
+    return a._activity.published > b._activity.published ? -1 : 1
   }
 
   /**
