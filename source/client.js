@@ -97,19 +97,9 @@ export class ImmersClient extends window.EventTarget {
    */
   constructor (destinationDescription, options) {
     super()
-    this.enterBound = this.enter.bind(this)
-    this.#setPlaceFromDestination(destinationDescription).then(() => {
-      if (!this.place.id) {
-        // fake AP IRI for destinations without their own immer
-        this.place.id = this.place.url
-      }
-    })
     this.localImmer = options?.localImmer ? getURLPart(options.localImmer, 'host') : undefined
-    if (this.localImmer) {
-      // some functionality enabled prior to login when local immer present
-      this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
-    }
     this.allowStorage = options?.allowStorage
+    this.enterBound = this.enter.bind(this)
     this.#store = createStore(this.allowStorage)
     try {
       const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -122,6 +112,16 @@ export class ImmersClient extends window.EventTarget {
     } catch (err) {
       console.warn(`Unable to parse handle from URL hash: ${err.message}`)
     }
+    if (this.localImmer) {
+      // some functionality enabled prior to login when local immer present
+      this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
+    }
+    this.#setPlaceFromDestination(destinationDescription).then(() => {
+      if (!this.place.id) {
+        // fake AP IRI for destinations without their own immer
+        this.place.id = this.place.url
+      }
+    })
   }
 
   /**

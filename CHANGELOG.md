@@ -4,9 +4,10 @@
 
 * `ImmersClient.friendsList` sort updated to list online friends first
 
-## Fixed
+### Fixed
 
 * Fix memory leak in oauth popup that could cause page to crash if left open
+* OAuth client ID incorrect when using with local immer
 
 ## v2.4.0 (2022-04-23)
 ### Friend management
