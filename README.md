@@ -113,6 +113,16 @@ High-level APIs are [well-documented](https://immers-space.github.io/immers-clie
 
 For login on destination-only sites, users' home Immer must be running Immers Server v1.3.1 or later
 
+### Creating a new release
+
+The Immers Client is published to npm and uses semantic versioning.
+
+1. Validate local state: `git switch main && git pull && npm ci`
+1. Update `CHANGELOG.md`: Update top section header from "Unreleased" to "vx.x.x (yyyy-mm-dd)" with the version and date of the new release and commit this change
+2. Update package version: `npm version patch` or `npm version minor` or `npm version major` ([how to choose](https://semver.org/))
+3. Publish to npm: `npm publish` (this will automatically update the built files and types)
+4. Sync to GitHub: `git push --follow-tags`
+
 ## Creator Members
 
 [![Creator members](https://opencollective.com/immers-space/tiers/creator-member.svg?avatarHeight=36&width=600)](https://opencollective.com/immers-space)
