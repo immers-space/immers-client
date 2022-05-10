@@ -97,19 +97,9 @@ export class ImmersClient extends window.EventTarget {
    */
   constructor (destinationDescription, options) {
     super()
-    this.enterBound = this.enter.bind(this)
-    this.#setPlaceFromDestination(destinationDescription).then(() => {
-      if (!this.place.id) {
-        // fake AP IRI for destinations without their own immer
-        this.place.id = this.place.url
-      }
-    })
     this.localImmer = options?.localImmer ? getURLPart(options.localImmer, 'host') : undefined
-    if (this.localImmer) {
-      // some functionality enabled prior to login when local immer present
-      this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
-    }
     this.allowStorage = options?.allowStorage
+    this.enterBound = () => this.enter()
     this.#store = createStore(this.allowStorage)
     try {
       const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -122,6 +112,16 @@ export class ImmersClient extends window.EventTarget {
     } catch (err) {
       console.warn(`Unable to parse handle from URL hash: ${err.message}`)
     }
+    if (this.localImmer) {
+      // some functionality enabled prior to login when local immer present
+      this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
+    }
+    this.#setPlaceFromDestination(destinationDescription).then(() => {
+      if (!this.place.id) {
+        // fake AP IRI for destinations without their own immer
+        this.place.id = this.place.url
+      }
+    })
   }
 
   /**
@@ -179,8 +179,13 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as "online" at this immer and share the location with their friends.
    * Must be called after successful {@link login} or {@link restoreSession}
+   *  @param  {(Destination|APPlace|string)} [destinationDescription]
    */
-  async enter () {
+  async enter (destinationDescription) {
+    // optionally update the place before going online
+    if (destinationDescription) {
+      await this.#setPlaceFromDestination(destinationDescription)
+    }
     if (!this.connected) {
       throw new Error('Immers login required to udpate location')
     }
@@ -210,8 +215,7 @@ export class ImmersClient extends window.EventTarget {
       return
     }
     await this.exit()
-    await this.#setPlaceFromDestination(destinationDescription)
-    return this.enter()
+    return this.enter(destinationDescription)
   }
 
   /**
@@ -670,7 +674,7 @@ export class ImmersClient extends window.EventTarget {
         }
         break
     }
-    const isOnline = status === 'online'
+    const isOnline = status === 'friend-online'
     const friendStatus = {
       profile: ImmersClient.ProfileFromActor(actor),
       isOnline,

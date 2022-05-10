@@ -3,10 +3,13 @@
 ### Changed
 
 * `ImmersClient.friendsList` sort updated to list online friends first
+* `ImmersClient.enter` now takes an optional destination argument that will update the current location before going online
 
-## Fixed
+### Fixed
 
 * Fix memory leak in oauth popup that could cause page to crash if left open
+* OAuth client ID was incorrect when using with local immer
+* FriendStatus.isOnline is now `true` when friend is online
 
 ## v2.4.0 (2022-04-23)
 ### Friend management
