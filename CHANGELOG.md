@@ -3,6 +3,7 @@
 ### Changed
 
 * `ImmersClient.friendsList` sort updated to list online friends first
+* `ImmersClient.enter` now takes an optional destination argument that will update the current location before going online
 
 ### Fixed
 

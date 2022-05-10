@@ -99,7 +99,7 @@ export class ImmersClient extends window.EventTarget {
     super()
     this.localImmer = options?.localImmer ? getURLPart(options.localImmer, 'host') : undefined
     this.allowStorage = options?.allowStorage
-    this.enterBound = this.enter.bind(this)
+    this.enterBound = () => this.enter()
     this.#store = createStore(this.allowStorage)
     try {
       const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -179,8 +179,13 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as "online" at this immer and share the location with their friends.
    * Must be called after successful {@link login} or {@link restoreSession}
+   *  @param  {(Destination|APPlace|string)} [destinationDescription]
    */
-  async enter () {
+  async enter (destinationDescription) {
+    // optionally update the place before going online
+    if (destinationDescription) {
+      await this.#setPlaceFromDestination(destinationDescription)
+    }
     if (!this.connected) {
       throw new Error('Immers login required to udpate location')
     }
@@ -210,8 +215,7 @@ export class ImmersClient extends window.EventTarget {
       return
     }
     await this.exit()
-    await this.#setPlaceFromDestination(destinationDescription)
-    return this.enter()
+    return this.enter(destinationDescription)
   }
 
   /**
