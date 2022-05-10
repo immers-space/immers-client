@@ -670,7 +670,7 @@ export class ImmersClient extends window.EventTarget {
         }
         break
     }
-    const isOnline = status === 'online'
+    const isOnline = status === 'friend-online'
     const friendStatus = {
       profile: ImmersClient.ProfileFromActor(actor),
       isOnline,
