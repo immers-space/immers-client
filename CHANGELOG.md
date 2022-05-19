@@ -41,7 +41,7 @@ New high-level apis for creating, saving, sharing, and using avatars.
 * New `ImmersSocket` event `'immers-socket-outbox-update'` - when th current user has posted something new, either from current client or another\*
 * Fixed the auto leave-on-disconnect activity to have the same summary format as `ImmersClient.exit` activity
 
-\*  requires user's home Immers server version >= 2.2.0, otherwise error 'Missing/invalid upload media endpoint' will be thrown.
+\*  requires user's home Immers server version (TBD sorry this feature is still in development), otherwise error 'Missing/invalid upload media endpoint' will be thrown.
 
 ## v2.3.0
 
