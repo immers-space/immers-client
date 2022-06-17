@@ -134,7 +134,7 @@ export class ImmersClient extends window.EventTarget {
       return client;
     }
 
-    return new Promise(res => client.addEventListener("immers-client-connected", () => res(client)));
+    return new Promise(res => client.addEventListener("immers-client-connected", () => res(client), { once: true }));
   };
 
   /**
