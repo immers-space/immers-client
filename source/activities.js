@@ -100,7 +100,7 @@ export class Activities {
       body: JSON.stringify(activity)
     })
     if (!result.ok) {
-      throw new Error(`Error creating avatar: ${result.status} ${result.body}`)
+      throw new Error(`Error posting activity: ${result.status} ${await result.text()}`)
     }
     return result.headers.get('Location')
   }

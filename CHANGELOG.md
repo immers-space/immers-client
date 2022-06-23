@@ -9,6 +9,10 @@
 
 \* requires Immers Server version 3.1.0
 
+### Fixed
+
+* Fixed incorrect error message when an activity failes to post to outbox
+
 ## v2.5.0 (2022-05-11)
 
 ### Changed
