@@ -161,6 +161,10 @@ export class Activities {
     return col
   }
 
+  /**
+   * List of IRIs for users blocked by this user
+   * @returns {string[]} blocked user IRIs
+   */
   async blockList () {
     const blocked = []
     // use blocklist IRI if specified, fallback to immers default

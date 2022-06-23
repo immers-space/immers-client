@@ -292,6 +292,11 @@ export class ImmersClient extends window.EventTarget {
         'immers-socket-friends-update',
         () => this.#publishFriendsUpdate()
       )
+      this.#publishBlockedUpdate()
+      this.streaming.addEventListener(
+        'immers-socket-blocked-update',
+        () => this.#publishBlockedUpdate()
+      )
     }
     if (authorizedScopes.includes('viewPublic')) {
       this.streaming.addEventListener(
@@ -336,6 +341,20 @@ export class ImmersClient extends window.EventTarget {
       .map(ImmersClient.MessageFromActivity)
       .filter(msg => !!msg) // posts not convertable to Message
       .sort(desc('timestamp'))
+  }
+
+  /**
+   * Fetch list of Profile.id of all users blocked by this user
+   * @param {boolean} forceRefresh - skip local cache and fetch from server
+   * @returns {Promise<string[]>}
+   */
+  async blockList (forceRefresh) {
+    if (!forceRefresh && this.#store.blocked) {
+      return this.#store.blocked.map(activity => activity.object)
+    }
+    const blocked = await this.activities.blockList()
+    this.#store.blocked = blocked
+    return blocked.slice()
   }
 
   /**
@@ -391,6 +410,35 @@ export class ImmersClient extends window.EventTarget {
     // technically reject needs the original follow activity ID, but
     // immers server will do this lookup for us if we send reject of a friends list user id
     return this.activities.reject(userId, userId)
+  }
+
+  /**
+   * Add an someone to this immerser's blocklist. While on a blocklist,
+   * no messages/requests will sent or received between these two users,
+   * and any past messages will be omitted from feeds and friends lists.
+   * You should also prevent realtime interactions in your
+   * application from users in Profile.collections.blocked (e.g. hide avatars, mute audio)
+   * @param  {string} handle - the target user's immers handle or profile id
+   */
+  async blockUser (handle) {
+    const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
+    return this.activities.block(userId)
+  }
+
+  /**
+   * Remove someone to this immerser's blocklist. Messages will once again
+   * be sent & received between users and past messages from before the block
+   * will be visible again in feeds and friends lists.
+   * @param  {string} handle - the target user's immers handle or profile id
+   */
+  async unblockUser (handle) {
+    const userId = handle.startsWith('https://') ? handle : await this.resolveProfileIRI(handle)
+    // this undo formation can have different results depending on relationship state,
+    // so confirm the user is blocked first
+    if (!this.#store.blocked.includes(userId) && !(await this.blockList(true)).includes(userId)) {
+      throw new Error(`Unable to unblock ${userId}: User not found in block list`)
+    }
+    return this.activities.undo({ id: userId })
   }
 
   /*
@@ -587,6 +635,21 @@ export class ImmersClient extends window.EventTarget {
     const evt = new window.CustomEvent('immers-client-friends-update', {
       detail: {
         friends: await this.friendsList()
+      }
+    })
+    this.dispatchEvent(evt)
+  }
+
+  async #publishBlockedUpdate () {
+    /**
+     * Blocklist has changed
+     * @event immers-client-blocked-update
+     * @type {object}
+     * @property {string[]} detail.blocked Profile.id for each blocked user
+     */
+    const evt = new window.CustomEvent('immers-client-blocked-update', {
+      detail: {
+        blocked: await this.blockList(true)
       }
     })
     this.dispatchEvent(evt)

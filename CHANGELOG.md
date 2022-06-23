@@ -1,3 +1,14 @@
+## Unreleased
+
+## Added
+
+* `ImmersClient.blockUser` for adding to user's block list
+* `ImmersClient.unblockUser` for removing from user's block list\*
+* New event `'immers-client-blocked-update'` when a user's block list has changed\*
+* `ImmersClient.blockList` to fetch user's current block list
+
+\* requires Immers Server version 3.1.0
+
 ## v2.5.0 (2022-05-11)
 
 ### Changed
