@@ -31,6 +31,9 @@ export class ImmersSocket extends window.EventTarget {
     this.socket.on('friends-update', () => {
       this.dispatchEvent(new window.CustomEvent('immers-socket-friends-update'))
     })
+    this.socket.on('blocked-update', () => {
+      this.dispatchEvent(new window.CustomEvent('immers-socket-blocked-update'))
+    })
     this.socket.on('inbox-update', activity => {
       activity = JSON.parse(activity)
       this.dispatchEvent(new window.CustomEvent('immers-socket-inbox-update', { detail: activity }))
