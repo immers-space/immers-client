@@ -11,7 +11,7 @@
 
 ### Fixed
 
-* Fixed incorrect error message when an activity failes to post to outbox
+* Fixed incorrect error message when an activity fails to post to outbox
 
 ## v2.5.0 (2022-05-11)
 
