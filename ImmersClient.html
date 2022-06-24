@@ -551,7 +551,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line616">line 616</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line679">line 679</a>
     </li></ul></dd>
     
 
@@ -848,7 +848,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line626">line 626</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line689">line 689</a>
     </li></ul></dd>
     
 
@@ -985,7 +985,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line644">line 644</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line707">line 707</a>
     </li></ul></dd>
     
 
@@ -1140,7 +1140,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line697">line 697</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line760">line 760</a>
     </li></ul></dd>
     
 
@@ -1298,7 +1298,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line758">line 758</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line821">line 821</a>
     </li></ul></dd>
     
 
@@ -1460,7 +1460,7 @@ Find and return the URL string.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line780">line 780</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line843">line 843</a>
     </li></ul></dd>
     
 
@@ -1622,7 +1622,7 @@ Find and return the URL string.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line413">line 413</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line461">line 461</a>
     </li></ul></dd>
     
 
@@ -1762,7 +1762,303 @@ both users will need to call this method with the other user's handle.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line363">line 363</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line382">line 382</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="blockList"><span class="type-signature">(async) </span>blockList<span class="signature">(forceRefresh)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fetch list of Profile.id of all users blocked by this user
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>forceRefresh</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">skip local cache and fetch from server</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line351">line 351</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;Array.&lt;string>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="blockUser"><span class="type-signature">(async) </span>blockUser<span class="signature">(handle)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add an someone to this immerser's blocklist. While on a blocklist,
+no messages/requests will sent or received between these two users,
+and any past messages will be omitted from feeds and friends lists.
+You should also prevent realtime interactions in your
+application from users in Profile.collections.blocked (e.g. hide avatars, mute audio)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the target user's immers handle or profile id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line423">line 423</a>
     </li></ul></dd>
     
 
@@ -1976,7 +2272,7 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line815">line 815</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line878">line 878</a>
     </li></ul></dd>
     
 
@@ -2160,7 +2456,7 @@ falling back to the user's home immer's proxy service if available or plain fetc
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line449">line 449</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line497">line 497</a>
     </li></ul></dd>
     
 
@@ -2580,7 +2876,7 @@ Must be called after successful login or restoreSession
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line331">line 331</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line336">line 336</a>
     </li></ul></dd>
     
 
@@ -2686,7 +2982,7 @@ Must be called after successful login or restoreSession
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line315">line 315</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line320">line 320</a>
     </li></ul></dd>
     
 
@@ -2842,7 +3138,7 @@ Uses logged-in users's home immer proxy service if available
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line517">line 517</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line565">line 565</a>
     </li></ul></dd>
     
 
@@ -3631,7 +3927,7 @@ e.g. one obtained through a service account
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line826">line 826</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line889">line 889</a>
     </li></ul></dd>
     
 
@@ -3793,7 +4089,7 @@ or canceling a pending outgoing friend request
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line379">line 379</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line398">line 398</a>
     </li></ul></dd>
     
 
@@ -3930,7 +4226,7 @@ or canceling a pending outgoing friend request
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line487">line 487</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line535">line 535</a>
     </li></ul></dd>
     
 
@@ -4280,7 +4576,7 @@ Public: Direct plus Friends plus accessible via URL for sharing.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line352">line 352</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line371">line 371</a>
     </li></ul></dd>
     
 
@@ -4327,6 +4623,145 @@ Public: Direct plus Friends plus accessible via URL for sharing.
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="unblockUser"><span class="type-signature">(async) </span>unblockUser<span class="signature">(handle)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Remove someone to this immerser's blocklist. Messages will once again
+be sent & received between users and past messages from before the block
+will be visible again in feeds and friends lists.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the target user's immers handle or profile id</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line434">line 434</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4673,7 +5108,7 @@ Public: Direct plus Friends plus accessible via URL for sharing.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line421">line 421</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line469">line 469</a>
     </li></ul></dd>
     
 
@@ -4719,13 +5154,13 @@ Public: Direct plus Friends plus accessible via URL for sharing.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu May 19 2022 01:17:05 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 24 2022 12:32:01 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
