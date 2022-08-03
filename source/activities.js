@@ -1,28 +1,34 @@
+/** @namespace Activities */
 /**
- * @typedef {string} IRI String representing a unique resource URL
+ * @typedef {string} Activities.IRI String representing a unique resource URL
  */
 /**
- * @typedef {Object} APObject Object representing an ActivityPub object
- * @property {IRI} id
+ * @typedef {Object} Activities.APObject Object representing an ActivityPub object
+ * @property {Activities.IRI} id
  * @property {string} type
  */
 /**
- * @typedef {Object} APActivity Object representing an ActivityPub activity
- * @property {IRI} id
+ * @typedef {Object} Activities.APLink Object representing an ActivityPub object
+ * @property {Activities.IRI} id
  * @property {string} type
- * @property {APActor} actor
  */
 /**
- * @typedef {Object} APActor Object representing an ActivityPub actor
- * @property {IRI} id
+ * @typedef {Object} Activities.APActivity Object representing an ActivityPub activity
+ * @property {Activities.IRI} id
  * @property {string} type
- * @property {IRI} inbox
- * @property {IRI} outbox
+ * @property {Activities.APActor} actor
  */
 /**
- * @typedef {Object} APPlace
- * @property {IRI} id
- * @property {String} type 'Place'
+ * @typedef {Object} Activities.APActor Object representing an ActivityPub actor
+ * @property {Activities.IRI} id
+ * @property {string} type
+ * @property {Activities.IRI} inbox
+ * @property {Activities.IRI} outbox
+ */
+/**
+ * @typedef {Object} Activities.APPlace
+ * @property {Activities.IRI} id
+ * @property {'Place'} type
  * @property {String} name Title of the destination
  * @property {String} url link to visit the destination
  * @property {String} audience who can view this object (generally Activities.PublicAddress)
@@ -39,9 +45,9 @@ export class Activities {
 
   #token
   /**
-   * @param  {APActor} actor The user's actor object
+   * @param  {Activities.APActor} actor The user's actor object
    * @param  {string} homeImmer Protocol and domain of user's home Immers server
-   * @param  {APObject} place Place-type object representing this Immersive Web experience
+   * @param  {Activities.APObject} place Place-type object representing this Immersive Web experience
    * @param  {string} [token] OAuth2 token for user's home Immers server
    * @param  {string} [localImmer] Origin of local Immers server, e.g. https://immers.space
    */
@@ -107,7 +113,7 @@ export class Activities {
 
   /**
    * Post an activity with media upload
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @param  {Blob} file
    * @param  {Blob} icon
    */
@@ -207,8 +213,8 @@ export class Activities {
   /**
    * Add something to a user collection. The object of this must be an activity,
    * use e.g. the Create actvitiy for a Model object to add it to the 'avatars' collection
-   * @param  {(IRI|APObject)} activity - id or object of the activity to be added
-   * @param  {(IRI|string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
+   * @param  {(Activities.IRI|Activities.APObject)} activity - id or object of the activity to be added
+   * @param  {(Activities.IRI|Activities.string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
    */
   add (activity, target) {
     return this.postActivity({
@@ -251,8 +257,8 @@ export class Activities {
 
   /**
    * Post a create activity for an object
-   * @param  {APObject} object New object to be wrapped in Create activity
-   * @return {Promise<APActivity>} The resulting Create activity
+   * @param  {Activities.APObject} object New object to be wrapped in Create activity
+   * @return {Promise<Activities.APActivity>} The resulting Create activity
    */
   create (object) {
     return this.postActivity({

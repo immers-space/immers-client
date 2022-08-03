@@ -90,7 +90,7 @@ export class ImmersClient extends window.EventTarget {
   #store
   /**
 
-   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.
+   * @param  {(Destination|Activities.APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.
    * @param  {object} [options]
    * @param  {string} [options.localImmer] Domain (host) of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)
@@ -179,7 +179,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as "online" at this immer and share the location with their friends.
    * Must be called after successful {@link login} or {@link restoreSession}
-   *  @param  {(Destination|APPlace|string)} [destinationDescription]
+   *  @param  {(Destination|Activities.APPlace|string)} [destinationDescription]
    */
   async enter (destinationDescription) {
     // optionally update the place before going online
@@ -204,7 +204,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Update user's current online location and share with friends
-   * @param  {(Destination|APPlace|string)} destinationDescription
+   * @param  {(Destination|Activities.APPlace|string)} destinationDescription
    */
   async move (destinationDescription) {
     if (!this.connected) {
@@ -456,7 +456,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Add an existing avatar to a user's personal avatar collection
-   * @param  {(string|APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
+   * @param  {(string|Activities.APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
    */
   addAvatar (sourceActivity) {
     return this.activities.add(sourceActivity, this.profile.collections.avatars)
@@ -701,7 +701,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Extract friend status information from their most recent location activity
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @returns {FriendStatus}
    */
   static FriendStatusFromActivity (activity) {
@@ -754,7 +754,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Extract a Message from an activity object
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @returns {Message | null}
    */
   static MessageFromActivity (activity) {
@@ -815,7 +815,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Convert ActivityPub Actor format to Immers profile
-   * @param  {APActor} actor - ActivityPub Actor object
+   * @param  {Activities.APActor} actor - ActivityPub Actor object
    * @returns {Profile}
    */
   static ProfileFromActor (actor) {
@@ -837,7 +837,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Links in ActivityPub objects can take a variety of forms.
    * Find and return the URL string.
-   * @param  {APObject|object|string} prop
+   * @param  {Activities.APObject|object|string} prop
    * @returns {string} URL string
    */
   static URLFromProperty (prop) {
