@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+import { htmlAnchorForPlace } from './utils'
 
 export class ImmersSocket extends window.EventTarget {
   #token
@@ -58,7 +59,7 @@ export class ImmersSocket extends window.EventTarget {
         actor: actorObj.id,
         target: place,
         to: actorObj.followers,
-        summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
+        summary: htmlAnchorForPlace(place)
       }
     })
   }

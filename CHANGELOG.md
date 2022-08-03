@@ -1,3 +1,14 @@
+## Unreleased
+
+## Changed
+
+* Improved destination metadata
+  * Separate identity for a specific page/room from the identity of the experience/application
+  * Support optional previewImage and description props on Destinations
+  * destination.context links it to its immer (i.e. `/o/immer` Place object)
+  * Standardize destination link formats in status updates and include immer name
+* Improved type linking in docs and type inference in IDEs for low-level types in Activities
+
 ## v2.6.0 (2022-06-24)
 
 ## Added
