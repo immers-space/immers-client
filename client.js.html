@@ -29,7 +29,7 @@
             <pre class="prettyprint source linenums"><code>import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
 import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES, preprocessScopes } from './authUtils.js'
-import { desc, getURLPart, parseHandle } from './utils.js'
+import { desc, getURLPart, htmlAnchorForPlace, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
 
@@ -37,6 +37,10 @@ import { clearStore, createStore } from './store.js'
  * @typedef {object} Destination
  * @property {string} name Title of the destination
  * @property {string} url link to visit the destination
+ * @property {string} [privacy] 'direct', 'friends', or 'public' determines who can view this Destination and url e.g. in recently visited places. Default: friends
+ * @property {string} [description] text summary of destination
+ * @property {string} [previewImage] thumbnail image url
+ * @property {Activities.APPlace} [immer] reference to the parent/homepage place object for this experience, if ommitted will use the local immer
  */
 /**
  * @typedef {object} Profile
@@ -118,7 +122,7 @@ export class ImmersClient extends window.EventTarget {
   #store
   /**
 
-   * @param  {(Destination|APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.
+   * @param  {(Destination|Activities.APPlace|string)} destinationDescription Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.
    * @param  {object} [options]
    * @param  {string} [options.localImmer] Domain (host) of the local Immers Server, if there is one
    * @param  {boolean} [options.allowStorage] Enable localStorage of handle &amp; token for reconnection (make sure you've provided complaince notices as needed)
@@ -144,12 +148,7 @@ export class ImmersClient extends window.EventTarget {
       // some functionality enabled prior to login when local immer present
       this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
     }
-    this.#setPlaceFromDestination(destinationDescription).then(() => {
-      if (!this.place.id) {
-        // fake AP IRI for destinations without their own immer
-        this.place.id = this.place.url
-      }
-    })
+    this.#setPlaceFromDestination(destinationDescription)
   }
 
   /**
@@ -207,7 +206,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Mark user as "online" at this immer and share the location with their friends.
    * Must be called after successful {@link login} or {@link restoreSession}
-   *  @param  {(Destination|APPlace|string)} [destinationDescription]
+   *  @param  {(Destination|Activities.APPlace|string)} [destinationDescription]
    */
   async enter (destinationDescription) {
     // optionally update the place before going online
@@ -232,7 +231,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Update user's current online location and share with friends
-   * @param  {(Destination|APPlace|string)} destinationDescription
+   * @param  {(Destination|Activities.APPlace|string)} destinationDescription
    */
   async move (destinationDescription) {
     if (!this.connected) {
@@ -484,7 +483,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Add an existing avatar to a user's personal avatar collection
-   * @param  {(string|APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
+   * @param  {(string|Activities.APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
    */
   addAvatar (sourceActivity) {
     return this.activities.add(sourceActivity, this.profile.collections.avatars)
@@ -700,6 +699,22 @@ export class ImmersClient extends window.EventTarget {
     this.dispatchEvent(evt)
   }
 
+  /** fetch &amp; cache the /o/immer object */
+  #getLocalImmerPlaceObject () {
+    if (this.#store.localImmerPlaceObject) {
+      return Promise.resolve(this.#store.localImmerPlaceObject)
+    }
+    return window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
+      headers: { Accept: Activities.JSONLDMime }
+    })
+      .then(res => res.json())
+      .then(place => {
+        this.#store.localImmerPlaceObject = place
+        return place
+      })
+      .catch(() => undefined)
+  }
+
   /**
    * Users Immers handle, if known. May be available even when logged-out if passed via URL or stored from past login
    * @type {string}
@@ -729,7 +744,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Extract friend status information from their most recent location activity
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @returns {FriendStatus}
    */
   static FriendStatusFromActivity (activity) {
@@ -743,7 +758,7 @@ export class ImmersClient extends window.EventTarget {
       case 'arrive':
         status = 'friend-online'
         statusString = `Online at ${locationName} (${locationURL})`
-        __unsafeStatusHTML = `&lt;span>Online at &lt;a href="${locationURL}">${locationName}&lt;/a>&lt;/span>`
+        __unsafeStatusHTML = `&lt;span>Online at ${htmlAnchorForPlace(activity.target)}&lt;/span>`
         break
       case 'leave':
       case 'accept':
@@ -782,7 +797,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Extract a Message from an activity object
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @returns {Message | null}
    */
   static MessageFromActivity (activity) {
@@ -843,7 +858,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Convert ActivityPub Actor format to Immers profile
-   * @param  {APActor} actor - ActivityPub Actor object
+   * @param  {Activities.APActor} actor - ActivityPub Actor object
    * @returns {Profile}
    */
   static ProfileFromActor (actor) {
@@ -865,7 +880,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Links in ActivityPub objects can take a variety of forms.
    * Find and return the URL string.
-   * @param  {APObject|object|string} prop
+   * @param  {Activities.APObject|object|string} prop
    * @returns {string} URL string
    */
   static URLFromProperty (prop) {
@@ -873,21 +888,36 @@ export class ImmersClient extends window.EventTarget {
   }
 
   async #setPlaceFromDestination (destinationDescription) {
-    if (typeof destinationDescription === 'string') {
+    if (destinationDescription.type) {
+      // user supplied fully formed APPlace, no need to modify
+      this.place = destinationDescription
+    } else if (typeof destinationDescription === 'string') {
+      // if URL, fetch the object and use as-is
       this.place = await window.fetch(destinationDescription, {
         headers: { Accept: Activities.JSONLDMime }
       }).then(res => res.json())
     } else {
-      const defaultPlace = { type: 'Place', audience: Activities.PublicAddress }
-      const basePlace = this.localImmer
-        ? await window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
-            headers: { Accept: Activities.JSONLDMime }
-          }).then(res => res.json()).catch(() => defaultPlace)
-        : defaultPlace
-      this.place = Object.assign(
-        basePlace,
-        destinationDescription
-      )
+      // form APPlace from Destination
+      const { name, url, privacy, description, previewImage, immer } = destinationDescription
+      const place = { type: 'Place', audience: [], name, url }
+      if (privacy === 'public') {
+        place.audience.push(Activities.PublicAddress)
+      }
+      if (this.activities.actor &amp;&amp; (privacy === 'public' || privacy === 'friends' || !privacy)) {
+        place.audience.push(this.activities.actor.followers)
+      }
+      if (description) {
+        place.summary = DOMPurify.sanitize(description)
+      }
+      if (previewImage) {
+        place.icon = previewImage
+      }
+      if (immer) {
+        place.context = immer
+      } else if (this.localImmer) {
+        place.context = await this.#getLocalImmerPlaceObject()
+      }
+      this.place = place
     }
     if (this.activities) {
       this.activities.place = this.place
@@ -932,13 +962,13 @@ export class ImmersClient extends window.EventTarget {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 24 2022 12:35:05 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Aug 03 2022 22:54:51 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -26,37 +26,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @typedef {string} IRI String representing a unique resource URL
+            <pre class="prettyprint source linenums"><code>/** @namespace Activities */
+/**
+ * @typedef {string} Activities.IRI String representing a unique resource URL
  */
 /**
- * @typedef {Object} APObject Object representing an ActivityPub object
- * @property {IRI} id
+ * @typedef {Object} Activities.APObject Object representing an ActivityPub object
+ * @property {Activities.IRI} id
  * @property {string} type
  */
 /**
- * @typedef {Object} APActivity Object representing an ActivityPub activity
- * @property {IRI} id
+ * @typedef {Object} Activities.APLink Object representing an ActivityPub object
+ * @property {Activities.IRI} id
  * @property {string} type
- * @property {APActor} actor
  */
 /**
- * @typedef {Object} APActor Object representing an ActivityPub actor
- * @property {IRI} id
+ * @typedef {Object} Activities.APActivity Object representing an ActivityPub activity
+ * @property {Activities.IRI} id
  * @property {string} type
- * @property {IRI} inbox
- * @property {IRI} outbox
+ * @property {Activities.APActor} actor
  */
 /**
- * @typedef {Object} APPlace
- * @property {IRI} id
- * @property {String} type 'Place'
+ * @typedef {Object} Activities.APActor Object representing an ActivityPub actor
+ * @property {Activities.IRI} id
+ * @property {string} type
+ * @property {Activities.IRI} inbox
+ * @property {Activities.IRI} outbox
+ */
+/**
+ * @typedef {Object} Activities.APPlace
+ * @property {Activities.IRI} id
+ * @property {'Place'} type
  * @property {String} name Title of the destination
+ * @property {String} [summary] Description destination
  * @property {String} url link to visit the destination
  * @property {String} audience who can view this object (generally Activities.PublicAddress)
+ * @property {(string|Activities.APObject|Activities.APLink)} [icon] preview image
+ * @property {Activities.APPlace} [context] Main Place object representing the immer this place exists in
  */
 
-import { getURLPart } from './utils'
+import { getURLPart, htmlAnchorForPlace } from './utils'
 
 /** Low-level API client-to-server ActivityPub methods */
 export class Activities {
@@ -67,9 +76,9 @@ export class Activities {
 
   #token
   /**
-   * @param  {APActor} actor The user's actor object
+   * @param  {Activities.APActor} actor The user's actor object
    * @param  {string} homeImmer Protocol and domain of user's home Immers server
-   * @param  {APObject} place Place-type object representing this Immersive Web experience
+   * @param  {Activities.APObject} place Place-type object representing this Immersive Web experience
    * @param  {string} [token] OAuth2 token for user's home Immers server
    * @param  {string} [localImmer] Origin of local Immers server, e.g. https://immers.space
    */
@@ -135,7 +144,7 @@ export class Activities {
 
   /**
    * Post an activity with media upload
-   * @param  {APActivity} activity
+   * @param  {Activities.APActivity} activity
    * @param  {Blob} file
    * @param  {Blob} icon
    */
@@ -235,8 +244,8 @@ export class Activities {
   /**
    * Add something to a user collection. The object of this must be an activity,
    * use e.g. the Create actvitiy for a Model object to add it to the 'avatars' collection
-   * @param  {(IRI|APObject)} activity - id or object of the activity to be added
-   * @param  {(IRI|string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
+   * @param  {(Activities.IRI|Activities.APObject)} activity - id or object of the activity to be added
+   * @param  {(Activities.IRI|Activities.string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
    */
   add (activity, target) {
     return this.postActivity({
@@ -255,7 +264,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: `&lt;span>Arrived at &lt;a href="${place.url}">${place.name}&lt;/a>&lt;/span>`
+      summary: htmlAnchorForPlace(place)
     })
   }
 
@@ -265,7 +274,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: `&lt;span>Left &lt;a href="${place.url}">${place.name}&lt;/a>&lt;/span>`
+      summary: htmlAnchorForPlace(place)
     })
   }
 
@@ -279,8 +288,8 @@ export class Activities {
 
   /**
    * Post a create activity for an object
-   * @param  {APObject} object New object to be wrapped in Create activity
-   * @return {Promise&lt;APActivity>} The resulting Create activity
+   * @param  {Activities.APObject} object New object to be wrapped in Create activity
+   * @return {Promise&lt;Activities.APActivity>} The resulting Create activity
    */
   create (object) {
     return this.postActivity({
@@ -426,13 +435,13 @@ export class Activities {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Activities.html">Activities</a></li><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 24 2022 12:35:05 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Aug 03 2022 22:54:51 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
