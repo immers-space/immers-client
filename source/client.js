@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify'
 import { Activities } from './activities.js'
 import { ImmerOAuthPopup, DestinationOAuthPopup, tokenToActor, SCOPES, preprocessScopes } from './authUtils.js'
-import { desc, getURLPart, parseHandle } from './utils.js'
+import { desc, getURLPart, htmlAnchorForPlace, parseHandle } from './utils.js'
 import { ImmersSocket } from './streaming.js'
 import { clearStore, createStore } from './store.js'
 
@@ -9,6 +9,10 @@ import { clearStore, createStore } from './store.js'
  * @typedef {object} Destination
  * @property {string} name Title of the destination
  * @property {string} url link to visit the destination
+ * @property {string} [privacy] 'direct', 'friends', or 'public' determines who can view this Destination and url e.g. in recently visited places. Default: friends
+ * @property {string} [description] text summary of destination
+ * @property {string} [previewImage] thumbnail image url
+ * @property {Activities.APPlace} [immer] reference to the parent/homepage place object for this experience, if ommitted will use the local immer
  */
 /**
  * @typedef {object} Profile
@@ -116,12 +120,7 @@ export class ImmersClient extends window.EventTarget {
       // some functionality enabled prior to login when local immer present
       this.activities = new Activities({}, this.localImmer, this.place, null, this.localImmer)
     }
-    this.#setPlaceFromDestination(destinationDescription).then(() => {
-      if (!this.place.id) {
-        // fake AP IRI for destinations without their own immer
-        this.place.id = this.place.url
-      }
-    })
+    this.#setPlaceFromDestination(destinationDescription)
   }
 
   /**
@@ -672,6 +671,22 @@ export class ImmersClient extends window.EventTarget {
     this.dispatchEvent(evt)
   }
 
+  /** fetch & cache the /o/immer object */
+  #getLocalImmerPlaceObject () {
+    if (this.#store.localImmerPlaceObject) {
+      return Promise.resolve(this.#store.localImmerPlaceObject)
+    }
+    return window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
+      headers: { Accept: Activities.JSONLDMime }
+    })
+      .then(res => res.json())
+      .then(place => {
+        this.#store.localImmerPlaceObject = place
+        return place
+      })
+      .catch(() => undefined)
+  }
+
   /**
    * Users Immers handle, if known. May be available even when logged-out if passed via URL or stored from past login
    * @type {string}
@@ -715,7 +730,7 @@ export class ImmersClient extends window.EventTarget {
       case 'arrive':
         status = 'friend-online'
         statusString = `Online at ${locationName} (${locationURL})`
-        __unsafeStatusHTML = `<span>Online at <a href="${locationURL}">${locationName}</a></span>`
+        __unsafeStatusHTML = `<span>Online at ${htmlAnchorForPlace(activity.target)}</span>`
         break
       case 'leave':
       case 'accept':
@@ -845,21 +860,36 @@ export class ImmersClient extends window.EventTarget {
   }
 
   async #setPlaceFromDestination (destinationDescription) {
-    if (typeof destinationDescription === 'string') {
+    if (destinationDescription.type) {
+      // user supplied fully formed APPlace, no need to modify
+      this.place = destinationDescription
+    } else if (typeof destinationDescription === 'string') {
+      // if URL, fetch the object and use as-is
       this.place = await window.fetch(destinationDescription, {
         headers: { Accept: Activities.JSONLDMime }
       }).then(res => res.json())
     } else {
-      const defaultPlace = { type: 'Place', audience: Activities.PublicAddress }
-      const basePlace = this.localImmer
-        ? await window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
-            headers: { Accept: Activities.JSONLDMime }
-          }).then(res => res.json()).catch(() => defaultPlace)
-        : defaultPlace
-      this.place = Object.assign(
-        basePlace,
-        destinationDescription
-      )
+      // form APPlace from Destination
+      const { name, url, privacy, description, previewImage, immer } = destinationDescription
+      const place = { type: 'Place', audience: [], name, url }
+      if (privacy === 'public') {
+        place.audience.push(Activities.PublicAddress)
+      }
+      if (this.activities.actor && (privacy === 'public' || privacy === 'friends' || !privacy)) {
+        place.audience.push(this.activities.actor.followers)
+      }
+      if (description) {
+        place.summary = DOMPurify.sanitize(description)
+      }
+      if (previewImage) {
+        place.icon = previewImage
+      }
+      if (immer) {
+        place.context = immer
+      } else if (this.localImmer) {
+        place.context = await this.#getLocalImmerPlaceObject()
+      }
+      this.place = place
     }
     if (this.activities) {
       this.activities.place = this.place

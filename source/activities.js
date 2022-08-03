@@ -30,11 +30,14 @@
  * @property {Activities.IRI} id
  * @property {'Place'} type
  * @property {String} name Title of the destination
+ * @property {String} [summary] Description destination
  * @property {String} url link to visit the destination
  * @property {String} audience who can view this object (generally Activities.PublicAddress)
+ * @property {(string|Activities.APObject|Activities.APLink)} [icon] preview image
+ * @property {Activities.APPlace} [context] Main Place object representing the immer this place exists in
  */
 
-import { getURLPart } from './utils'
+import { getURLPart, htmlAnchorForPlace } from './utils'
 
 /** Low-level API client-to-server ActivityPub methods */
 export class Activities {
@@ -233,7 +236,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: `<span>Arrived at <a href="${place.url}">${place.name}</a></span>`
+      summary: htmlAnchorForPlace(place)
     })
   }
 
@@ -243,7 +246,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: `<span>Left <a href="${place.url}">${place.name}</a></span>`
+      summary: htmlAnchorForPlace(place)
     })
   }
 

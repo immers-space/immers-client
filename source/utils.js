@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify'
+
 /**
  * @typedef {Object} ParsedHandle
  * @property {string | undefined} username - The user's local identifier
@@ -50,4 +52,17 @@ export function getURLPart (input, part) {
     throw new Error(`Invalid URL: ${input}`)
   }
   return url[part]
+}
+/**
+ * Generate anchor tag for a place, e.g. for arrive/leave summaries.
+ * Returned value is sanitized and safe to render.
+ * @param  {Activities.APPlace} place
+ * @returns {string} sanitized html
+ */
+export function htmlAnchorForPlace (place) {
+  if (!place) {
+    return ''
+  }
+  const contextName = place.context?.name ? `${place.context.name}: ` : ''
+  return DOMPurify.sanitize(`<a href="${place.url}">${contextName}${place.name}</a>`)
 }
