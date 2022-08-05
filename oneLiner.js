@@ -3,7 +3,8 @@ import { ImmersHUD } from './source/ImmersHUD/ImmersHUD.js'
 ImmersHUD.Register()
 let scriptArgs
 try {
-  scriptArgs = Object.fromEntries(new URL(import.meta.url).searchParams)
+  const meta = import.meta
+  scriptArgs = Object.fromEntries(new URL(meta.url).searchParams)
 } catch (err) {
   scriptArgs = {}
   console.warn(`Unable to process query arguments to script, ${err.message}`)
