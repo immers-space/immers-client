@@ -1,3 +1,9 @@
+## Unreleased
+
+## Fixed
+
+* Type Error when loading client on destination-only sites
+
 ## v2.7.0 (2022-08-04)
 
 ## Changed
