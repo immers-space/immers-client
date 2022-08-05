@@ -875,7 +875,7 @@ export class ImmersClient extends window.EventTarget {
       if (privacy === 'public') {
         place.audience.push(Activities.PublicAddress)
       }
-      if (this.activities.actor && (privacy === 'public' || privacy === 'friends' || !privacy)) {
+      if (this.activities?.actor && (privacy === 'public' || privacy === 'friends' || !privacy)) {
         place.audience.push(this.activities.actor.followers)
       }
       if (description) {
