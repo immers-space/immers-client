@@ -28,7 +28,7 @@ import { ImmersClient } from '../client'
  * @example <caption>Load & register the custom element via import (option 1)</caption>
  * import 'immers-client/dist/ImmersHUD.bundle'
  * @example <caption>Load & register the custom element via CDN (option 2)</caption>
- * <script type="module" src="https://unpkg.com/immers-client/dist/ImmersHUD.bundle.js"></script>
+ * <script type="module" src="https://cdn.jsdelivr.net/npm/immers-client/dist/ImmersHUD.bundle.js"></script>
  * @example <caption>Using the custom element in HTML</caption>
  * <immers-hud position="bottom-left" access-role="friends"
  *             destination-name="My Immer" destination-url="https://myimmer.com/"
