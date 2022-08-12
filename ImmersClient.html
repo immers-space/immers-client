@@ -551,7 +551,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line694">line 694</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line696">line 696</a>
     </li></ul></dd>
     
 
@@ -848,7 +848,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line704">line 704</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line706">line 706</a>
     </li></ul></dd>
     
 
@@ -985,7 +985,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line722">line 722</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line724">line 724</a>
     </li></ul></dd>
     
 
@@ -1140,7 +1140,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line775">line 775</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line777">line 777</a>
     </li></ul></dd>
     
 
@@ -1298,7 +1298,7 @@ friends at the top and the rest by most recent update
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line836">line 836</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line838">line 838</a>
     </li></ul></dd>
     
 
@@ -1460,7 +1460,7 @@ Find and return the URL string.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line858">line 858</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line860">line 860</a>
     </li></ul></dd>
     
 
@@ -1518,7 +1518,7 @@ Find and return the URL string.
     
 
     
-    <h4 class="name" id="addAvatar"><span class="type-signature"></span>addAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addAvatar"><span class="type-signature"></span>addAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
 
     
@@ -1622,7 +1622,7 @@ Find and return the URL string.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line460">line 460</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line461">line 461</a>
     </li></ul></dd>
     
 
@@ -1647,6 +1647,28 @@ Find and return the URL string.
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    IRI of avatar add activity
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2272,7 +2294,7 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line908">line 908</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line910">line 910</a>
     </li></ul></dd>
     
 
@@ -2456,7 +2478,7 @@ falling back to the user's home immer's proxy service if available or plain fetc
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line496">line 496</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line498">line 498</a>
     </li></ul></dd>
     
 
@@ -2481,6 +2503,296 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createAvatar"><span class="type-signature"></span>createAvatar<span class="signature">(name, glb, icon, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Upload a 3d model as an avatar and optionally share it
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Name/description</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>glb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Blob</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">3d model gltf binary file</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>icon</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Blob</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Preview image for thumbnails</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>privacy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">'direct', 'friends', or 'public'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>to</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line452">line 452</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    IRI of avatar creation post
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3138,7 +3450,7 @@ Uses logged-in users's home immer proxy service if available
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line564">line 564</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line566">line 566</a>
     </li></ul></dd>
     
 
@@ -3927,7 +4239,7 @@ e.g. one obtained through a service account
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line919">line 919</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line921">line 921</a>
     </li></ul></dd>
     
 
@@ -4226,7 +4538,7 @@ or canceling a pending outgoing friend request
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line534">line 534</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line536">line 536</a>
     </li></ul></dd>
     
 
@@ -5004,7 +5316,7 @@ will be visible again in feeds and friends lists.
     
 
     
-    <h4 class="name" id="useAvatar"><span class="type-signature">(async) </span>useAvatar<span class="signature">(avatar)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="useAvatar"><span class="type-signature">(async) </span>useAvatar<span class="signature">(avatar)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
 
     
@@ -5108,7 +5420,7 @@ will be visible again in feeds and friends lists.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line468">line 468</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line470">line 470</a>
     </li></ul></dd>
     
 
@@ -5133,6 +5445,28 @@ will be visible again in feeds and friends lists.
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    IRI of profile update activity
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -5160,7 +5494,7 @@ will be visible again in feeds and friends lists.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Aug 08 2022 18:07:33 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 12 2022 20:55:31 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
