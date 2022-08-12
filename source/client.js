@@ -440,14 +440,14 @@ export class ImmersClient extends window.EventTarget {
     return this.activities.undo({ id: userId })
   }
 
-  /*
+  /**
    * Upload a 3d model as an avatar and optionally share it
    * @param  {string} name - Name/description
    * @param  {Blob} glb - 3d model gltf binary file
    * @param  {Blob} icon - Preview image for thumbnails
    * @param  {string} privacy - 'direct', 'friends', or 'public'
    * @param  {} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
-   * @returns {Promise<string>} Url of avatar creation post
+   * @returns {Promise<string>} IRI of avatar creation post
    */
   createAvatar (name, glb, icon, privacy, to = []) {
     return this.activities.model(name, glb, icon, to, privacy)
@@ -456,6 +456,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Add an existing avatar to a user's personal avatar collection
    * @param  {(string|Activities.APActivity)} sourceActivity - Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)
+   * @returns {Promise<string>} IRI of avatar add activity
    */
   addAvatar (sourceActivity) {
     return this.activities.add(sourceActivity, this.profile.collections.avatars)
@@ -464,6 +465,7 @@ export class ImmersClient extends window.EventTarget {
   /**
    * Update user's avatar in their profile.
    * @param  {(object|string)} avatar - Model type object or id for one (or activity containing the model as its object)
+   * @returns {Promise<string>} IRI of profile update activity
    */
   async useAvatar (avatar) {
     // if IRI, fetch object
