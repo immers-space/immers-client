@@ -236,7 +236,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: htmlAnchorForPlace(place)
+      summary: `<span>Arrived at ${htmlAnchorForPlace(place)}</span>`
     })
   }
 
@@ -246,7 +246,7 @@ export class Activities {
       actor: this.actor.id,
       target: place,
       to: this.actor.followers,
-      summary: htmlAnchorForPlace(place)
+      summary: `<span>Left ${htmlAnchorForPlace(place)}</span>`
     })
   }
 

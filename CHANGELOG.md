@@ -1,6 +1,12 @@
+## Unreleased
+
+### Fixed
+
+* Restore summary messages in arrive/leave activities
+
 ## v2.7.1 (2022-08-04)
 
-## Fixed
+### Fixed
 
 * Type Error when loading client on destination-only sites
 
