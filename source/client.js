@@ -673,17 +673,21 @@ export class ImmersClient extends window.EventTarget {
     this.dispatchEvent(evt)
   }
 
-  /** fetch & cache the /o/immer object */
-  #getLocalImmerPlaceObject () {
-    if (this.#store.localImmerPlaceObject) {
-      return Promise.resolve(this.#store.localImmerPlaceObject)
+  #localImmerPlaceObject
+  /**
+   * fetch the /o/immer object for the current immer from memory cache or network
+   * @type {Promise<Activities.APPlace>}
+   */
+  get localImmerPlaceObject () {
+    if (this.#localImmerPlaceObject) {
+      return Promise.resolve(this.#localImmerPlaceObject)
     }
     return window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
       headers: { Accept: Activities.JSONLDMime }
     })
       .then(res => res.json())
       .then(place => {
-        this.#store.localImmerPlaceObject = place
+        this.#localImmerPlaceObject = place
         return place
       })
       .catch(() => undefined)
@@ -889,7 +893,7 @@ export class ImmersClient extends window.EventTarget {
       if (immer) {
         place.context = immer
       } else if (this.localImmer) {
-        place.context = await this.#getLocalImmerPlaceObject()
+        place.context = await this.localImmerPlaceObject
       }
       this.place = place
     }

@@ -3,6 +3,7 @@
 ### Fixed
 
 * Restore summary messages in arrive/leave activities
+* Fix local immer place object not updating
 
 ## v2.7.1 (2022-08-04)
 
