@@ -6,6 +6,10 @@
 has changed
 * Added `avatarId` prop to `Profile`
 
+### Changed
+
+* `URLFromProperty` can also find `href` prop if given a `Link` object
+
 ### Fixed
 
 * Restore summary messages in arrive/leave activities

@@ -885,10 +885,10 @@ export class ImmersClient extends window.EventTarget {
    * Links in ActivityPub objects can take a variety of forms.
    * Find and return the URL string.
    * @param  {Activities.APObject|object|string} prop
-   * @returns {string} URL string
+   * @returns {(string|undefined)} URL string, if present
    */
   static URLFromProperty (prop) {
-    return prop?.url?.href ?? prop?.url ?? prop
+    return prop?.url?.href ?? prop?.url ?? prop?.href ?? prop
   }
 
   async #setPlaceFromDestination (destinationDescription) {
