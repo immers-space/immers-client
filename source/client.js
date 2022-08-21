@@ -21,6 +21,7 @@ import { clearStore, createStore } from './store.js'
  * @property {string} displayName - User's changeable preferred identifier, may contain spaces & symbols
  * @property {string} homeImmer - Domain of imme where user account is registered
  * @property {string} username - User's permanent uniqe identifier within their home immer
+ * @property {Activities.IRI} avatarId - Avatar unique id
  * @property {string} avatarImage - Profile icon url
  * @property {string} avatarGltf - Profile avatar 3d model url
  * @property {string} url - Webpage to view full profile
@@ -65,6 +66,7 @@ import { clearStore, createStore } from './store.js'
  * @fires immers-client-disconnected
  * @fires immers-client-friends-update
  * @fires immers-client-new-message
+ * @fires immers-client-profile-update
  */
 export class ImmersClient extends window.EventTarget {
   /**
@@ -301,6 +303,14 @@ export class ImmersClient extends window.EventTarget {
       this.streaming.addEventListener(
         'immers-socket-inbox-update',
         event => this.#publishIncomingMessage(event.detail)
+      )
+      this.streaming.addEventListener(
+        'immers-socket-outbox-update',
+        ({ detail: activity }) => {
+          if (activity.type === 'Update' && activity.object.id === this.profile.id) {
+            this.#handleProfileUpdate(activity.object)
+          }
+        }
       )
     }
     /**
@@ -673,6 +683,21 @@ export class ImmersClient extends window.EventTarget {
     this.dispatchEvent(evt)
   }
 
+  #handleProfileUpdate (actor) {
+    this.profile = ImmersClient.ProfileFromActor(actor)
+    this.activities.actor = actor
+    /**
+     * Profile data has changed
+     * @event immers-client-profile-update
+     * @type {object}
+     * @property {Profile} detail.profile updated profile
+     */
+    const evt = new window.CustomEvent('immers-client-profile-update', {
+      detail: { profile: this.profile }
+    })
+    this.dispatchEvent(evt)
+  }
+
   #localImmerPlaceObject
   /**
    * fetch the /o/immer object for the current immer from memory cache or network
@@ -848,6 +873,7 @@ export class ImmersClient extends window.EventTarget {
       homeImmer,
       displayName,
       username,
+      avatarId: avatar?.id,
       avatarImage: ImmersClient.URLFromProperty(icon),
       avatarModel: ImmersClient.URLFromProperty(avatar),
       url: url ?? id,

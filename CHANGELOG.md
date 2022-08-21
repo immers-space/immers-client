@@ -1,5 +1,11 @@
 ## Unreleased
 
+### Added
+
+* New event `immers-client-profile-update` fires whenever logged-in user's profile
+has changed
+* Added `avatarId` prop to `Profile`
+
 ### Fixed
 
 * Restore summary messages in arrive/leave activities
