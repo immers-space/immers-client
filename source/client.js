@@ -126,6 +126,19 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
+   * Utility method to hide details for waiting on a client connection
+   * @param {ImmersClient} client
+   * @returns {ImmersClient}
+   */
+  static async GetConnected (client) {
+    if (client.connected) {
+      return client;
+    }
+
+    return new Promise(res => client.addEventListener("immers-client-connected", () => res(client), { once: true }));
+  };
+
+  /**
    * Connect to user's Immers Space profile, using pop-up window for OAuth
    * @param  {string} tokenCatcherURL Page on your domain that runs {@link catchToken} on load to retrieve the granted access token.
    * Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.
