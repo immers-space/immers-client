@@ -126,16 +126,22 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
-   * Utility method to hide details for waiting on a client connection
-   * @param {ImmersClient} client
-   * @returns {ImmersClient}
+   * Utility method to hide details for checking if user is logged in
+   * or waiting util they have before performing actions that require
+   * a logged-in user
+   * @example
+   * await client.waitUntilConnected()
+   * client.sendChatMessage('Hey friends, I'm connected!', 'friends')
+   * @returns {Promise<true>}
    */
-  static async GetConnected (client) {
-    if (client.connected) {
-      return client;
+  async waitUntilConnected () {
+    if (this.connected) {
+      return true
     }
 
-    return new Promise(res => client.addEventListener("immers-client-connected", () => res(client), { once: true }));
+    return new Promise(resolve => {
+      this.addEventListener('immers-client-connected', () => resolve(true), { once: true })
+    })
   };
 
   /**

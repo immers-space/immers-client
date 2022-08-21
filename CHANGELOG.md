@@ -4,6 +4,7 @@
 
 * New event `immers-client-profile-update` fires whenever logged-in user's profile
 has changed
+* New method `immersClient.waitUntilConnected`, utility to simplify timing checks when a logged-in user is required (contributed by @wswoodruff)
 * Added `avatarId` prop to `Profile`
 
 ### Changed
