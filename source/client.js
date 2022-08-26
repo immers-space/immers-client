@@ -21,10 +21,19 @@ import { clearStore, createStore } from './store.js'
  * @property {string} displayName - User's changeable preferred identifier, may contain spaces & symbols
  * @property {string} homeImmer - Domain of imme where user account is registered
  * @property {string} username - User's permanent uniqe identifier within their home immer
+ * @property {string} bio - Text description of user, may contain sanitized HTML
  * @property {string} avatarImage - Profile icon url
- * @property {string} avatarGltf - Profile avatar 3d model url
+ * @property {string} avatarModel - Profile avatar 3d model url
+ * @property {Activities.APModel} avatarObject - Profile avatar full Model object
  * @property {string} url - Webpage to view full profile
- * @property {object} collections - Map of user collections retrievable with getCollection. Always includes 'blocked' (user blocklist) and 'avatars'
+ * @property {object} collections - Map of user collections - urls to fetch lists of related activities. May include user-generated collections in addition to those listed
+ * @property {string} collections.avatars - Activities with model objects representing user's collection of avatars
+ * @property {string} collections.blocked - User blocks
+ * @property {string} collections.destinations - Unique immers visited by user, most recent first
+ * @property {string} collections.friends - Most recent activity for each friend (see {@link friendsList})
+ * @property {string} collections.friendsDestinations - Unique immers visited by user's friends, most recent first
+ * @property {string} collections.inbox - All incoming activities
+ * @property {string} collections.outbox - All outgoing activities
  */
 /**
  * @typedef {object} FriendStatus
@@ -32,6 +41,7 @@ import { clearStore, createStore } from './store.js'
  * @property {boolean} isOnline - Currently online anywhere in Immers Space
  * @property {string} [locationName] - Name of current or last immer visited
  * @property {string} [locationURL] - URL of current or last immer visited
+ * @property {Destination} [destination] - Destination object for current or last immer visited
  * @property {('friend-online'|'friend-offline'|'request-receved'|'request-sent'|'none')} status - descriptor of the current relationship to this user
  * @property {string} statusString - Text description of current status, "Offline" / "Online at..."
  * @property {string} __unsafeStatusHTML - Unsanitized HTML description of current status with link.
@@ -65,6 +75,7 @@ import { clearStore, createStore } from './store.js'
  * @fires immers-client-disconnected
  * @fires immers-client-friends-update
  * @fires immers-client-new-message
+ * @fires immers-client-profile-update
  */
 export class ImmersClient extends window.EventTarget {
   /**
@@ -122,6 +133,25 @@ export class ImmersClient extends window.EventTarget {
     }
     this.#setPlaceFromDestination(destinationDescription)
   }
+
+  /**
+   * Utility method to hide details for checking if user is logged in
+   * or waiting util they have before performing actions that require
+   * a logged-in user
+   * @example
+   * await client.waitUntilConnected()
+   * client.sendChatMessage('Hey friends, I'm connected!', 'friends')
+   * @returns {Promise<true>}
+   */
+  async waitUntilConnected () {
+    if (this.connected) {
+      return true
+    }
+
+    return new Promise(resolve => {
+      this.addEventListener('immers-client-connected', () => resolve(true), { once: true })
+    })
+  };
 
   /**
    * Connect to user's Immers Space profile, using pop-up window for OAuth
@@ -301,6 +331,14 @@ export class ImmersClient extends window.EventTarget {
       this.streaming.addEventListener(
         'immers-socket-inbox-update',
         event => this.#publishIncomingMessage(event.detail)
+      )
+      this.streaming.addEventListener(
+        'immers-socket-outbox-update',
+        ({ detail: activity }) => {
+          if (activity.type === 'Update' && activity.object.id === this.profile.id) {
+            this.#handleProfileUpdate(activity.object)
+          }
+        }
       )
     }
     /**
@@ -673,17 +711,36 @@ export class ImmersClient extends window.EventTarget {
     this.dispatchEvent(evt)
   }
 
-  /** fetch & cache the /o/immer object */
-  #getLocalImmerPlaceObject () {
-    if (this.#store.localImmerPlaceObject) {
-      return Promise.resolve(this.#store.localImmerPlaceObject)
+  #handleProfileUpdate (actor) {
+    this.profile = ImmersClient.ProfileFromActor(actor)
+    this.activities.actor = actor
+    /**
+     * Profile data has changed
+     * @event immers-client-profile-update
+     * @type {object}
+     * @property {Profile} detail.profile updated profile
+     */
+    const evt = new window.CustomEvent('immers-client-profile-update', {
+      detail: { profile: this.profile }
+    })
+    this.dispatchEvent(evt)
+  }
+
+  #localImmerPlaceObject
+  /**
+   * fetch the /o/immer object for the current immer from memory cache or network
+   * @type {Promise<Activities.APPlace>}
+   */
+  get localImmerPlaceObject () {
+    if (this.#localImmerPlaceObject) {
+      return Promise.resolve(this.#localImmerPlaceObject)
     }
     return window.fetch(`${getURLPart(this.localImmer, 'origin')}/o/immer`, {
       headers: { Accept: Activities.JSONLDMime }
     })
       .then(res => res.json())
       .then(place => {
-        this.#store.localImmerPlaceObject = place
+        this.#localImmerPlaceObject = place
         return place
       })
       .catch(() => undefined)
@@ -714,6 +771,27 @@ export class ImmersClient extends window.EventTarget {
       return 0
     }
     return a._activity.published > b._activity.published ? -1 : 1
+  }
+
+  /**
+   * Extract a Destination from a place object
+   * @param  {Activities.APPlace} place
+   * @returns {Destination}
+   */
+  static DestinationFromPlace (place) {
+    /** @type {Destination} */
+    const dest = {
+      name: place.name,
+      url: place.url,
+      previewImage: place.icon || place.context?.icon
+    }
+    if (place.summary) {
+      dest.description = DOMPurify.sanitize(place.summary)
+    }
+    if (place.context) {
+      dest.immer = place.context
+    }
+    return dest
   }
 
   /**
@@ -757,6 +835,7 @@ export class ImmersClient extends window.EventTarget {
     const isOnline = status === 'friend-online'
     const friendStatus = {
       profile: ImmersClient.ProfileFromActor(actor),
+      destination: activity.target && ImmersClient.DestinationFromPlace(activity.target),
       isOnline,
       locationName,
       locationURL,
@@ -836,18 +915,21 @@ export class ImmersClient extends window.EventTarget {
    * @returns {Profile}
    */
   static ProfileFromActor (actor) {
-    const { id, name: displayName, preferredUsername: username, icon, avatar, url } = actor
+    const { id, name: displayName, preferredUsername: username, icon, avatar, url, summary } = actor
     const homeImmer = new URL(id).host
+    const collections = { ...actor.streams, inbox: actor.inbox, outbox: actor.outbox }
     return {
       id,
       handle: `${username}[${homeImmer}]`,
       homeImmer,
       displayName,
       username,
+      bio: DOMPurify.sanitize(summary),
       avatarImage: ImmersClient.URLFromProperty(icon),
       avatarModel: ImmersClient.URLFromProperty(avatar),
+      avatarObject: avatar,
       url: url ?? id,
-      collections: actor.streams
+      collections
     }
   }
 
@@ -855,10 +937,10 @@ export class ImmersClient extends window.EventTarget {
    * Links in ActivityPub objects can take a variety of forms.
    * Find and return the URL string.
    * @param  {Activities.APObject|object|string} prop
-   * @returns {string} URL string
+   * @returns {(string|undefined)} URL string, if present
    */
   static URLFromProperty (prop) {
-    return prop?.url?.href ?? prop?.url ?? prop
+    return prop?.url?.href ?? prop?.url ?? prop?.href ?? prop
   }
 
   async #setPlaceFromDestination (destinationDescription) {
@@ -889,7 +971,11 @@ export class ImmersClient extends window.EventTarget {
       if (immer) {
         place.context = immer
       } else if (this.localImmer) {
-        place.context = await this.#getLocalImmerPlaceObject()
+        place.context = await this.localImmerPlaceObject
+      }
+      if (place.url?.endsWith('#')) {
+        // avoid duplicate entries in destinations history from empty hashes
+        place.url = place.url.substring(0, place.url.length - 1)
       }
       this.place = place
     }

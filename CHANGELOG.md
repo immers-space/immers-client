@@ -1,6 +1,30 @@
+## Unreleased
+
+### Added
+
+* New event `immers-client-profile-update` fires whenever logged-in user's profile
+has changed
+* New method `immersClient.waitUntilConnected`, utility to simplify timing checks when a logged-in user is required (contributed by @wswoodruff)
+* New static method `ImmersClient.DestinationFromPlace` to transform ActivityPub Place to Destination type
+
+### Changed
+
+* Added `bio` and `avatarObject` to `Profile`
+* Added `inbox` and `outbox` to `Profile.collections`
+* Added `destination` to `FriendStatus`
+* `URLFromProperty` can also find `href` prop if given a `Link` object
+* `Activities.getObject` can accept URL object in addition to string
+* Destination urls ending with an empty fragment will have the trailing `#` dropped to more accutately aggregate Destinations history
+
+### Fixed
+
+* Restore summary messages in arrive/leave activities
+* Fix local immer place object not updating
+* Fix error in Profile type, url for avatar 3d Model is in prop `avatarModel` not `avatarGltf`
+
 ## v2.7.1 (2022-08-04)
 
-## Fixed
+### Fixed
 
 * Type Error when loading client on destination-only sites
 
