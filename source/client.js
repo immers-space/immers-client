@@ -26,7 +26,14 @@ import { clearStore, createStore } from './store.js'
  * @property {string} avatarModel - Profile avatar 3d model url
  * @property {Activities.APModel} avatarObject - Profile avatar full Model object
  * @property {string} url - Webpage to view full profile
- * @property {object} collections - Map of user collections retrievable with getCollection. Always includes 'inbox;', 'outbox', 'blocked' (user blocklist) and 'avatars'
+ * @property {object} collections - Map of user collections - urls to fetch lists of related activities. May include user-generated collections in addition to those listed
+ * @property {string} collections.avatars - Activities with model objects representing user's collection of avatars
+ * @property {string} collections.blocked - User blocks
+ * @property {string} collections.destinations - Unique immers visited by user, most recent first
+ * @property {string} collections.friends - Most recent activity for each friend (see {@link friendsList})
+ * @property {string} collections.friendsDestinations - Unique immers visited by user's friends, most recent first
+ * @property {string} collections.inbox - All incoming activities
+ * @property {string} collections.outbox - All outgoing activities
  */
 /**
  * @typedef {object} FriendStatus

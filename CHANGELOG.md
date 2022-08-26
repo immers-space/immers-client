@@ -5,7 +5,7 @@
 * New event `immers-client-profile-update` fires whenever logged-in user's profile
 has changed
 * New method `immersClient.waitUntilConnected`, utility to simplify timing checks when a logged-in user is required (contributed by @wswoodruff)
-* New static methid `ImmersClient.DestinationFromPlace` to transform ActivityPub Place to Destination type
+* New static method `ImmersClient.DestinationFromPlace` to transform ActivityPub Place to Destination type
 
 ### Changed
 
