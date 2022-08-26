@@ -21,11 +21,12 @@ import { clearStore, createStore } from './store.js'
  * @property {string} displayName - User's changeable preferred identifier, may contain spaces & symbols
  * @property {string} homeImmer - Domain of imme where user account is registered
  * @property {string} username - User's permanent uniqe identifier within their home immer
- * @property {Activities.IRI} avatarId - Avatar unique id
+ * @property {string} bio - Text description of user, may contain sanitized HTML
  * @property {string} avatarImage - Profile icon url
- * @property {string} avatarGltf - Profile avatar 3d model url
+ * @property {string} avatarModel - Profile avatar 3d model url
+ * @property {Activities.APModel} avatarObject - Profile avatar full Model object
  * @property {string} url - Webpage to view full profile
- * @property {object} collections - Map of user collections retrievable with getCollection. Always includes 'blocked' (user blocklist) and 'avatars'
+ * @property {object} collections - Map of user collections retrievable with getCollection. Always includes 'inbox;', 'outbox', 'blocked' (user blocklist) and 'avatars'
  */
 /**
  * @typedef {object} FriendStatus
@@ -765,6 +766,27 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
+   * Extract a Destination from a place object
+   * @param  {Activities.APPlace} place
+   * @returns {Destination}
+   */
+  static DestinationFromPlace (place) {
+    /** @type {Destination} */
+    const dest = {
+      name: place.name,
+      url: place.url,
+      previewImage: place.icon || place.context?.icon
+    }
+    if (place.summary) {
+      dest.description = DOMPurify.sanitize(place.summary)
+    }
+    if (place.context) {
+      dest.immer = place.context
+    }
+    return dest
+  }
+
+  /**
    * Extract friend status information from their most recent location activity
    * @param  {Activities.APActivity} activity
    * @returns {FriendStatus}
@@ -884,19 +906,21 @@ export class ImmersClient extends window.EventTarget {
    * @returns {Profile}
    */
   static ProfileFromActor (actor) {
-    const { id, name: displayName, preferredUsername: username, icon, avatar, url } = actor
+    const { id, name: displayName, preferredUsername: username, icon, avatar, url, summary } = actor
     const homeImmer = new URL(id).host
+    const collections = { ...actor.streams, inbox: actor.inbox, outbox: actor.outbox }
     return {
       id,
       handle: `${username}[${homeImmer}]`,
       homeImmer,
       displayName,
       username,
-      avatarId: avatar?.id,
+      bio: DOMPurify.sanitize(summary),
       avatarImage: ImmersClient.URLFromProperty(icon),
       avatarModel: ImmersClient.URLFromProperty(avatar),
+      avatarObject: avatar,
       url: url ?? id,
-      collections: actor.streams
+      collections
     }
   }
 
@@ -939,6 +963,10 @@ export class ImmersClient extends window.EventTarget {
         place.context = immer
       } else if (this.localImmer) {
         place.context = await this.localImmerPlaceObject
+      }
+      if (place.url?.endsWith('#')) {
+        // avoid duplicate entries in destinations history from empty hashes
+        place.url = place.url.substring(0, place.url.length - 1)
       }
       this.place = place
     }

@@ -36,6 +36,15 @@
  * @property {(string|Activities.APObject|Activities.APLink)} [icon] preview image
  * @property {Activities.APPlace} [context] Main Place object representing the immer this place exists in
  */
+/**
+ * @typedef {Object} Activities.APModel
+ * @property {Activities.IRI} id
+ * @property {'Model'} type
+ * @property {string} name Model name
+ * @property {(string|Activities.APObject|Activities.APLink)} url link to 3D model file
+ * @property {(string|Activities.APObject|Activities.APLink)} [icon] preview image
+ * @property {string} audience who can view this object (generally Activities.PublicAddress)
+ */
 
 import { getURLPart, htmlAnchorForPlace } from './utils'
 
@@ -79,7 +88,7 @@ export class Activities {
     if (this.#token) {
       headers.Authorization = `Bearer ${this.#token}`
     }
-    if (this.trustedIRI(IRI)) {
+    if (this.trustedIRI(IRI.toString())) {
       result = await window.fetch(IRI, { headers })
     } else if (this.actor.endpoints?.proxyUrl) {
       result = await window.fetch(this.actor.endpoints.proxyUrl, {

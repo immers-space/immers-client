@@ -59,7 +59,7 @@ export class ImmersSocket extends window.EventTarget {
         actor: actorObj.id,
         target: place,
         to: actorObj.followers,
-        summary: htmlAnchorForPlace(place)
+        summary: `<span>Left ${htmlAnchorForPlace(place)}</span>`
       }
     })
   }
