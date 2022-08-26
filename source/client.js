@@ -34,6 +34,7 @@ import { clearStore, createStore } from './store.js'
  * @property {boolean} isOnline - Currently online anywhere in Immers Space
  * @property {string} [locationName] - Name of current or last immer visited
  * @property {string} [locationURL] - URL of current or last immer visited
+ * @property {Destination} [destination] - Destination object for current or last immer visited
  * @property {('friend-online'|'friend-offline'|'request-receved'|'request-sent'|'none')} status - descriptor of the current relationship to this user
  * @property {string} statusString - Text description of current status, "Offline" / "Online at..."
  * @property {string} __unsafeStatusHTML - Unsanitized HTML description of current status with link.
@@ -827,6 +828,7 @@ export class ImmersClient extends window.EventTarget {
     const isOnline = status === 'friend-online'
     const friendStatus = {
       profile: ImmersClient.ProfileFromActor(actor),
+      destination: activity.target && ImmersClient.DestinationFromPlace(activity.target),
       isOnline,
       locationName,
       locationURL,
