@@ -2218,6 +2218,37 @@ as necessary. Must be invoked from a trusted user input event handler to allow t
 
         <tr>
             
+                <td class="name"><code>destination</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Destination">Destination</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Destination object for current or last immer visited</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>status</code></td>
             
 
@@ -2379,7 +2410,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line29">line 29</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -2547,7 +2578,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line56">line 56</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -2884,7 +2915,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line42">line 42</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -3213,6 +3244,29 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
         <tr>
             
+                <td class="name"><code>bio</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Text description of user, may contain sanitized HTML</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>avatarImage</code></td>
             
 
@@ -3236,7 +3290,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
         <tr>
             
-                <td class="name"><code>avatarGltf</code></td>
+                <td class="name"><code>avatarModel</code></td>
             
 
             <td class="type">
@@ -3253,6 +3307,29 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
             
 
             <td class="description last">Profile avatar 3d model url</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>avatarObject</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Activities.html#.APModel">Activities.APModel</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Profile avatar full Model object</td>
         </tr>
 
     
@@ -3298,7 +3375,193 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 
             
 
-            <td class="description last">Map of user collections retrievable with getCollection. Always includes 'blocked' (user blocklist) and 'avatars'</td>
+            <td class="description last">Map of user collections - urls to fetch lists of related activities. May include user-generated collections in addition to those listed
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>avatars</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Activities with model objects representing user's collection of avatars</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>blocked</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">User blocks</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>destinations</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Unique immers visited by user, most recent first</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>friends</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Most recent activity for each friend (see friendsList)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>friendsDestinations</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Unique immers visited by user's friends, most recent first</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>inbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">All incoming activities</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>outbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">All outgoing activities</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -3479,7 +3742,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line645">line 645</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line683">line 683</a>
     </li></ul></dd>
     
 
@@ -3629,7 +3892,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line306">line 306</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line344">line 344</a>
     </li></ul></dd>
     
 
@@ -3717,7 +3980,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line244">line 244</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line274">line 274</a>
     </li></ul></dd>
     
 
@@ -3867,7 +4130,7 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line630">line 630</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line668">line 668</a>
     </li></ul></dd>
     
 
@@ -3965,7 +4228,157 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line665">line 665</a>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line703">line 703</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="event:immers-client-profile-update">immers-client-profile-update</h4>
+    
+
+    
+
+
+
+<div class="description">
+    Profile data has changed
+</div>
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>detail.profile</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">updated profile</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="client.js.html">client.js</a>, <a href="client.js.html#line717">line 717</a>
     </li></ul></dd>
     
 
@@ -4007,13 +4420,13 @@ You must sanitize this string before inserting into the DOM to avoid XSS attacks
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 12 2022 20:55:31 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 26 2022 20:54:51 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
