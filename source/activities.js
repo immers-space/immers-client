@@ -2,6 +2,7 @@
 /**
  * @typedef {string} Activities.IRI String representing a unique resource URL
  */
+/** @typedef {('direct'|'friends'|'public')} Activities.Audience visibilty and delivery targets for activity or obejct */
 /**
  * @typedef {Object} Activities.APObject Object representing an ActivityPub object
  * @property {Activities.IRI} id
@@ -269,20 +270,30 @@ export class Activities {
 
   /**
    * Post a create activity for an object
-   * @param  {Activities.APObject} object New object to be wrapped in Create activity
-   * @return {Promise<Activities.APActivity>} The resulting Create activity
+   * @param  {Activities.APObject} object - New object to be wrapped in Create activity
+   * @param  {Activities.IRI[]} to - direct addressee IRIs
+   * @param  {Activities.Audience} audience - direct, friends, or public
+   * @param  {string} [summary] - activity summary description (may contain HTML)
+   * @return {Promise<IRI>} The resulting Create activity IRI
    */
-  create (object) {
-    return this.postActivity({
+  create (object, to, audience, summary) {
+    object.context = this.place
+    const activity = {
       type: 'Create',
       actor: this.actor.id,
+      to: to.slice(),
       object
-    }).then(res => {
-      if (!res.ok) {
-        throw new Error('Error creating', res.status, res.body)
-      }
-      return this.getObject(res.headers.get('Location'))
-    })
+    }
+    if (summary) {
+      activity.summary = summary
+    }
+    if (audience === 'friends' || audience === 'public') {
+      activity.to.push(this.actor.followers)
+    }
+    if (audience === 'public') {
+      activity.to.push(Activities.PublicAddress)
+    }
+    return this.postActivity(activity)
   }
 
   follow (targetId) {
