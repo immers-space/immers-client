@@ -1,6 +1,7 @@
 import htmlTemplate from './ImmersHUD.html'
 import styles from './ImmersHUD.css'
-import { ImmersClient } from '../client'
+import { ImmersClient, Destination } from '../client'
+import { roles } from '../authUtils'
 
 /**
  * Web Component heads-up display for Immers profile login.
@@ -17,13 +18,15 @@ import { ImmersClient } from '../client'
  * @fires immers-hud-connected - On successful login, detail.profile will include users {@link Profile}
  *
  * @prop {'top-left'|'top-right'|'bottom-left'|'bottom-right'} [position] - Enable overlay positioning.
- * @prop {string} token-catcher - OAuth redirect URL, a page on your domain that runs {@link catchToken} on load
- * @prop {string} access-role - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level.
- * @prop {string} [destination-name] Title for your experience (required if you don't have a local Immers Server)
- * @prop {string} [destination-url] Sharable URL for your experience (required if you don't have a local Immers Server)
+ * @prop {string} [token-catcher] - OAuth redirect URL, a page on your domain that runs {@link catchToken} on load (default: current url)
+ * @prop {string} [access-role] - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level. (default: modAdditive)
+ * @prop {string} [destination-name] Title for your experience (default: meta[og:description], document.title)
+ * @prop {string} [destination-url] Sharable URL for your experience (default: current url)
+ * @prop {strong} [destination-description] Social share preview test (default meta[og:description], meta[twitter:description])
+ * @prop {strong} [destination-image] Image url for social share previews (default: meta[og:image], meta[twitter:image])
  * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
  * @prop {boolean} [allow-storage] Enable local storage of user identity to reconnect when returning to page
- * @prop {'true'|'false'} open - Toggles between icon and full HUD view
+ * @prop {'true'|'false'} open - Toggles between icon and full HUD view (default: true is user's handle is saved but login is needed, false otherwise)
  *
  * @example <caption>Load & register the custom element via import (option 1)</caption>
  * import 'immers-client/dist/ImmersHUD.bundle'
@@ -63,29 +66,35 @@ export class ImmersHUD extends window.HTMLElement {
       return
     }
     // Immers client setup
-    if (this.getAttribute('local-immer')) {
-      /* todo: fetch local place object and initialize client in full immer mode */
-    } else {
-      this.immersClient = new ImmersClient({
-        id: window.location.href,
-        name: this.getAttribute('destination-name'),
-        url: this.getAttribute('destination-url')
-      }, {
-        allowStorage: this.hasAttribute('allow-storage')
-      })
-      this.immersClient.addEventListener(
-        'immers-client-friends-update',
-        ({ detail: { friends } }) => this.onFriendsUpdate(friends)
-      )
-      this.immersClient.addEventListener(
-        'immers-client-connected',
-        ({ detail: { profile } }) => this.onClientConnected(profile)
-      )
-      this.immersClient.addEventListener(
-        'immers-client-disconnected',
-        () => this.onClientDisconnected()
-      )
+    /** @type {Destination} */
+    const destination = {
+      name: this.getAttribute('destination-name') || this.#meta('og:title') || document.title,
+      url: this.getAttribute('destination-url') || window.location.href
     }
+    const description = this.getAttribute('destination-description') || this.#meta('og:description') || this.#meta('twitter:description')
+    if (description) {
+      destination.description = description
+    }
+    const image = this.getAttribute('destination-image') || this.#meta('og:image') || this.#meta('twitter:image')
+    if (image) {
+      destination.previewImage = image
+    }
+    this.immersClient = new ImmersClient(destination, {
+      localImmer: this.getAttribute('local-immer'),
+      allowStorage: this.hasAttribute('allow-storage')
+    })
+    this.immersClient.addEventListener(
+      'immers-client-friends-update',
+      ({ detail: { friends } }) => this.onFriendsUpdate(friends)
+    )
+    this.immersClient.addEventListener(
+      'immers-client-connected',
+      ({ detail: { profile } }) => this.onClientConnected(profile)
+    )
+    this.immersClient.addEventListener(
+      'immers-client-disconnected',
+      () => this.onClientDisconnected()
+    )
 
     this.#container.addEventListener('click', evt => {
       switch (evt.target.id) {
@@ -132,11 +141,11 @@ export class ImmersHUD extends window.HTMLElement {
   }
 
   login () {
-    return this.immersClient.connect(
-      this.getAttribute('token-catcher'),
-      this.getAttribute('access-role'),
+    this.immersClient.login(
+      this.getAttribute('token-catcher') || window.location.href,
+      this.getAttribute('access-role') || roles[2],
       this.#el('handle-input').value
-    )
+    ).then(() => this.immersClient.enter())
   }
 
   onClientConnected (profile) {
@@ -176,6 +185,11 @@ export class ImmersHUD extends window.HTMLElement {
     this.dispatchEvent(new window.CustomEvent(type, {
       detail: data
     }))
+  }
+
+  #meta (name) {
+    const attr = name.startsWith('og:') ? 'property' : 'name'
+    return document.querySelector(`meta[${attr}="${name}"]`)?.getAttribute('content')
   }
 
   static get observedAttributes () {
