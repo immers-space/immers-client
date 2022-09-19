@@ -1,3 +1,13 @@
+## Unreleased
+
+### Changed
+* Added `destination-image` and `destination-description` attributes for `<immers-hud>` to improve destination metadata
+* Improved default values for `<immers-hud>` attributes, including pulling destination description and image from `og` meta tags, if available
+* Filled out and documented the formerly non-functional `Activities.create` low-level api method. Useful if your application implements custom object types
+
+### Fixed
+* `<immers-hud>` now works when using `local-immer`
+
 ## v2.8.0 (2022-08-26)
 
 ### Added
