@@ -42,11 +42,13 @@ export class ImmersHUD extends window.HTMLElement {
   #queryCache = {}
   #container
   /**
-   * @prop {FriendStatus[]} - Live-updated friends list with current status
+   * Live-updated friends list with current status
+   * @type {FriendStatus[]}
    */
   friends = []
   /**
-   * @prop {ImmersClient} - Immers client instance
+   * Immers client instance
+   * @type {ImmersClient}
    */
   immersClient
   constructor () {

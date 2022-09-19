@@ -218,7 +218,7 @@ export class Activities {
       actor: this.actor.id,
       object: follow.id,
       to: follow.actor,
-      summary: '<span>Accepted your a friend request</span>'
+      summary: '<span>Accepted your friend request</span>'
     })
   }
 
