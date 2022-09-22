@@ -1,4 +1,4 @@
-## Unreleased
+## v2.8.1 (2022-09-21)
 
 ### Changed
 * Added `destination-image` and `destination-description` attributes for `<immers-hud>` to improve destination metadata
