@@ -247,7 +247,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line231">line 231</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line232">line 232</a>
     </li></ul></dd>
     
 
@@ -335,7 +335,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line186">line 186</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line187">line 187</a>
     </li></ul></dd>
     
 
@@ -393,7 +393,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
 
     
-    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(object)</span><span class="type-signature"> &rarr; {Promise.&lt;<a href="Activities.html#.APActivity">Activities.APActivity</a>>}</span></h4>
+    <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">(object, to, audience, summary<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;IRI>}</span></h4>
     
 
     
@@ -425,6 +425,8 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -450,10 +452,113 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
             <td class="description last">New object to be wrapped in Create activity</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>to</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Activities.html#.IRI">Activities.IRI</a>></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">direct addressee IRIs</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>audience</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Activities.html#.Audience">Activities.Audience</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">direct, friends, or public</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>summary</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">activity summary description (may contain HTML)</td>
         </tr>
 
     
@@ -494,7 +599,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line275">line 275</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line279">line 279</a>
     </li></ul></dd>
     
 
@@ -523,7 +628,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
 
         
 <div class="param-desc">
-    The resulting Create activity
+    The resulting Create activity IRI
 </div>
 
 
@@ -534,7 +639,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;<a href="Activities.html#.APActivity">Activities.APActivity</a>></span>
+<span class="param-type">Promise.&lt;IRI></span>
 
 
     </dd>
@@ -699,7 +804,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line132">line 132</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line133">line 133</a>
     </li></ul></dd>
     
 
@@ -889,7 +994,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line15">line 15</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1082,7 +1187,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line21">line 21</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -1229,7 +1334,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line10">line 10</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -1516,7 +1621,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line39">line 39</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -1663,7 +1768,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line5">line 5</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -2006,7 +2111,85 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line28">line 28</a>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id=".Audience">Audience</h4>
+
+
+
+
+<div class="description">
+    visibilty and delivery targets for activity or obejct
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">'direct'</span>
+|
+
+<span class="param-type">'friends'</span>
+|
+
+<span class="param-type">'public'</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="activities.js.html">activities.js</a>, <a href="activities.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -2114,7 +2297,7 @@ use e.g. the Create actvitiy for a Model object to add it to the 'avatars' colle
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 26 2022 20:58:50 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Sep 22 2022 04:15:32 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

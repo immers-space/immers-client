@@ -154,6 +154,8 @@ Properties you can access from the element object directly are listed under Memb
             
                 <td class="attributes">
                 
+                    &lt;optional><br>
+                
 
                 
                 </td>
@@ -161,7 +163,7 @@ Properties you can access from the element object directly are listed under Memb
 
             
 
-            <td class="description last">OAuth redirect URL, a page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load</td>
+            <td class="description last">OAuth redirect URL, a page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load (default: current url)</td>
         </tr>
 
     
@@ -183,6 +185,8 @@ Properties you can access from the element object directly are listed under Memb
             
                 <td class="attributes">
                 
+                    &lt;optional><br>
+                
 
                 
                 </td>
@@ -190,7 +194,7 @@ Properties you can access from the element object directly are listed under Memb
 
             
 
-            <td class="description last">Requested authorization scope from <a href="global.html#roles">roles</a>. Users are given the option to alter this and grant a different level.</td>
+            <td class="description last">Requested authorization scope from <a href="global.html#roles">roles</a>. Users are given the option to alter this and grant a different level. (default: modAdditive)</td>
         </tr>
 
     
@@ -221,7 +225,7 @@ Properties you can access from the element object directly are listed under Memb
 
             
 
-            <td class="description last">Title for your experience (required if you don't have a local Immers Server)</td>
+            <td class="description last">Title for your experience (default: meta[og:description], document.title)</td>
         </tr>
 
     
@@ -252,7 +256,69 @@ Properties you can access from the element object directly are listed under Memb
 
             
 
-            <td class="description last">Sharable URL for your experience (required if you don't have a local Immers Server)</td>
+            <td class="description last">Sharable URL for your experience (default: current url)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>destination-description</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">strong</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Social share preview test (default meta[og:description], meta[twitter:description])</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>destination-image</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">strong</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Image url for social share previews (default: meta[og:image], meta[twitter:image])</td>
         </tr>
 
     
@@ -346,7 +412,7 @@ Properties you can access from the element object directly are listed under Memb
 
             
 
-            <td class="description last">Toggles between icon and full HUD view</td>
+            <td class="description last">Toggles between icon and full HUD view (default: true is user's handle is saved but login is needed, false otherwise)</td>
         </tr>
 
     
@@ -385,7 +451,7 @@ Properties you can access from the element object directly are listed under Memb
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ImmersHUD_ImmersHUD.js.html">ImmersHUD/ImmersHUD.js</a>, <a href="ImmersHUD_ImmersHUD.js.html#line5">line 5</a>
+        <a href="ImmersHUD_ImmersHUD.js.html">ImmersHUD/ImmersHUD.js</a>, <a href="ImmersHUD_ImmersHUD.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -457,167 +523,27 @@ Properties you can access from the element object directly are listed under Memb
 
         
             
-<h4 class="name" id="friends"><span class="type-signature"></span>friends<span class="type-signature"></span></h4>
+<h4 class="name" id="friends"><span class="type-signature"></span>friends<span class="type-signature"> :Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>></span></h4>
 
 
 
 
+<div class="description">
+    Live-updated friends list with current status
+</div>
 
 
 
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-
-            <td class="type">
-            
-                
 <span class="param-type">Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>></span>
 
 
-            
-            </td>
+        </li>
+    </ul>
 
-            
-
-            
-
-            <td class="description last">Live-updated friends list with current status</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="ImmersHUD_ImmersHUD.js.html">ImmersHUD/ImmersHUD.js</a>, <a href="ImmersHUD_ImmersHUD.js.html#line44">line 44</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
-<h4 class="name" id="immersClient"><span class="type-signature"></span>immersClient<span class="type-signature"></span></h4>
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="ImmersClient.html">ImmersClient</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Immers client instance</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -668,6 +594,78 @@ Properties you can access from the element object directly are listed under Memb
 
 
         
+            
+<h4 class="name" id="immersClient"><span class="type-signature"></span>immersClient<span class="type-signature"> :<a href="ImmersClient.html">ImmersClient</a></span></h4>
+
+
+
+
+<div class="description">
+    Immers client instance
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="ImmersClient.html">ImmersClient</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="ImmersHUD_ImmersHUD.js.html">ImmersHUD/ImmersHUD.js</a>, <a href="ImmersHUD_ImmersHUD.js.html#line53">line 53</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
     
 
     
@@ -691,7 +689,7 @@ Properties you can access from the element object directly are listed under Memb
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 26 2022 20:58:50 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Sep 22 2022 04:15:32 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
