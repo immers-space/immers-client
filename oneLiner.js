@@ -1,4 +1,4 @@
-import { catchToken, roles } from './source/authUtils.js'
+import { catchToken } from './source/authUtils.js'
 import { ImmersHUD } from './source/ImmersHUD/ImmersHUD.js'
 ImmersHUD.Register()
 let scriptArgs
@@ -20,9 +20,6 @@ try {
       const hud = document.createElement('immers-hud')
       hud.setAttribute('position', scriptArgs.position ?? 'bottom-left')
       hud.setAttribute('destination-name', scriptArgs.title ?? document.title)
-      hud.setAttribute('destination-url', window.location.href)
-      hud.setAttribute('token-catcher', window.location.href)
-      hud.setAttribute('access-role', scriptArgs.role ?? roles[1])
       if (scriptArgs.save === 'true') {
         hud.setAttribute('allow-storage', 'true')
       }
