@@ -164,7 +164,8 @@ export class ImmersClient extends window.EventTarget {
   async login (tokenCatcherURL, requestedRole, handle) {
     let authResult
     if (this.localImmer) {
-      authResult = await ImmerOAuthPopup(this.localImmer, this.place.id, requestedRole, tokenCatcherURL, handle)
+      const client = await this.localImmerPlaceObject
+      authResult = await ImmerOAuthPopup(this.localImmer, client.id, requestedRole, tokenCatcherURL, handle)
     } else {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }

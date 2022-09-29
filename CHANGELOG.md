@@ -1,3 +1,8 @@
+## v2.8.2 (2022-09-28)
+
+### Fixed
+* `ImmersClient.login` was failing to send clientId, causing full immers to be treated like destinations with limited permissions
+
 ## v2.8.1 (2022-09-21)
 
 ### Changed

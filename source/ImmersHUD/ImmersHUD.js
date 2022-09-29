@@ -29,7 +29,8 @@ import { roles } from '../authUtils'
  * @prop {'true'|'false'} open - Toggles between icon and full HUD view (default: true is user's handle is saved but login is needed, false otherwise)
  *
  * @example <caption>Load & register the custom element via import (option 1)</caption>
- * import 'immers-client/dist/ImmersHUD.bundle'
+ * import { ImmersHUD } from 'immers-client';
+ * ImmersHUD.Register();
  * @example <caption>Load & register the custom element via CDN (option 2)</caption>
  * <script type="module" src="https://cdn.jsdelivr.net/npm/immers-client/dist/ImmersHUD.bundle.js"></script>
  * @example <caption>Using the custom element in HTML</caption>
