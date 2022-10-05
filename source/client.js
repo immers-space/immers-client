@@ -411,6 +411,53 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
+   * Upload and/or share an image.
+   * When image is a canvas element, its toBlob method is used to generate a
+   * png image to upload.
+   * When image is a File/Blob, it will be uploaded to the user's home immer
+   * and shared. The `name` attribute is optional, but `type` must contain the
+   * correct MIME. When image is a url, an existing image is shared without
+   * re-uploading. It's better to upload a file so that the user's home
+   * immer can ensure it remains available.
+   * Privacy level determines who receives and can acccess the message.
+   * Direct: Only those named in `to` receive the message.
+   * Friends: Direct plus friends list.
+   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * @param {(File|Blob|HTMLCanvasElement|string)} image - Image data to upload or url to share
+   * @param {string} privacy - 'direct', 'friends', or 'public'
+   * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   * @returns {Promise<string>} Url of newly posted message
+   */
+  async sendImage (image, privacy, to = []) {
+    if (image instanceof HTMLCanvasElement) {
+      image = await new Promise(resolve => {
+        image.toBlob(resolve)
+      })
+    }
+    return this.activities.image(image, to, privacy)
+  }
+
+  /**
+   * Upload and/or share a video.
+   * When video is a File/Blob, it will be uploaded to the user's home immer
+   * and shared. The `name` attribute is optional, but `type` must contain the
+   * correct MIME. When video is a url, an existing video is shared without
+   * re-uploading. It's better to upload a file so that the user's home
+   * immer can ensure it remains available.
+   * Privacy level determines who receives and can acccess the message.
+   * Direct: Only those named in `to` receive the message.
+   * Friends: Direct plus friends list.
+   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * @param {(File|Blob|string)} video - Video data to upload or url to share
+   * @param {string} privacy - 'direct', 'friends', or 'public'
+   * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   * @returns {Promise<string>} Url of newly posted message
+   */
+  sendVideo (video, privacy, to = []) {
+    return this.activities.video(video, to, privacy)
+  }
+
+  /**
    * This method will either initiate a new friend request or,
    * if a request has already been received from the target user,
    * accept a pending friend request. To create a friend connection,

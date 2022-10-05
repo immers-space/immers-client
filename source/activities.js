@@ -128,15 +128,17 @@ export class Activities {
    * Post an activity with media upload
    * @param  {Activities.APActivity} activity
    * @param  {Blob} file
-   * @param  {Blob} icon
+   * @param  {Blob} [icon]
    */
   async postMedia (activity, file, icon) {
     if (!this.trustedIRI(this.actor.endpoints.uploadMedia)) {
       throw new Error('Missing/invalid upload media endpoint')
     }
     const formData = new globalThis.FormData()
-    formData.append('file', file, 'NiceFreeTreasure.glb')
-    formData.append('icon', icon, 'NiceFreeTreasure.png')
+    formData.append('file', file, file.name ?? 'UploadedFile')
+    if (icon) {
+      formData.append('icon', icon, icon.name ?? 'UploadedIcon')
+    }
     formData.append('object', JSON.stringify(activity))
     const result = await window.fetch(this.actor.endpoints.uploadMedia, {
       method: 'POST',
@@ -311,9 +313,8 @@ export class Activities {
     return this.getObject(friendsEndpoint)
   }
 
-  image (url, to, audience, summary) {
+  image (urlOrBlob, to, audience, summary) {
     const obj = {
-      url,
       type: 'Image',
       attributedTo: this.actor.id,
       context: this.place,
@@ -328,7 +329,14 @@ export class Activities {
     if (audience === 'public') {
       obj.to.push(Activities.PublicAddress)
     }
-    return this.postActivity(obj)
+    if (typeof urlOrBlob === 'string') {
+      obj.url = urlOrBlob
+      return this.postActivity(obj)
+    }
+    if (urlOrBlob instanceof Blob) {
+      return this.postMedia(obj, urlOrBlob)
+    }
+    return Promise.reject(new Error('Image must be either url string or Blob data'))
   }
 
   note (content, to, audience, summary) {
@@ -397,9 +405,8 @@ export class Activities {
     return this.postActivity(activity)
   }
 
-  video (url, to, audience, summary) {
+  video (urlOrBlob, to, audience, summary) {
     const obj = {
-      url,
       type: 'Video',
       attributedTo: this.actor.id,
       context: this.place,
@@ -414,6 +421,13 @@ export class Activities {
     if (audience === 'public') {
       obj.to.push(Activities.PublicAddress)
     }
-    return this.postActivity(obj)
+    if (typeof urlOrBlob === 'string') {
+      obj.url = urlOrBlob
+      return this.postActivity(obj)
+    }
+    if (urlOrBlob instanceof Blob) {
+      return this.postMedia(obj, urlOrBlob)
+    }
+    return Promise.reject(new Error('Image must be either url string or Blob data'))
   }
 }

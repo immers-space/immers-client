@@ -44,7 +44,10 @@
     "webpack-merge": "^5.8.0"
   },
   "standard": {
-    "parser": "@babel/eslint-parser"
+    "parser": "@babel/eslint-parser",
+    "env": {
+      "browser": true
+    }
   },
   "dependencies": {
     "core-js": "^3.17.2",
