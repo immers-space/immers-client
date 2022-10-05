@@ -1,3 +1,13 @@
+## Unreleased
+
+### Added
+
+* `ImmersClient.sendImage` and `ImmersClient.sendVideo` - new high level apis to upload and share media
+
+### Changed
+
+* `Activities.image` and `Activities.video` now accept Blob/File and upload them with postMedia in addition to urls
+
 ## v2.8.2 (2022-09-28)
 
 ### Fixed
