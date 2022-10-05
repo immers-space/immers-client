@@ -419,10 +419,10 @@ export class ImmersClient extends window.EventTarget {
    * correct MIME. When image is a url, an existing image is shared without
    * re-uploading. It's better to upload a file so that the user's home
    * immer can ensure it remains available.
-   * Privacy level determines who receives and can acccess the message.
-   * Direct: Only those named in `to` receive the message.
-   * Friends: Direct plus friends list.
-   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * privacy level determines who receives and can acccess the message.
+   * direct: Only those named in `to` receive the message.
+   * friends: Direct plus friends list.
+   * public: Direct plus Friends plus accessible via URL for sharing.
    * @param {(File|Blob|HTMLCanvasElement|string)} image - Image data to upload or url to share
    * @param {string} privacy - 'direct', 'friends', or 'public'
    * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
@@ -444,10 +444,10 @@ export class ImmersClient extends window.EventTarget {
    * correct MIME. When video is a url, an existing video is shared without
    * re-uploading. It's better to upload a file so that the user's home
    * immer can ensure it remains available.
-   * Privacy level determines who receives and can acccess the message.
-   * Direct: Only those named in `to` receive the message.
-   * Friends: Direct plus friends list.
-   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * privacy level determines who receives and can acccess the message.
+   * direct: Only those named in `to` receive the message.
+   * friends: Direct plus friends list.
+   * public: Direct plus Friends plus accessible via URL for sharing.
    * @param {(File|Blob|string)} video - Video data to upload or url to share
    * @param {string} privacy - 'direct', 'friends', or 'public'
    * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
