@@ -397,10 +397,10 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Send a message with text content.
-   * Privacy level determines who receives and can acccess the message.
-   * Direct: Only those named in `to` receive the message.
-   * Friends: Direct plus friends list.
-   * Public: Direct plus Friends plus accessible via URL for sharing.
+   * privacy level determines who receives and can acccess the message.
+   * direct: Only those named in `to` receive the message.
+   * friends: Direct plus friends list.
+   * public: Direct plus Friends plus accessible via URL for sharing.
    * @param {string} content - The text/HTML content. Will be sanitized before sending
    * @param {string} privacy - 'direct', 'friends', or 'public'
    * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
@@ -571,6 +571,15 @@ export class ImmersClient extends window.EventTarget {
       profileUpdate.icon = icon
     }
     return this.activities.updateProfile(profileUpdate)
+  }
+
+  /**
+   * Remove user's avatar from their Avatar Collection.
+   * @param  {(object|string)} sourceActivity - IRI of activity or Activity in the Avatars Collection (other activities with the avatar as their object)
+   * @returns {Promise<string>} IRI of the remove activity
+   */
+  async removeAvatar (sourceActivity) {
+    return this.activities.remove(sourceActivity, this.profile.collections.avatars)
   }
 
   // Misc utilities
