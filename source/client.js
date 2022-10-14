@@ -575,7 +575,7 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Remove user's avatar from their Avatar Collection.
-   * @param  {(object|string)} sourceActivity - IRI of activity or Activity in the Avatars Collection (other activities with the avatar as their object)
+   * @param  {(string|Activities.APActivity)} sourceActivity - Activity IRI or Activity from the Avatars Collection to remove
    * @returns {Promise<string>} IRI of the remove activity
    */
   async removeAvatar (sourceActivity) {
