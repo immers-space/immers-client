@@ -1,3 +1,14 @@
+## Unreleased
+
+### Added
+
+* `ImmersClient.removeAvatar` - new high-level api to remove models from user's Avatar collection
+* `Activities.remove` - new low-level api to remove activities
+
+### Fixed
+
+* `Activities.add` - fixed target URL logic
+
 ## v2.9.0 (2022-10-05) 
 
 ### Added

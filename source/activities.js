@@ -238,7 +238,7 @@ export class Activities {
       object: typeof activity === 'string' ? activity : activity.id,
       target: target.startsWith('https://')
         ? target
-        : `https://${this.homeImmer}/collection/${this.actor.preferredUsername}/${target}`
+        : `https://${getURLPart(this.homeImmer, 'host')})/collection/${this.actor.preferredUsername}/${target}`
     })
   }
 
@@ -382,6 +382,17 @@ export class Activities {
       actor: this.actor.id,
       object: objectId,
       to: recipientId
+    })
+  }
+
+  remove (activity, target) {
+    return this.postActivity({
+      type: 'Remove',
+      actor: this.actor.id,
+      object: typeof activity === 'string' ? activity : activity.id,
+      target: target.startsWith('https://')
+        ? target
+        : `https://${getURLPart(this.homeImmer, 'host')})/collection/${this.actor.preferredUsername}/${target}`
     })
   }
 
