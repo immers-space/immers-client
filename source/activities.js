@@ -298,6 +298,15 @@ export class Activities {
     return this.postActivity(activity)
   }
 
+  delete (activity) {
+    return this.postActivity({
+      type: 'Delete',
+      actor: this.actor.id,
+      object: typeof activity === 'string' ? activity : activity.id,
+      to: activity.to
+    })
+  }
+
   follow (targetId) {
     return this.postActivity({
       type: 'Follow',
@@ -400,7 +409,7 @@ export class Activities {
     return this.postActivity({
       type: 'Undo',
       actor: this.actor.id,
-      object: activity.id,
+      object: typeof activity === 'string' ? activity : activity.id,
       to: activity.to
     })
   }

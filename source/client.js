@@ -411,6 +411,22 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
+   * Delete  user's avatar from their Avatar Collection.
+   * @param  {(object|string)} sourceActivity - IRI of activity or Activity in the Outbox
+   * @returns {Promise<string>} IRI of the remove activity
+   */
+  async deleteMessage (sourceActivity) {
+    switch (sourceActivity.type.toLowerCase()) {
+      case 'arrive':
+        return this.activities.undo(sourceActivity)
+      case 'leave':
+        return this.activities.undo(sourceActivity)
+      case 'create':
+        return this.activities.delete(sourceActivity)
+    }
+  }
+
+  /**
    * Upload and/or share an image.
    * When image is a canvas element, its toBlob method is used to generate a
    * png image to upload.
