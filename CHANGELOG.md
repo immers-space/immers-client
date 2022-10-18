@@ -1,4 +1,4 @@
-## Unreleased
+## v2.10.0 (2022-10-05)
 
 ### Added
 
@@ -9,7 +9,7 @@
 
 * `Activities.add` - fixed target URL logic
 
-## v2.9.0 (2022-10-05) 
+## v2.9.0 (2022-10-05)
 
 ### Added
 
