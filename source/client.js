@@ -418,7 +418,6 @@ export class ImmersClient extends window.EventTarget {
   async deleteMessage (sourceActivity) {
     switch (sourceActivity.type.toLowerCase()) {
       case 'arrive':
-        return this.activities.undo(sourceActivity)
       case 'leave':
         return this.activities.undo(sourceActivity)
       case 'create':
