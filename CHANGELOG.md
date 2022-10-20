@@ -1,3 +1,10 @@
+## Unreleased
+
+### Added
+
+* `Immersclient.navigateToImmersLink` - navigate to a given URL while passing along the user's handle so they don't have to re-enter it at the next destination
+* `ImmersClient.handleImmersLinkClick` - onClick handler to make navigating between immers easier by passing along the user's handle
+
 ## v2.10.0 (2022-10-05)
 
 ### Added
