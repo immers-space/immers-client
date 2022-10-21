@@ -298,12 +298,11 @@ export class Activities {
     return this.postActivity(activity)
   }
 
-  delete (activity) {
+  delete (object) {
     return this.postActivity({
       type: 'Delete',
       actor: this.actor.id,
-      object: typeof activity === 'string' ? activity : activity.id,
-      to: activity.to
+      object: typeof object === 'string' ? object : object.id
     })
   }
 
@@ -398,7 +397,7 @@ export class Activities {
     return this.postActivity({
       type: 'Remove',
       actor: this.actor.id,
-      object: typeof activity === 'string' ? activity : activity.id,
+      object: typeof activity === 'string' ? activity : activity.object,
       target: target.startsWith('https://')
         ? target
         : `https://${getURLPart(this.homeImmer, 'host')})/collection/${this.actor.preferredUsername}/${target}`

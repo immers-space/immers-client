@@ -51,7 +51,7 @@ import { clearStore, createStore } from './store.js'
 
 /**
  * @typedef {object} Message
- * @property {string} id - URL of original message object, usable as unique id
+ * @property {string} id - URL of original message activity object, usable as unique id
  * @property {Profile} sender - Message sender's Profile
  * @property {Date} timestamp - Message sent time
  * @property {string} type - Describes the message content: 'chat', 'media', 'status', or 'other'
@@ -411,17 +411,18 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
-   * Delete  user's avatar from their Avatar Collection.
-   * @param  {(object|string)} sourceActivity - IRI of activity or Activity in the Outbox
+   * Delete a message.
+   * @param  {(string|Activities.APActivity)} sourceActivity - IRI of activity or Activity in the Outbox
    * @returns {Promise<string>} IRI of the remove activity
    */
   async deleteMessage (sourceActivity) {
-    switch (sourceActivity.type.toLowerCase()) {
+    const Activity = (typeof sourceActivity === 'string' ? this.activities.getObject(sourceActivity) : sourceActivity)
+    switch (Activity.type.toLowerCase()) {
       case 'arrive':
       case 'leave':
-        return this.activities.undo(sourceActivity)
+        return this.activities.undo(Activity)
       case 'create':
-        return this.activities.delete(sourceActivity)
+        return this.activities.delete(Activity.object)
     }
   }
 
