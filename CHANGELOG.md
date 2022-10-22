@@ -1,3 +1,14 @@
+## Unreleased
+
+### Added
+
+* `ImmersClient.login` gains an optional `registration` argument to redirect users directly to the registration tab when opening the login popup.
+* new `ImmersClient.authorizedScopes` getter to access the scopes authorized for the current login session
+
+### Changed
+
+* The OAuth popup size is now 800x800 to avoid mobile syling and is positioned to appear slightly outside the opening window's border in order to avoid [BITB attacks](https://usa.kaspersky.com/blog/browser-in-the-browser-attack/26399/)
+
 ## v2.11.0 (2022-10-20)
 
 ### Added
