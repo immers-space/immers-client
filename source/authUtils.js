@@ -80,10 +80,11 @@ export function catchToken () {
  */
 function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle, deepLink }) {
   // center the popup
-  const width = 785
-  const height = 785
+  const width = 800
+  const height = 800
   const left = (window.innerWidth - width) / 2 + window.screenLeft
-  const top = (window.innerHeight - height) / 2 + window.screenTop
+  // we want the window to overlap browser chrome in order to rule out BITB attack
+  const top = window.screenTop + 5
   const features = `toolbar=no, menubar=no, width=${width}, height=${height}, top=${top}, left=${left}`
   const authURL = new URL(oauthPath)
   const authURLParams = new URLSearchParams({
