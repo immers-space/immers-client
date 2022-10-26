@@ -416,13 +416,15 @@ export class ImmersClient extends window.EventTarget {
    * @returns {Promise<string>} IRI of the remove activity
    */
   async deleteMessage (sourceActivity) {
-    const Activity = (typeof sourceActivity === 'string' ? this.activities.getObject(sourceActivity) : sourceActivity)
-    switch (Activity.type.toLowerCase()) {
+    const activity = typeof sourceActivity === 'string'
+      ? await this.activities.getObject(sourceActivity)
+      : sourceActivity
+    switch (activity.type.toLowerCase()) {
       case 'arrive':
       case 'leave':
-        return this.activities.undo(Activity)
+        return this.activities.undo(activity)
       case 'create':
-        return this.activities.delete(Activity.object)
+        return this.activities.delete(activity.object)
     }
   }
 
