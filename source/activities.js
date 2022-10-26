@@ -83,6 +83,15 @@ export class Activities {
   }
 
   // lower-level utilities
+  /**
+   * Fetch the ActivityPub entity at the given IRI
+   * (may be object, activity, collection, et c).
+   * If the domain is the user's home immer or the local immer,
+   * makes a fetch with credentials included. Otherwise uses the user's
+   * home immer proxy service, if available
+   * @param  {string} IRI
+   * @returns {Promise<object>}
+   */
   async getObject (IRI) {
     let result
     const headers = { Accept: Activities.JSONLDMime }
