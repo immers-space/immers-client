@@ -83,6 +83,15 @@ export class Activities {
   }
 
   // lower-level utilities
+  /**
+   * Fetch the ActivityPub entity at the given IRI
+   * (may be object, activity, collection, et c).
+   * If the domain is the user's home immer or the local immer,
+   * makes a fetch with credentials included. Otherwise uses the user's
+   * home immer proxy service, if available
+   * @param  {string} IRI
+   * @returns {Promise<object>}
+   */
   async getObject (IRI) {
     let result
     const headers = { Accept: Activities.JSONLDMime }
@@ -298,6 +307,14 @@ export class Activities {
     return this.postActivity(activity)
   }
 
+  delete (object) {
+    return this.postActivity({
+      type: 'Delete',
+      actor: this.actor.id,
+      object: typeof object === 'string' ? object : object.id
+    })
+  }
+
   follow (targetId) {
     return this.postActivity({
       type: 'Follow',
@@ -389,7 +406,7 @@ export class Activities {
     return this.postActivity({
       type: 'Remove',
       actor: this.actor.id,
-      object: typeof activity === 'string' ? activity : activity.id,
+      object: typeof activity === 'string' ? activity : activity.object,
       target: target.startsWith('https://')
         ? target
         : `https://${getURLPart(this.homeImmer, 'host')})/collection/${this.actor.preferredUsername}/${target}`
@@ -400,7 +417,7 @@ export class Activities {
     return this.postActivity({
       type: 'Undo',
       actor: this.actor.id,
-      object: activity.id,
+      object: typeof activity === 'string' ? activity : activity.id,
       to: activity.to
     })
   }
