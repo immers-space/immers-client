@@ -10,6 +10,24 @@
 * Documented `Activities.getObject` low-level api method.
 * `Activities.undo` - method can now take an activity IRI
 
+## v2.12.0 (2022-10-24)
+
+### Added
+
+* `ImmersClient.login` gains an optional `registration` argument to redirect users directly to the registration tab when opening the login popup.
+* new `ImmersClient.authorizedScopes` getter to access the scopes authorized for the current login session
+
+### Changed
+
+* The OAuth popup size is now 800x800 to avoid mobile syling and is positioned to appear slightly outside the opening window's border in order to avoid [BITB attacks](https://usa.kaspersky.com/blog/browser-in-the-browser-attack/26399/)
+
+## v2.11.0 (2022-10-20)
+
+### Added
+
+* `Immersclient.navigateToImmersLink` - navigate to a given URL while passing along the user's handle so they don't have to re-enter it at the next destination
+* `ImmersClient.handleImmersLinkClick` - onClick handler to make navigating between immers easier by passing along the user's handle
+
 ## v2.10.0 (2022-10-05)
 
 ### Added

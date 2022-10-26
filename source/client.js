@@ -140,7 +140,7 @@ export class ImmersClient extends window.EventTarget {
    * a logged-in user
    * @example
    * await client.waitUntilConnected()
-   * client.sendChatMessage('Hey friends, I'm connected!', 'friends')
+   * client.sendChatMessage('Hey friends, I am connected!', 'friends')
    * @returns {Promise<true>}
    */
   async waitUntilConnected () {
@@ -159,13 +159,14 @@ export class ImmersClient extends window.EventTarget {
    * Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.
    * @param  {string} requestedRole Access level to request, see {@link roles} for details
    * @param  {string} [handle] User's immers handle. Optional if you have a local Immers Server
+   * @param  {boolean} [registration] For use with local immer only, open the popup with the registration tab selected instead of login. handle will be used to prefill the registratoin form if provided
    * @returns {Promise<string>} token OAuth2 acess token
    */
-  async login (tokenCatcherURL, requestedRole, handle) {
+  async login (tokenCatcherURL, requestedRole, handle, registration) {
     let authResult
     if (this.localImmer) {
       const client = await this.localImmerPlaceObject
-      authResult = await ImmerOAuthPopup(this.localImmer, client.id, requestedRole, tokenCatcherURL, handle)
+      authResult = await ImmerOAuthPopup(this.localImmer, client.id, requestedRole, tokenCatcherURL, handle, registration ? 'Register' : undefined)
     } else {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }
@@ -739,6 +740,52 @@ export class ImmersClient extends window.EventTarget {
     return info
   }
 
+  /**
+   * Make navigating between immers easier by providing the user's
+   * handle to the next experience so they don't have to type it in.
+   * Use as an onClick handler to inject the "me hash" into any cross-origin
+   * anchor when navigating. Can be registered directly on the anchor
+   * or on a parent element.
+   * Will fallback to default click behavior if same-origin, not logged in,
+   * or unable to process url.
+   * @param  {MouseEvent} clickEvent
+   */
+  handleImmerLinkClick (clickEvent) {
+    const a = clickEvent.composedPath()
+      .find(element => element.tagName === 'A')
+    if (!a) {
+      return
+    }
+    if (this.profile && a.origin !== window.location.origin) {
+      try {
+        this.navigateToImmerLink(a.href)
+        clickEvent.preventDefault()
+      } catch (ignore) {
+        /* if fail, leave original url unchanged */
+      }
+    }
+  }
+
+  /**
+   * Navigate to a given url while injecting a "me hash" to provide the
+   * user's handle to the destination site so that they don't have to re-enter it.
+   * Safe to use without checking if user is logged in, will just navigate normally
+   * if not
+   * @param  {string} href
+   */
+  navigateToImmerLink (href) {
+    const url = new URL(href)
+    if (this.profile) {
+      const hashParams = new URLSearchParams(
+        // preserve original hash if present, must strip '#' to avoid doubling it
+        url.hash.replace(/^#/, '')
+      )
+      hashParams.set('me', this.profile.handle)
+      url.hash = hashParams.toString()
+    }
+    window.location = url
+  }
+
   async #publishFriendsUpdate () {
     /**
      * Friends status/location has changed
@@ -827,6 +874,17 @@ export class ImmersClient extends window.EventTarget {
    */
   get handle () {
     return this.#store.handle
+  }
+
+  /**
+   * List of scopes authorized by the user during login.
+   * This may differ from what you requested, as the user can override
+   * during the authorization process.
+   * @type {string[]}
+   * @see {SCOPES}
+   */
+  get authorizedScopes () {
+    return this.#store.credential.authorizedScopes ?? []
   }
 
   /**
