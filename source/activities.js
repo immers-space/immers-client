@@ -90,7 +90,7 @@ export class Activities {
    * makes a fetch with credentials included. Otherwise uses the user's
    * home immer proxy service, if available
    * @param  {string} IRI
-   * @returns {Promise<object>}
+   * @returns {Promise<any>}
    */
   async getObject (IRI) {
     let result
