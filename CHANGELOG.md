@@ -1,4 +1,4 @@
-## Unreleased
+## v2.13.1 (2022-10-27)
 
 ### Fixed
 * Fix incorrect type for `Activities.getObject`'s return value
