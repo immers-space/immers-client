@@ -1,25 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: ImmersClient</title>
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/immers-client/dist/destination.bundle.js?position=top-right&title=immers-client%20Documentation"></script>
+  <script type='module' src='https://cdn.jsdelivr.net/npm/immers-client/dist/destination.bundle.js?position=bottom-right&role=friends&save=true'></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>immers-client Documentation ImmersClient</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
 </head>
 
-<body>
 
-<div id="main">
 
-    <h1 class="page-title">Class: ImmersClient</h1>
-
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
     
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">immers-client Documentation</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/immers-space/immers-client"
+                        >
+                            Github
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Class</p>
+                    <h1>ImmersClient</h1>
+                </header>
+                
 
 
 
@@ -30,7 +100,7 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>ImmersClient<span class="signature">(destinationDescription, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">High-level interface to Immers profile and social features</div>
+            <div class="class-description"><p>High-level interface to Immers profile and social features</p></div>
         
     
 </header>
@@ -39,18 +109,29 @@
     <div class="container-overview">
     
         
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="ImmersClient"><span class="type-signature"></span>new ImmersClient<span class="signature">(destinationDescription, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
-    
-
-    
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
 
 
+    
+    <h4 class="name" id="ImmersClient">
+        <a class="href-link" href="#ImmersClient">#</a>
+        
+        <span class="code-name">
+            
+                new ImmersClient<span class="signature">(destinationDescription, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
 
 
 
@@ -62,195 +143,174 @@
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>destinationDescription</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type"><a href="global.html#Destination">Destination</a></span>
+            <th>Attributes</th>
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>destinationDescription</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#Destination">Destination</a></code>
 |
 
-<span class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></span>
+<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
 |
 
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.</td>
-        </tr>
+  <td class="description last"><p>Metadata about this destination used when sharing or url for the related Place object. Either a Destination/APPlace object or a url where one can be fetched.</p></td>
+</tr>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
 
         
 
-        <th class="last">Description</th>
-    </tr>
-    </thead>
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
 
-    <tbody>
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>localImmer</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>localImmer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Domain (host) of the local Immers Server, if there is one</td>
-        </tr>
+  <td class="description last"><p>Domain (host) of the local Immers Server, if there is one</p></td>
+</tr>
 
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>allowStorage</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>allowStorage</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Enable localStorage of handle & token for reconnection (make sure you've provided complaince notices as needed)</td>
-        </tr>
+  <td class="description last"><p>Enable localStorage of handle &amp; token for reconnection (make sure you've provided complaince notices as needed)</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
+  
 
-            </td>
-        </tr>
 
-    
-    </tbody>
-</table>
-
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -281,18 +341,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line80">line 80</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line80">line 80</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -300,37 +361,47 @@
 
 
 
-<h5>Fires:</h5>
-<ul>
-    <li><a href="global.html#event:immers-client-connected">event:immers-client-connected</a></li>
-
-    <li><a href="global.html#event:immers-client-disconnected">event:immers-client-disconnected</a></li>
-
-    <li><a href="global.html#event:immers-client-friends-update">event:immers-client-friends-update</a></li>
-
-    <li><a href="global.html#event:immers-client-new-message">event:immers-client-new-message</a></li>
-
-    <li><a href="global.html#event:immers-client-profile-update">event:immers-client-profile-update</a></li>
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    <div class="method-parameter columns">
+        <div class="column is-2"><label>Fires:</label></div>
+        <div class="column is-10">
+            <ul>
+                <li><a href="global.html#event:immers-client-connected">event:immers-client-connected</a></li>
+            
+                <li><a href="global.html#event:immers-client-disconnected">event:immers-client-disconnected</a></li>
+            
+                <li><a href="global.html#event:immers-client-friends-update">event:immers-client-friends-update</a></li>
+            
+                <li><a href="global.html#event:immers-client-new-message">event:immers-client-new-message</a></li>
+            
+                <li><a href="global.html#event:immers-client-profile-update">event:immers-client-profile-update</a></li>
+            </ul>
+        </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
     
 
     
@@ -351,30 +422,35 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
             
-<h4 class="name" id="activities"><span class="type-signature"></span>activities<span class="type-signature"> :<a href="Activities.html">Activities</a></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="Activities.html">Activities</a></code>
+
+
+    </span>
+
+<h4 class="name" id="activities">
+    <a class="href-link" href="#activities">#</a>
+    
+    <span class="code-name">
+        activities
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Activities instance for access to low-level ActivityPub API
+    <p>Activities instance for access to low-level ActivityPub API</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="Activities.html">Activities</a></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -405,18 +481,19 @@
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line86">line 86</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line86">line 86</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -424,31 +501,35 @@
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="authorizedScopes"><span class="type-signature"></span>authorizedScopes<span class="type-signature"> :Array.&lt;string></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Array.&lt;string></code>
+
+
+    </span>
+
+<h4 class="name" id="authorizedScopes">
+    <a class="href-link" href="#authorizedScopes">#</a>
+    
+    <span class="code-name">
+        authorizedScopes
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    List of scopes authorized by the user during login.
+    <p>List of scopes authorized by the user during login.
 This may differ from what you requested, as the user can override
-during the authorization process.
+during the authorization process.</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;string></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -479,14 +560,6 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line886">line 886</a>
-    </li></ul></dd>
-    
-
     
 
     
@@ -499,35 +572,48 @@ during the authorization process.
     
 
     
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line886">line 886</a>
+            </span>
+        </p>
+    
 </dl>
 
 
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="connected"><span class="type-signature"></span>connected<span class="type-signature"> :boolean</span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">boolean</code>
+
+
+    </span>
+
+<h4 class="name" id="connected">
+    <a class="href-link" href="#connected">#</a>
+    
+    <span class="code-name">
+        connected
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Is the client connected to the User's immer?
+    <p>Is the client connected to the User's immer?</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">boolean</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -558,18 +644,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line104">line 104</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line104">line 104</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -577,29 +664,33 @@ during the authorization process.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="handle"><span class="type-signature"></span>handle<span class="type-signature"> :string</span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+
+
+    </span>
+
+<h4 class="name" id="handle">
+    <a class="href-link" href="#handle">#</a>
+    
+    <span class="code-name">
+        handle
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    Users Immers handle, if known. May be available even when logged-out if passed via URL or stored from past login
+    <p>Users Immers handle, if known. May be available even when logged-out if passed via URL or stored from past login</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">string</span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -630,18 +721,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line875">line 875</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line875">line 875</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -649,29 +741,33 @@ during the authorization process.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="localImmerPlaceObject"><span class="type-signature"></span>localImmerPlaceObject<span class="type-signature"> :Promise.&lt;<a href="Activities.html#.APPlace">Activities.APPlace</a>></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Promise.&lt;<a href="Activities.html#.APPlace">Activities.APPlace</a>></code>
+
+
+    </span>
+
+<h4 class="name" id="localImmerPlaceObject">
+    <a class="href-link" href="#localImmerPlaceObject">#</a>
+    
+    <span class="code-name">
+        localImmerPlaceObject
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    fetch the /o/immer object for the current immer from memory cache or network
+    <p>fetch the /o/immer object for the current immer from memory cache or network</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Promise.&lt;<a href="Activities.html#.APPlace">Activities.APPlace</a>></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -702,18 +798,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line856">line 856</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line856">line 856</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -721,29 +818,33 @@ during the authorization process.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="profile"><span class="type-signature"></span>profile<span class="type-signature"> :<a href="global.html#Profile">Profile</a></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="global.html#Profile">Profile</a></code>
+
+
+    </span>
+
+<h4 class="name" id="profile">
+    <a class="href-link" href="#profile">#</a>
+    
+    <span class="code-name">
+        profile
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    User's Immers profile
+    <p>User's Immers profile</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="global.html#Profile">Profile</a></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -774,18 +875,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line98">line 98</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line98">line 98</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -793,29 +895,33 @@ during the authorization process.
 
 
 
-
-        
+</div>
             
-<h4 class="name" id="streaming"><span class="type-signature"></span>streaming<span class="type-signature"> :<a href="ImmersSocket.html">ImmersSocket</a></span></h4>
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="ImmersSocket.html">ImmersSocket</a></code>
+
+
+    </span>
+
+<h4 class="name" id="streaming">
+    <a class="href-link" href="#streaming">#</a>
+    
+    <span class="code-name">
+        streaming
+    </span>
+    
+</h4>
 
 
 
 
 <div class="description">
-    ImmersSocket instance for access to low-level streaming API
+    <p>ImmersSocket instance for access to low-level streaming API</p>
 </div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type"><a href="ImmersSocket.html">ImmersSocket</a></span>
-
-
-        </li>
-    </ul>
 
 
 
@@ -846,18 +952,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line92">line 92</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line92">line 92</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -865,29 +972,42 @@ during the authorization process.
 
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
-        <h3 class="subsection-title">Methods</h3>
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
 
+
+    
+    <h4 class="name" id=".DestinationFromPlace">
+        <a class="href-link" href="#.DestinationFromPlace">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                DestinationFromPlace<span class="signature">(place)</span><span class="type-signature"> &rarr; {<a href="global.html#Destination">Destination</a>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".DestinationFromPlace"><span class="type-signature">(static) </span>DestinationFromPlace<span class="signature">(place)</span><span class="type-signature"> &rarr; {<a href="global.html#Destination">Destination</a>}</span></h4>
     
-
+    <div class="description">
+        <p>Extract a Destination from a place object</p>
+    </div>
     
-
-
-
-<div class="description">
-    Extract a Destination from a place object
-</div>
 
 
 
@@ -899,52 +1019,54 @@ during the authorization process.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>place</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>place</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -975,18 +1097,19 @@ during the authorization process.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line914">line 914</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line914">line 914</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1004,46 +1127,63 @@ during the authorization process.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type"><a href="global.html#Destination">Destination</a></code>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Destination">Destination</a></span>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".FriendsSorter">
+        <a class="href-link" href="#.FriendsSorter">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                FriendsSorter<span class="signature">(a, b)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".FriendsSorter"><span class="type-signature">(static) </span>FriendsSorter<span class="signature">(a, b)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Array.sort compareFunction to sort a friends list putting online
+friends at the top and the rest by most recent update</p>
+    </div>
     
-
-
-
-<div class="description">
-    Array.sort compareFunction to sort a friends list putting online
-friends at the top and the rest by most recent update
-</div>
 
 
 
@@ -1055,75 +1195,79 @@ friends at the top and the rest by most recent update
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>a</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>b</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>a</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>b</code></td>
+  
 
-            
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
 
-            <td class="description last"></td>
-        </tr>
 
-    
-    </tbody>
-</table>
+  
+  </td>
 
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1154,18 +1298,19 @@ friends at the top and the rest by most recent update
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line896">line 896</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line896">line 896</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1188,22 +1333,34 @@ friends at the top and the rest by most recent update
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".FriendStatusFromActivity">
+        <a class="href-link" href="#.FriendStatusFromActivity">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                FriendStatusFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#FriendStatus">FriendStatus</a>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".FriendStatusFromActivity"><span class="type-signature">(static) </span>FriendStatusFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#FriendStatus">FriendStatus</a>}</span></h4>
     
-
+    <div class="description">
+        <p>Extract friend status information from their most recent location activity</p>
+    </div>
     
-
-
-
-<div class="description">
-    Extract friend status information from their most recent location activity
-</div>
 
 
 
@@ -1215,52 +1372,54 @@ friends at the top and the rest by most recent update
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>activity</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>activity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1291,18 +1450,19 @@ friends at the top and the rest by most recent update
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line935">line 935</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line935">line 935</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1320,45 +1480,62 @@ friends at the top and the rest by most recent update
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></span>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".MessageFromActivity">
+        <a class="href-link" href="#.MessageFromActivity">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                MessageFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#Message">Message</a>|null}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".MessageFromActivity"><span class="type-signature">(static) </span>MessageFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#Message">Message</a>|null}</span></h4>
     
-
+    <div class="description">
+        <p>Extract a Message from an activity object</p>
+    </div>
     
-
-
-
-<div class="description">
-    Extract a Message from an activity object
-</div>
 
 
 
@@ -1370,52 +1547,54 @@ friends at the top and the rest by most recent update
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>activity</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>activity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1446,18 +1625,19 @@ friends at the top and the rest by most recent update
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line989">line 989</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line989">line 989</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1475,48 +1655,65 @@ friends at the top and the rest by most recent update
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Message">Message</a></span>
+<code class="param-type"><a href="global.html#Message">Message</a></code>
 |
 
-<span class="param-type">null</span>
+<code class="param-type">null</code>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".ProfileFromActor">
+        <a class="href-link" href="#.ProfileFromActor">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                ProfileFromActor<span class="signature">(actor)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".ProfileFromActor"><span class="type-signature">(static) </span>ProfileFromActor<span class="signature">(actor)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>}</span></h4>
     
-
+    <div class="description">
+        <p>Convert ActivityPub Actor format to Immers profile</p>
+    </div>
     
-
-
-
-<div class="description">
-    Convert ActivityPub Actor format to Immers profile
-</div>
 
 
 
@@ -1528,52 +1725,54 @@ friends at the top and the rest by most recent update
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>actor</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Activities.html#.APActor">Activities.APActor</a></span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">ActivityPub Actor object</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>actor</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActor">Activities.APActor</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>ActivityPub Actor object</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1604,18 +1803,19 @@ friends at the top and the rest by most recent update
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line1050">line 1050</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1050">line 1050</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1633,46 +1833,63 @@ friends at the top and the rest by most recent update
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type"><a href="global.html#Profile">Profile</a></code>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id=".URLFromProperty">
+        <a class="href-link" href="#.URLFromProperty">#</a>
         
             
-
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                URLFromProperty<span class="signature">(prop)</span><span class="type-signature"> &rarr; {string|undefined}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id=".URLFromProperty"><span class="type-signature">(static) </span>URLFromProperty<span class="signature">(prop)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
     
-
+    <div class="description">
+        <p>Links in ActivityPub objects can take a variety of forms.
+Find and return the URL string.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Links in ActivityPub objects can take a variety of forms.
-Find and return the URL string.
-</div>
 
 
 
@@ -1684,58 +1901,60 @@ Find and return the URL string.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>prop</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Activities.html#.APObject">Activities.APObject</a></span>
-|
-
-<span class="param-type">object</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>prop</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APObject">Activities.APObject</a></code>
+|
+
+<code class="param-type">object</code>
+|
+
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1766,18 +1985,19 @@ Find and return the URL string.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line1075">line 1075</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1075">line 1075</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1795,52 +2015,63 @@ Find and return the URL string.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>URL string, if present</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    URL string, if present
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 |
 
-<span class="param-type">undefined</span>
+<code class="param-type">undefined</code>
 
 
-    </dd>
-</dl>
-
+    </div>
     
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addAvatar"><span class="type-signature"></span>addAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Add an existing avatar to a user's personal avatar collection
 </div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addAvatar">
+        <a class="href-link" href="#addAvatar">#</a>
+        
+        <span class="code-name">
+            
+                addAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Add an existing avatar to a user's personal avatar collection</p>
+    </div>
+    
 
 
 
@@ -1852,55 +2083,57 @@ Find and return the URL string.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>sourceActivity</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">string</span>
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>sourceActivity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 |
 
-<span class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></span>
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)</td>
-        </tr>
+  <td class="description last"><p>Create activity for the avatar or IRI of activity (other activities with the avatar as their object, e.g. Offer, also allowed)</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -1931,18 +2164,19 @@ Find and return the URL string.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line566">line 566</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line566">line 566</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -1960,52 +2194,67 @@ Find and return the URL string.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>IRI of avatar add activity</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    IRI of avatar add activity
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="addFriend">
+        <a class="href-link" href="#addFriend">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                addFriend<span class="signature">(handle)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="addFriend"><span class="type-signature">(async) </span>addFriend<span class="signature">(handle)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    This method will either initiate a new friend request or,
+    <div class="description">
+        <p>This method will either initiate a new friend request or,
 if a request has already been received from the target user,
 accept a pending friend request. To create a friend connection,
-both users will need to call this method with the other user's handle.
-</div>
+both users will need to call this method with the other user's handle.</p>
+    </div>
+    
 
 
 
@@ -2017,52 +2266,54 @@ both users will need to call this method with the other user's handle.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">the target user's immers handle or profile id</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>the target user's immers handle or profile id</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2093,18 +2344,19 @@ both users will need to call this method with the other user's handle.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line486">line 486</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line486">line 486</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2127,22 +2379,34 @@ both users will need to call this method with the other user's handle.
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="blockList">
+        <a class="href-link" href="#blockList">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                blockList<span class="signature">(forceRefresh)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="blockList"><span class="type-signature">(async) </span>blockList<span class="signature">(forceRefresh)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span></h4>
     
-
+    <div class="description">
+        <p>Fetch list of Profile.id of all users blocked by this user</p>
+    </div>
     
-
-
-
-<div class="description">
-    Fetch list of Profile.id of all users blocked by this user
-</div>
 
 
 
@@ -2154,52 +2418,54 @@ both users will need to call this method with the other user's handle.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>forceRefresh</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">skip local cache and fetch from server</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>forceRefresh</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>skip local cache and fetch from server</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2230,18 +2496,19 @@ both users will need to call this method with the other user's handle.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line390">line 390</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line390">line 390</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2259,49 +2526,66 @@ both users will need to call this method with the other user's handle.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type">Promise.&lt;Array.&lt;string>></code>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;string>></span>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="blockUser">
+        <a class="href-link" href="#blockUser">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                blockUser<span class="signature">(handle)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="blockUser"><span class="type-signature">(async) </span>blockUser<span class="signature">(handle)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Add an someone to this immerser's blocklist. While on a blocklist,
+    <div class="description">
+        <p>Add an someone to this immerser's blocklist. While on a blocklist,
 no messages/requests will sent or received between these two users,
 and any past messages will be omitted from feeds and friends lists.
 You should also prevent realtime interactions in your
-application from users in Profile.collections.blocked (e.g. hide avatars, mute audio)
-</div>
+application from users in Profile.collections.blocked (e.g. hide avatars, mute audio)</p>
+    </div>
+    
 
 
 
@@ -2313,52 +2597,54 @@ application from users in Profile.collections.blocked (e.g. hide avatars, mute a
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">the target user's immers handle or profile id</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>the target user's immers handle or profile id</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2389,18 +2675,19 @@ application from users in Profile.collections.blocked (e.g. hide avatars, mute a
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line527">line 527</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line527">line 527</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2423,22 +2710,34 @@ application from users in Profile.collections.blocked (e.g. hide avatars, mute a
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="connect">
+        <a class="href-link" href="#connect">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                connect<span class="signature">(tokenCatcherURL, requestedRole, handle<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="connect"><span class="type-signature">(async) </span>connect<span class="signature">(tokenCatcherURL, requestedRole, handle<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
-
+    <div class="description">
+        <p>Connect to user's Immers Space profile, using pop-up window for OAuth if needed</p>
+    </div>
     
-
-
-
-<div class="description">
-    Connect to user's Immers Space profile, using pop-up window for OAuth if needed
-</div>
 
 
 
@@ -2450,127 +2749,133 @@ application from users in Profile.collections.blocked (e.g. hide avatars, mute a
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>tokenCatcherURL</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last">Page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load to retrieve the granted access token.
-Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>requestedRole</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>tokenCatcherURL</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load to retrieve the granted access token.
+Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>requestedRole</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Access level to request, see <a href="global.html#roles">roles</a> for details</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>handle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Access level to request, see <a href="global.html#roles">roles</a> for details</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
 
-            <td class="description last">User's immers handle. Optional if you have a local Immers Server</td>
-        </tr>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
-    
-    </tbody>
-</table>
 
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>User's immers handle. Optional if you have a local Immers Server</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2603,18 +2908,19 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line1129">line 1129</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1129">line 1129</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2632,51 +2938,66 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>token OAuth2 acess token</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    token OAuth2 acess token
+<code class="param-type">string</code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="corsProxyFetch">
+        <a class="href-link" href="#corsProxyFetch">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                corsProxyFetch<span class="signature">(url, headers)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="corsProxyFetch"><span class="type-signature">(async) </span>corsProxyFetch<span class="signature">(url, headers)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Attempt to fetch a cross-domain resource.
+    <div class="description">
+        <p>Attempt to fetch a cross-domain resource.
 Prefers using the local immer's proxy service if available,
-falling back to the user's home immer's proxy service if available or plain fetch.
-</div>
+falling back to the user's home immer's proxy service if available or plain fetch.</p>
+    </div>
+    
 
 
 
@@ -2688,75 +3009,79 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>url</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">resource to GET</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>headers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>resource to GET</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>headers</code></td>
+  
 
-            
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
 
-            <td class="description last">fetch headers</td>
-        </tr>
 
-    
-    </tbody>
-</table>
+  
+  </td>
 
+  
+
+  
+
+  <td class="description last"><p>fetch headers</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -2787,18 +3112,19 @@ falling back to the user's home immer's proxy service if available or plain fetc
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line612">line 612</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line612">line 612</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -2821,22 +3147,30 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="createAvatar"><span class="type-signature"></span>createAvatar<span class="signature">(name, glb, icon, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Upload a 3d model as an avatar and optionally share it
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createAvatar">
+        <a class="href-link" href="#createAvatar">#</a>
+        
+        <span class="code-name">
+            
+                createAvatar<span class="signature">(name, glb, icon, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Upload a 3d model as an avatar and optionally share it</p>
+    </div>
+    
 
 
 
@@ -2848,183 +3182,193 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>name</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last">Name/description</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>glb</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Blob</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>name</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Name/description</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>glb</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">3d model gltf binary file</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>icon</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Blob</span>
+  <td class="type">
+  
+      
+<code class="param-type">Blob</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>3d model gltf binary file</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>icon</code></td>
+  
 
-            <td class="description last">Preview image for thumbnails</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>privacy</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">Blob</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">'direct', 'friends', or 'public'</td>
-        </tr>
+  <td class="description last"><p>Preview image for thumbnails</p></td>
+</tr>
 
-    
 
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-            </td>
+        
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>privacy</code></td>
+  
 
-                
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
-                
-                </td>
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>'direct', 'friends', or 'public'</p></td>
+</tr>
+
+
+        
+
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>to</code></td>
+  
 
-            
+  <td class="type">
+  
+  </td>
 
-            <td class="description last">Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</td>
-        </tr>
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-    
-    </tbody>
-</table>
+      
 
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3055,18 +3399,19 @@ falling back to the user's home immer's proxy service if available or plain fetc
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line557">line 557</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line557">line 557</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3084,49 +3429,64 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>IRI of avatar creation post</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    IRI of avatar creation post
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="deleteMessage">
+        <a class="href-link" href="#deleteMessage">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                deleteMessage<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="deleteMessage"><span class="type-signature">(async) </span>deleteMessage<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
+    <div class="description">
+        <p>Delete a message.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Delete a message.
-</div>
 
 
 
@@ -3138,54 +3498,178 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>sourceActivity</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">string</span>
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>sourceActivity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 |
 
-<span class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></span>
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">IRI of activity or Activity in the Outbox</td>
-        </tr>
+  <td class="description last"><p>IRI of activity or Activity in the Outbox</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
 
     
-    </tbody>
-</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line419">line 419</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>IRI of the remove activity</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="disconnect">
+        <a class="href-link" href="#disconnect">#</a>
+        
+        <span class="code-name">
+            
+                disconnect<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Disconnect from User's immer, retaining credentials to reconnect</p>
+    </div>
+    
+
+
+
+
+
+
+
 
 
 
@@ -3217,18 +3701,19 @@ falling back to the user's home immer's proxy service if available or plain fetc
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line419">line 419</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line271">line 271</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3246,138 +3731,40 @@ falling back to the user's home immer's proxy service if available or plain fetc
 
 
 
-<h5>Returns:</h5>
 
-        
-<div class="param-desc">
-    IRI of the remove activity
+
+
+
+
+
 </div>
+            
+                <div class="member">
 
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
-
-
-    </dd>
-</dl>
 
     
-
-
-
-
-
+    <h4 class="name" id="enter">
+        <a class="href-link" href="#enter">#</a>
         
             
-
-    
-
-    
-    <h4 class="name" id="disconnect"><span class="type-signature"></span>disconnect<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Disconnect from User's immer, retaining credentials to reconnect
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line271">line 271</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+                <span class='tag'>async</span>
             
-
+        
+        <span class="code-name">
+            
+                enter<span class="signature">(destinationDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="enter"><span class="type-signature">(async) </span>enter<span class="signature">(destinationDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Mark user as &quot;online&quot; at this immer and share the location with their friends.
+Must be called after successful login or restoreSession</p>
+    </div>
     
-
-
-
-<div class="description">
-    Mark user as "online" at this immer and share the location with their friends.
-Must be called after successful login or restoreSession
-</div>
 
 
 
@@ -3389,70 +3776,72 @@ Must be called after successful login or restoreSession
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>destinationDescription</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Destination">Destination</a></span>
-|
-
-<span class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></span>
-|
-
-<span class="param-type">string</span>
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>destinationDescription</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#Destination">Destination</a></code>
+|
+
+<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
+|
+
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3483,12 +3872,6 @@ Must be called after successful login or restoreSession
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line215">line 215</a>
-    </li></ul></dd>
     
 
     
@@ -3496,93 +3879,12 @@ Must be called after successful login or restoreSession
     
 
     
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="exit"><span class="type-signature">(async) </span>exit<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Mark user as no longer online at this immer.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line255">line 255</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line215">line 215</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3605,22 +3907,34 @@ Must be called after successful login or restoreSession
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="exit">
+        <a class="href-link" href="#exit">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                exit<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="feed"><span class="type-signature">(async) </span>feed<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#Message">Message</a>>>}</span></h4>
     
-
+    <div class="description">
+        <p>Mark user as no longer online at this immer.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Fetch a page of recent activity Messages
-</div>
 
 
 
@@ -3659,18 +3973,19 @@ Must be called after successful login or restoreSession
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line375">line 375</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line255">line 255</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3688,45 +4003,39 @@ Must be called after successful login or restoreSession
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;<a href="global.html#Message">Message</a>>></span>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="feed">
+        <a class="href-link" href="#feed">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                feed<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#Message">Message</a>>>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="friendsList"><span class="type-signature">(async) </span>friendsList<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>>>}</span></h4>
     
-
+    <div class="description">
+        <p>Fetch a page of recent activity Messages</p>
+    </div>
     
-
-
-
-<div class="description">
-    Fetch list of friends and their online status and location
-</div>
 
 
 
@@ -3765,18 +4074,19 @@ Must be called after successful login or restoreSession
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line359">line 359</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line375">line 375</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3794,46 +4104,187 @@ Must be called after successful login or restoreSession
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
+<code class="param-type">Promise.&lt;Array.&lt;<a href="global.html#Message">Message</a>>></code>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>>></span>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
-    </dd>
-</dl>
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="friendsList">
+        <a class="href-link" href="#friendsList">#</a>
         
             
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                friendsList<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Fetch list of friends and their online status and location</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
 
     
 
     
-    <h4 class="name" id="getProfile"><span class="type-signature">(async) </span>getProfile<span class="signature">(handle)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>|undefined}</span></h4>
+
+    
+
     
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line359">line 359</a>
+            </span>
+        </p>
+    
+</dl>
 
 
-<div class="description">
-    Get a user's profile object from their handle.
-Uses logged-in users's home immer proxy service if available
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;<a href="global.html#FriendStatus">FriendStatus</a>>></code>
+
+
+    </div>
+    
 </div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getProfile">
+        <a class="href-link" href="#getProfile">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                getProfile<span class="signature">(handle)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>|undefined}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Get a user's profile object from their handle.
+Uses logged-in users's home immer proxy service if available</p>
+    </div>
+    
 
 
 
@@ -3845,52 +4296,54 @@ Uses logged-in users's home immer proxy service if available
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">Immers handle</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Immers handle</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -3921,18 +4374,19 @@ Uses logged-in users's home immer proxy service if available
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line680">line 680</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line680">line 680</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -3950,58 +4404,71 @@ Uses logged-in users's home immer proxy service if available
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><ul>
+<li>User profile or undefined if failed</li>
+</ul></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    - User profile or undefined if failed
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Profile">Profile</a></span>
+<code class="param-type"><a href="global.html#Profile">Profile</a></code>
 |
 
-<span class="param-type">undefined</span>
+<code class="param-type">undefined</code>
 
 
-    </dd>
-</dl>
-
+    </div>
     
+</div>
+
+                
+        </div>
+    </div>
 
 
 
 
-
-        
+</div>
             
+                <div class="member">
 
+
+    
+    <h4 class="name" id="handleImmerLinkClick">
+        <a class="href-link" href="#handleImmerLinkClick">#</a>
+        
+        <span class="code-name">
+            
+                handleImmerLinkClick<span class="signature">(clickEvent)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="handleImmerLinkClick"><span class="type-signature"></span>handleImmerLinkClick<span class="signature">(clickEvent)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Make navigating between immers easier by providing the user's
+    <div class="description">
+        <p>Make navigating between immers easier by providing the user's
 handle to the next experience so they don't have to type it in.
-Use as an onClick handler to inject the "me hash" into any cross-origin
+Use as an onClick handler to inject the &quot;me hash&quot; into any cross-origin
 anchor when navigating. Can be registered directly on the anchor
 or on a parent element.
 Will fallback to default click behavior if same-origin, not logged in,
-or unable to process url.
-</div>
+or unable to process url.</p>
+    </div>
+    
 
 
 
@@ -4013,52 +4480,54 @@ or unable to process url.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>clickEvent</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">MouseEvent</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>clickEvent</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">MouseEvent</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -4089,18 +4558,19 @@ or unable to process url.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line753">line 753</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line753">line 753</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -4123,22 +4593,34 @@ or unable to process url.
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="login">
+        <a class="href-link" href="#login">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                login<span class="signature">(tokenCatcherURL, requestedRole, handle<span class="signature-attributes">opt</span>, registration<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="login"><span class="type-signature">(async) </span>login<span class="signature">(tokenCatcherURL, requestedRole, handle<span class="signature-attributes">opt</span>, registration<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
+    <div class="description">
+        <p>Connect to user's Immers Space profile, using pop-up window for OAuth</p>
+    </div>
     
-
-
-
-<div class="description">
-    Connect to user's Immers Space profile, using pop-up window for OAuth
-</div>
 
 
 
@@ -4150,160 +4632,168 @@ or unable to process url.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>tokenCatcherURL</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last">Page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load to retrieve the granted access token.
-Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>requestedRole</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>tokenCatcherURL</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Page on your domain that runs <a href="global.html#catchToken">catchToken</a> on load to retrieve the granted access token.
+Can be the same page as long as loading it again in a pop-up won't cause a the main session to disconnect.</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>requestedRole</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">Access level to request, see <a href="global.html#roles">roles</a> for details</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>handle</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Access level to request, see <a href="global.html#roles">roles</a> for details</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
 
-            <td class="description last">User's immers handle. Optional if you have a local Immers Server</td>
-        </tr>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
-    
 
-        <tr>
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>User's immers handle. Optional if you have a local Immers Server</p></td>
+</tr>
+
+
+        
+
             
-                <td class="name"><code>registration</code></td>
-            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>registration</code></td>
+  
 
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">For use with local immer only, open the popup with the registration tab selected instead of login. handle will be used to prefill the registratoin form if provided</td>
-        </tr>
+  <td class="description last"><p>For use with local immer only, open the popup with the registration tab selected instead of login. handle will be used to prefill the registratoin form if provided</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -4334,18 +4824,19 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line165">line 165</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line165">line 165</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -4363,50 +4854,61 @@ Can be the same page as long as loading it again in a pop-up won't cause a the m
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    token OAuth2 acess token
-</div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
             
+                    
 
+<div class="columns">
     
-
+    <div class='param-desc column is-7'><p>token OAuth2 acess token</p></div>
     
-    <h4 class="name" id="loginWithToken"><span class="type-signature"></span>loginWithToken<span class="signature">(token, homeImmer, authorizedScopes)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;string></code>
 
+
+    </div>
     
-
-
-
-<div class="description">
-    Initialize client with an existing credential,
-e.g. one obtained through a service account
 </div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="loginWithToken">
+        <a class="href-link" href="#loginWithToken">#</a>
+        
+        <span class="code-name">
+            
+                loginWithToken<span class="signature">(token, homeImmer, authorizedScopes)</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Initialize client with an existing credential,
+e.g. one obtained through a service account</p>
+    </div>
+    
 
 
 
@@ -4418,100 +4920,228 @@ e.g. one obtained through a service account
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>token</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">OAuth2 Access Token</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>homeImmer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>token</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>OAuth2 Access Token</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>homeImmer</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Domain (host) for user's home immer</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>authorizedScopes</code></td>
+  
 
-            <td class="description last">Domain (host) for user's home immer</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>authorizedScopes</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 |
 
-<span class="param-type">Array.&lt;string></span>
+<code class="param-type">Array.&lt;string></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Scopes authorized for the token</td>
-        </tr>
+  <td class="description last"><p>Scopes authorized for the token</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
 
     
-    </tbody>
-</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line187">line 187</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>true if the login was successful</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;boolean></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="logout">
+        <a class="href-link" href="#logout">#</a>
+        
+        <span class="code-name">
+            
+                logout<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Disconnect from User's immer and delete any traces of user identity</p>
+    </div>
+    
+
+
+
+
+
+
+
 
 
 
@@ -4543,18 +5173,19 @@ e.g. one obtained through a service account
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line187">line 187</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line286">line 286</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -4572,137 +5203,39 @@ e.g. one obtained through a service account
 
 
 
-<h5>Returns:</h5>
 
-        
-<div class="param-desc">
-    true if the login was successful
+
+
+
+
+
 </div>
+            
+                <div class="member">
 
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;boolean></span>
-
-
-    </dd>
-</dl>
 
     
-
-
-
-
-
+    <h4 class="name" id="move">
+        <a class="href-link" href="#move">#</a>
         
             
-
-    
-
-    
-    <h4 class="name" id="logout"><span class="type-signature"></span>logout<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Disconnect from User's immer and delete any traces of user identity
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line286">line 286</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+                <span class='tag'>async</span>
             
-
+        
+        <span class="code-name">
+            
+                move<span class="signature">(destinationDescription)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="move"><span class="type-signature">(async) </span>move<span class="signature">(destinationDescription)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Update user's current online location and share with friends</p>
+    </div>
     
-
-
-
-<div class="description">
-    Update user's current online location and share with friends
-</div>
 
 
 
@@ -4714,58 +5247,60 @@ e.g. one obtained through a service account
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>destinationDescription</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Destination">Destination</a></span>
-|
-
-<span class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>destinationDescription</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#Destination">Destination</a></code>
+|
+
+<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
+|
+
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -4796,18 +5331,19 @@ e.g. one obtained through a service account
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line240">line 240</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line240">line 240</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -4830,25 +5366,33 @@ e.g. one obtained through a service account
 
 
 
-        
+
+</div>
             
+                <div class="member">
 
+
+    
+    <h4 class="name" id="navigateToImmerLink">
+        <a class="href-link" href="#navigateToImmerLink">#</a>
+        
+        <span class="code-name">
+            
+                navigateToImmerLink<span class="signature">(href)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="navigateToImmerLink"><span class="type-signature"></span>navigateToImmerLink<span class="signature">(href)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Navigate to a given url while injecting a "me hash" to provide the
+    <div class="description">
+        <p>Navigate to a given url while injecting a &quot;me hash&quot; to provide the
 user's handle to the destination site so that they don't have to re-enter it.
 Safe to use without checking if user is logged in, will just navigate normally
-if not
-</div>
+if not</p>
+    </div>
+    
 
 
 
@@ -4860,52 +5404,54 @@ if not
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>href</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last"></td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>href</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -4936,18 +5482,19 @@ if not
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line776">line 776</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line776">line 776</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -4970,22 +5517,34 @@ if not
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="reconnect">
+        <a class="href-link" href="#reconnect">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                reconnect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="reconnect"><span class="type-signature">(async) </span>reconnect<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
     
-
+    <div class="description">
+        <p>Attempt to restore session from a previously granted token. Requires options.allowStorage</p>
+    </div>
     
-
-
-
-<div class="description">
-    Attempt to restore session from a previously granted token. Requires options.allowStorage
-</div>
 
 
 
@@ -5026,18 +5585,19 @@ if not
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line1140">line 1140</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1140">line 1140</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5055,49 +5615,64 @@ if not
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Was reconnection successful</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    Was reconnection successful
+<code class="param-type">Promise.&lt;boolean></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;boolean></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="removeAvatar">
+        <a class="href-link" href="#removeAvatar">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                removeAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="removeAvatar"><span class="type-signature">(async) </span>removeAvatar<span class="signature">(sourceActivity)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
+    <div class="description">
+        <p>Remove user's avatar from their Avatar Collection.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Remove user's avatar from their Avatar Collection.
-</div>
 
 
 
@@ -5109,55 +5684,57 @@ if not
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>sourceActivity</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">string</span>
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>sourceActivity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 |
 
-<span class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></span>
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Activity IRI or Activity from the Avatars Collection to remove</td>
-        </tr>
+  <td class="description last"><p>Activity IRI or Activity from the Avatars Collection to remove</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -5188,18 +5765,19 @@ if not
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line600">line 600</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line600">line 600</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5217,52 +5795,67 @@ if not
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>IRI of the remove activity</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    IRI of the remove activity
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="removeFriend">
+        <a class="href-link" href="#removeFriend">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                removeFriend<span class="signature">(handle)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="removeFriend"><span class="type-signature">(async) </span>removeFriend<span class="signature">(handle)</span><span class="type-signature"></span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Remove a relationship to another immerser,
+    <div class="description">
+        <p>Remove a relationship to another immerser,
 either by removing an existing friend,
 rejecting a pending incoming friend request,
-or canceling a pending outgoing friend request
-</div>
+or canceling a pending outgoing friend request</p>
+    </div>
+    
 
 
 
@@ -5274,52 +5867,54 @@ or canceling a pending outgoing friend request
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">the target user's immers handle or profile id</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>the target user's immers handle or profile id</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -5350,18 +5945,19 @@ or canceling a pending outgoing friend request
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line502">line 502</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line502">line 502</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5384,22 +5980,34 @@ or canceling a pending outgoing friend request
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="resolveProfileIRI">
+        <a class="href-link" href="#resolveProfileIRI">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                resolveProfileIRI<span class="signature">(handle)</span><span class="type-signature"> &rarr; {string|undefined}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="resolveProfileIRI"><span class="type-signature">(async) </span>resolveProfileIRI<span class="signature">(handle)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
     
-
+    <div class="description">
+        <p>Get a user ID/URL from their handle using webfinger</p>
+    </div>
     
-
-
-
-<div class="description">
-    Get a user ID/URL from their handle using webfinger
-</div>
 
 
 
@@ -5411,52 +6019,54 @@ or canceling a pending outgoing friend request
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">immers handle</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>immers handle</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -5487,18 +6097,19 @@ or canceling a pending outgoing friend request
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line650">line 650</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line650">line 650</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5516,52 +6127,69 @@ or canceling a pending outgoing friend request
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><ul>
+<li>The profile IRI or undefined if failed</li>
+</ul></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    - The profile IRI or undefined if failed
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 |
 
-<span class="param-type">undefined</span>
+<code class="param-type">undefined</code>
 
 
-    </dd>
-</dl>
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="restoreSession">
+        <a class="href-link" href="#restoreSession">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                restoreSession<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="restoreSession"><span class="type-signature">(async) </span>restoreSession<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;boolean>}</span></h4>
     
-
+    <div class="description">
+        <p>Attempt to restore session from a previously granted token. Requires options.allowStorage</p>
+    </div>
     
-
-
-
-<div class="description">
-    Attempt to restore session from a previously granted token. Requires options.allowStorage
-</div>
 
 
 
@@ -5600,18 +6228,19 @@ or canceling a pending outgoing friend request
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line198">line 198</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line198">line 198</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5629,53 +6258,64 @@ or canceling a pending outgoing friend request
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Was reconnection successful
-</div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;boolean></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
             
+                    
 
+<div class="columns">
     
-
+    <div class='param-desc column is-7'><p>Was reconnection successful</p></div>
     
-    <h4 class="name" id="sendChatMessage"><span class="type-signature"></span>sendChatMessage<span class="signature">(content, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;boolean></code>
 
+
+    </div>
     
-
-
-
-<div class="description">
-    Send a message with text content.
-privacy level determines who receives and can acccess the message.
-direct: Only those named in `to` receive the message.
-friends: Direct plus friends list.
-public: Direct plus Friends plus accessible via URL for sharing.
 </div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="sendChatMessage">
+        <a class="href-link" href="#sendChatMessage">#</a>
+        
+        <span class="code-name">
+            
+                sendChatMessage<span class="signature">(content, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Send a message with text content.
+privacy level determines who receives and can acccess the message.
+direct: Only those named in <code>to</code> receive the message.
+friends: Direct plus friends list.
+public: Direct plus Friends plus accessible via URL for sharing.</p>
+    </div>
+    
 
 
 
@@ -5687,126 +6327,132 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>content</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+            <th>Type</th>
 
             
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last">The text/HTML content. Will be sanitized before sending</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-
-        <tr>
-            
-                <td class="name"><code>privacy</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        <tbody>
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>content</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>The text/HTML content. Will be sanitized before sending</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>privacy</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">'direct', 'friends', or 'public'</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>'direct', 'friends', or 'public'</p></td>
+</tr>
+
+
+        
 
             
+<tr class="deep-level-0">
+  
+      <td class="name"><code>to</code></td>
+  
 
-            <td class="description last">Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</td>
-        </tr>
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;string></code>
 
-    
-    </tbody>
-</table>
 
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -5837,18 +6483,19 @@ public: Direct plus Friends plus accessible via URL for sharing.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line410">line 410</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line410">line 410</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -5866,60 +6513,75 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Url of newly posted message</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    Url of newly posted message
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="sendImage">
+        <a class="href-link" href="#sendImage">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                sendImage<span class="signature">(image, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="sendImage"><span class="type-signature">(async) </span>sendImage<span class="signature">(image, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Upload and/or share an image.
+    <div class="description">
+        <p>Upload and/or share an image.
 When image is a canvas element, its toBlob method is used to generate a
 png image to upload.
 When image is a File/Blob, it will be uploaded to the user's home immer
-and shared. The `name` attribute is optional, but `type` must contain the
+and shared. The <code>name</code> attribute is optional, but <code>type</code> must contain the
 correct MIME. When image is a url, an existing image is shared without
 re-uploading. It's better to upload a file so that the user's home
 immer can ensure it remains available.
 privacy level determines who receives and can acccess the message.
-direct: Only those named in `to` receive the message.
+direct: Only those named in <code>to</code> receive the message.
 friends: Direct plus friends list.
-public: Direct plus Friends plus accessible via URL for sharing.
-</div>
+public: Direct plus Friends plus accessible via URL for sharing.</p>
+    </div>
+    
 
 
 
@@ -5931,135 +6593,141 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>image</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">File</span>
+            <th>Attributes</th>
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>image</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">File</code>
 |
 
-<span class="param-type">Blob</span>
+<code class="param-type">Blob</code>
 |
 
-<span class="param-type">HTMLCanvasElement</span>
+<code class="param-type">HTMLCanvasElement</code>
 |
 
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Image data to upload or url to share</td>
-        </tr>
+  <td class="description last"><p>Image data to upload or url to share</p></td>
+</tr>
 
-    
 
-        <tr>
-            
-                <td class="name"><code>privacy</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>privacy</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>'direct', 'friends', or 'public'</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>to</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">'direct', 'friends', or 'public'</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;string></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</td>
-        </tr>
+  <td class="description last"><p>Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -6090,18 +6758,19 @@ public: Direct plus Friends plus accessible via URL for sharing.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line450">line 450</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line450">line 450</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -6119,58 +6788,69 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Url of newly posted message</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    Url of newly posted message
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
-
-
-    </dd>
-</dl>
-
-    
+                
+        </div>
+    </div>
 
 
 
 
-
-        
+</div>
             
+                <div class="member">
 
+
+    
+    <h4 class="name" id="sendVideo">
+        <a class="href-link" href="#sendVideo">#</a>
+        
+        <span class="code-name">
+            
+                sendVideo<span class="signature">(video, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="sendVideo"><span class="type-signature"></span>sendVideo<span class="signature">(video, privacy, to<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Upload and/or share a video.
+    <div class="description">
+        <p>Upload and/or share a video.
 When video is a File/Blob, it will be uploaded to the user's home immer
-and shared. The `name` attribute is optional, but `type` must contain the
+and shared. The <code>name</code> attribute is optional, but <code>type</code> must contain the
 correct MIME. When video is a url, an existing video is shared without
 re-uploading. It's better to upload a file so that the user's home
 immer can ensure it remains available.
 privacy level determines who receives and can acccess the message.
-direct: Only those named in `to` receive the message.
+direct: Only those named in <code>to</code> receive the message.
 friends: Direct plus friends list.
-public: Direct plus Friends plus accessible via URL for sharing.
-</div>
+public: Direct plus Friends plus accessible via URL for sharing.</p>
+    </div>
+    
 
 
 
@@ -6182,132 +6862,138 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>video</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">File</span>
+            <th>Attributes</th>
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>video</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">File</code>
 |
 
-<span class="param-type">Blob</span>
+<code class="param-type">Blob</code>
 |
 
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
+  
+      <td class="attributes">
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Video data to upload or url to share</td>
-        </tr>
+  <td class="description last"><p>Video data to upload or url to share</p></td>
+</tr>
 
-    
 
-        <tr>
-            
-                <td class="name"><code>privacy</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
+        
 
             
-            </td>
+<tr class="deep-level-0">
+  
+      <td class="name"><code>privacy</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>'direct', 'friends', or 'public'</p></td>
+</tr>
+
+
+        
 
             
-                <td class="attributes">
-                
+<tr class="deep-level-0">
+  
+      <td class="name"><code>to</code></td>
+  
 
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">'direct', 'friends', or 'public'</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>to</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;string></span>
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;string></code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</td>
-        </tr>
+  <td class="description last"><p>Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -6338,18 +7024,19 @@ public: Direct plus Friends plus accessible via URL for sharing.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line475">line 475</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line475">line 475</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -6367,51 +7054,66 @@ public: Direct plus Friends plus accessible via URL for sharing.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Url of newly posted message</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    Url of newly posted message
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="unblockUser">
+        <a class="href-link" href="#unblockUser">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                unblockUser<span class="signature">(handle)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="unblockUser"><span class="type-signature">(async) </span>unblockUser<span class="signature">(handle)</span><span class="type-signature"></span></h4>
     
-
+    <div class="description">
+        <p>Remove someone to this immerser's blocklist. Messages will once again
+be sent &amp; received between users and past messages from before the block
+will be visible again in feeds and friends lists.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Remove someone to this immerser's blocklist. Messages will once again
-be sent & received between users and past messages from before the block
-will be visible again in feeds and friends lists.
-</div>
 
 
 
@@ -6423,52 +7125,54 @@ will be visible again in feeds and friends lists.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>handle</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
+            <th>Type</th>
 
             
 
             
 
-            <td class="description last">the target user's immers handle or profile id</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
-    
-    </tbody>
-</table>
+        <tbody>
+        
 
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handle</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>the target user's immers handle or profile id</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -6499,18 +7203,19 @@ will be visible again in feeds and friends lists.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line538">line 538</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line538">line 538</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -6533,22 +7238,30 @@ will be visible again in feeds and friends lists.
 
 
 
-        
-            
 
-    
-
-    
-    <h4 class="name" id="updateProfileInfo"><span class="type-signature"></span>updateProfileInfo<span class="signature">(info)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Update user's profile description
 </div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="updateProfileInfo">
+        <a class="href-link" href="#updateProfileInfo">#</a>
+        
+        <span class="code-name">
+            
+                updateProfileInfo<span class="signature">(info)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Update user's profile description</p>
+    </div>
+    
 
 
 
@@ -6560,146 +7273,133 @@ will be visible again in feeds and friends lists.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>info</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
+            <th>Type</th>
 
             
-            </td>
-
+            <th>Attributes</th>
             
 
             
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>displayName</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">User's preferred shorthand identifier, may contain spaces & symbols</td>
+            <th class="last">Description</th>
         </tr>
+        </thead>
 
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>info</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
     
+<tr class="deep-level-1">
+  
+      <td class="name"><code>displayName</code></td>
+  
 
-        <tr>
-            
-                <td class="name"><code>bio</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
 
-                
+      
 
-                
-                </td>
-            
+      
+      </td>
+  
 
-            
+  
 
-            <td class="description last">Summary paragraph displayed on user profile</td>
-        </tr>
+  <td class="description last"><p>User's preferred shorthand identifier, may contain spaces &amp; symbols</p></td>
+</tr>
 
+  
     
-    </tbody>
-</table>
+<tr class="deep-level-1">
+  
+      <td class="name"><code>bio</code></td>
+  
 
-            </td>
-        </tr>
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
 
-    
-    </tbody>
-</table>
 
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>Summary paragraph displayed on user profile</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -6730,18 +7430,19 @@ will be visible again in feeds and friends lists.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line297">line 297</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line297">line 297</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -6764,22 +7465,34 @@ will be visible again in feeds and friends lists.
 
 
 
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="useAvatar">
+        <a class="href-link" href="#useAvatar">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                useAvatar<span class="signature">(avatar)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="useAvatar"><span class="type-signature">(async) </span>useAvatar<span class="signature">(avatar)</span><span class="type-signature"> &rarr; {Promise.&lt;string>}</span></h4>
     
-
+    <div class="description">
+        <p>Update user's avatar in their profile.</p>
+    </div>
     
-
-
-
-<div class="description">
-    Update user's avatar in their profile.
-</div>
 
 
 
@@ -6791,55 +7504,57 @@ will be visible again in feeds and friends lists.
 
     <h5>Parameters:</h5>
     
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+<div class="table-container">
+    <table class="params table">
+        <thead>
         <tr>
             
-                <td class="name"><code>avatar</code></td>
+            <th>Name</th>
             
 
-            <td class="type">
+            <th>Type</th>
+
             
-                
-<span class="param-type">object</span>
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>avatar</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
 |
 
-<span class="param-type">string</span>
+<code class="param-type">string</code>
 
 
-            
-            </td>
+  
+  </td>
 
-            
+  
 
-            
+  
 
-            <td class="description last">Model type object or id for one (or activity containing the model as its object)</td>
-        </tr>
+  <td class="description last"><p>Model type object or id for one (or activity containing the model as its object)</p></td>
+</tr>
 
-    
-    </tbody>
-</table>
 
+        
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -6870,18 +7585,19 @@ will be visible again in feeds and friends lists.
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line575">line 575</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line575">line 575</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -6899,51 +7615,66 @@ will be visible again in feeds and friends lists.
 
 
 
-<h5>Returns:</h5>
 
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>IRI of profile update activity</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
         
-<div class="param-desc">
-    IRI of profile update activity
+<code class="param-type">Promise.&lt;string></code>
+
+
+    </div>
+    
 </div>
 
+                
+        </div>
+    </div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;string></span>
 
 
-    </dd>
-</dl>
+</div>
+            
+                <div class="member">
+
 
     
-
-
-
-
-
+    <h4 class="name" id="waitUntilConnected">
+        <a class="href-link" href="#waitUntilConnected">#</a>
         
             
-
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                waitUntilConnected<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;true>}</span>
+            
+        </span>
+    </h4>
     
 
     
-    <h4 class="name" id="waitUntilConnected"><span class="type-signature">(async) </span>waitUntilConnected<span class="signature">()</span><span class="type-signature"> &rarr; {Promise.&lt;true>}</span></h4>
     
-
-    
-
-
-
-<div class="description">
-    Utility method to hide details for checking if user is logged in
+    <div class="description">
+        <p>Utility method to hide details for checking if user is logged in
 or waiting util they have before performing actions that require
-a logged-in user
-</div>
+a logged-in user</p>
+    </div>
+    
 
 
 
@@ -6982,18 +7713,19 @@ a logged-in user
     
 
     
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="client.js.html">client.js</a>, <a href="client.js.html#line146">line 146</a>
-    </li></ul></dd>
     
 
     
 
     
 
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line146">line 146</a>
+            </span>
+        </p>
     
 </dl>
 
@@ -7011,36 +7743,47 @@ a logged-in user
 
 
 
-<h5>Returns:</h5>
-
-        
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;true></span>
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
 
-    </dd>
-</dl>
-
+<div class="columns">
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;true></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>await client.waitUntilConnected()
+    
+        <pre class="prettyprint"><code>await client.waitUntilConnected()
 client.sendChatMessage('Hey friends, I am connected!', 'friends')</code></pre>
+    
 
 
-
-        
+</div>
+            
+            </div>
+        </div>
     
 
     
@@ -7053,19 +7796,26 @@ client.sendChatMessage('Hey friends, I am connected!', 'friends')</code></pre>
 
 
 
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Oct 27 2022 14:30:31 GMT+0000 (Coordinated Universal Time)
-</footer>
-
-<script> prettyPrint(); </script>
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
+
 </body>
 </html>
