@@ -1,6 +1,6 @@
 {
   "name": "immers-client",
-  "version": "2.12.0",
+  "version": "2.13.1",
   "description": "Clients-side ActivityPub library for Immers Space",
   "module": "dist/esm.bundle.js",
   "sideEffects": [
@@ -30,6 +30,7 @@
     "@babel/eslint-parser": "^7.14.5",
     "@babel/preset-env": "^7.15.4",
     "babel-loader": "^8.2.2",
+    "better-docs": "^2.7.2",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.6",

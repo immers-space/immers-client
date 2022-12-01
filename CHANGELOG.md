@@ -4,6 +4,23 @@
 
 * Improper profile icon format prevented useAvatar profile icon changes from appearing in Mastodon
 
+## v2.13.1 (2022-10-27)
+
+### Fixed
+* Fix incorrect type for `Activities.getObject`'s return value
+
+## v2.13.0 (2022-10-26)
+
+### Added
+
+* `Activities.delete` - new low-level api to delete activities
+* `ImmersClient.deleteMessage` - new high-level api to delete Messages from user's Outbox
+
+### Changed
+
+* Documented `Activities.getObject` low-level api method.
+* `Activities.undo` - method can now take an activity IRI
+
 ## v2.12.0 (2022-10-24)
 
 ### Added

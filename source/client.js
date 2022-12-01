@@ -51,7 +51,7 @@ import { clearStore, createStore } from './store.js'
 
 /**
  * @typedef {object} Message
- * @property {string} id - URL of original message object, usable as unique id
+ * @property {string} id - URL of original message activity object, usable as unique id
  * @property {Profile} sender - Message sender's Profile
  * @property {Date} timestamp - Message sent time
  * @property {string} type - Describes the message content: 'chat', 'media', 'status', or 'other'
@@ -409,6 +409,24 @@ export class ImmersClient extends window.EventTarget {
    */
   sendChatMessage (content, privacy, to = []) {
     return this.activities.note(DOMPurify.sanitize(content), to, privacy)
+  }
+
+  /**
+   * Delete a message.
+   * @param  {(string|Activities.APActivity)} sourceActivity - IRI of activity or Activity in the Outbox
+   * @returns {Promise<string>} IRI of the remove activity
+   */
+  async deleteMessage (sourceActivity) {
+    const activity = typeof sourceActivity === 'string'
+      ? await this.activities.getObject(sourceActivity)
+      : sourceActivity
+    switch (activity.type.toLowerCase()) {
+      case 'arrive':
+      case 'leave':
+        return this.activities.undo(activity)
+      case 'create':
+        return this.activities.delete(activity.object)
+    }
   }
 
   /**
