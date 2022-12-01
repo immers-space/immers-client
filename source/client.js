@@ -585,9 +585,8 @@ export class ImmersClient extends window.EventTarget {
       throw new Error('Invalid avatar')
     }
     const profileUpdate = { avatar }
-    const icon = ImmersClient.URLFromProperty(avatar.icon)
-    if (icon) {
-      profileUpdate.icon = icon
+    if (avatar.icon) {
+      profileUpdate.icon = avatar.icon
     }
     return this.activities.updateProfile(profileUpdate)
   }
