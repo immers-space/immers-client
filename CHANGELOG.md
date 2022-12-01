@@ -1,3 +1,9 @@
+# Unreleased
+
+### Fixed
+
+* Improper profile icon format prevented useAvatar profile icon changes from appearing in Mastodon
+
 ## v2.12.0 (2022-10-24)
 
 ### Added
