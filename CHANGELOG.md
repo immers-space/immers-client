@@ -1,3 +1,14 @@
+## Unreleased
+
+### Added
+
+* `immersClient.sessionInfo` object will store any additional parameters returned with the authorization token, for new local users this will include login provider and, depending on immers server config, may contain email address (immers server >=v4.2.0)
+
+### Fixed
+
+* Promise returned by `immersClient.login` will now reject if user denies authorization rather than hanging
+* Fix error when calling `immersClient.logout` or `immersClient.disconnect` if the user is not currently logged in
+
 ## v2.13.2 (2022-12-01)
 
 ### Fixed
