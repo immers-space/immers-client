@@ -148,10 +148,14 @@ export const roles = ['public', 'friends', 'modAdditive', 'modFull']
 export function catchToken () {
   const hashParams = new URLSearchParams(window.location.hash.substring(1))
   if (hashParams.has('access_token')) {
-    // not safe to update store here, will be saved later in initialize()
     const token = hashParams.get('access_token')
+    hashParams.delete('access_token')
     const homeImmer = hashParams.get('issuer')
+    hashParams.delete('issuer')
     const authorizedScopes = hashParams.get('scope')?.split(' ') || []
+    hashParams.delete('scope')
+    // other params may include: email, provider
+    const sessionInfo = Object.fromEntries(hashParams)
     window.location.hash = ''
     // If this is an oauth popup, pass the results back up and close
     // todo check origin
@@ -160,19 +164,23 @@ export function catchToken () {
         type: 'ImmersAuth',
         token,
         homeImmer,
-        authorizedScopes
+        authorizedScopes,
+        sessionInfo
       })
       return true
     }
+  } else if (hashParams.has('error')) {
+    window.opener?.postMessage({ type: 'ImmersAuth', error: hashParams.get('error') })
   }
-  // TODO handle #error=access_denied
+  return false
 }
 /**
- * @typedef {Object} AuthResult
+ * @typedef {object} AuthResult
  * @property {APActor} actor User's ActivityPub profile object
  * @property {string} token OAuth access token
  * @property {string} homeImmer User's home Immers Server origin
  * @property {Array&lt;string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
+ * @property {object} sessionInfo Any other params returned from the authorization server with the token
  */
 /**
  * Internal oauth popup handler
@@ -216,16 +224,17 @@ function oauthPopup (oauthPath, { clientId, redirectURI, preferredScope, handle,
       if (data?.type !== 'ImmersAuth') {
         return
       }
-      if (!data.token) {
-        return reject(new Error('Not authorized'))
-      }
-      const { token, homeImmer } = data
-      const authorizedScopes = preprocessScopes(data.authorizedScopes)
-      window.removeEventListener('message', handler)
       // have to close the popup in this thread because, in chrome, having the popup close itself crashes the browser
       popup?.close()
+      if (data.error || !data.token) {
+        return reject(new Error(data.error ?? 'Not authorized'))
+      }
+      const { token, homeImmer, sessionInfo } = data
+      const authorizedScopes = preprocessScopes(data.authorizedScopes)
+      window.removeEventListener('message', handler)
+
       tokenToActor(token, homeImmer).then(actor => {
-        resolve({ actor, token, homeImmer, authorizedScopes })
+        resolve({ actor, token, homeImmer, authorizedScopes, sessionInfo })
       })
     }
     window.addEventListener('message', handler)

@@ -202,6 +202,15 @@ export class ImmersClient extends window.EventTarget {
    * @public
    */
   connected = false
+  /**
+   * Additional data returned from the user's immer on login
+   * @type {Object.&lt;string, any>}
+   * @property {boolean} [isNewUser] true when this is the first login of a new local user
+   * @property {string} [email] only included on home immer domain when that immer has passEmailToHub config enabled and this is their first login
+   * @property {string} [provider] identity provider domain if on home immer domain and logged in with OpenId Connect and this is their first login
+   * @public
+   */
+  sessionInfo = {}
   #store
   /**
 
@@ -270,9 +279,9 @@ export class ImmersClient extends window.EventTarget {
     } else {
       authResult = await DestinationOAuthPopup(handle, requestedRole, tokenCatcherURL)
     }
-    const { actor, token, homeImmer, authorizedScopes } = authResult
-    this.#store.credential = { token, homeImmer, authorizedScopes }
-    this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes)
+    const { actor, token, homeImmer, authorizedScopes, sessionInfo } = authResult
+    this.#store.credential = { token, homeImmer, authorizedScopes, sessionInfo }
+    this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes, sessionInfo)
     return token
   }
 
@@ -297,10 +306,10 @@ export class ImmersClient extends window.EventTarget {
    */
   async restoreSession () {
     try {
-      const { token, homeImmer, authorizedScopes } = this.#store.credential
+      const { token, homeImmer, authorizedScopes, sessionInfo } = this.#store.credential
       const actor = await tokenToActor(token, homeImmer)
       if (actor) {
-        this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes)
+        this.#setupAfterLogin(actor, homeImmer, token, authorizedScopes, sessionInfo)
         return true
       }
     } catch {}
@@ -369,7 +378,7 @@ export class ImmersClient extends window.EventTarget {
    * Disconnect from User's immer, retaining credentials to reconnect
    */
   disconnect () {
-    this.streaming.disconnect()
+    this.streaming?.disconnect()
     this.streaming = undefined
     this.activities = undefined
     this.connected = false
@@ -410,9 +419,10 @@ export class ImmersClient extends window.EventTarget {
     }
   }
 
-  #setupAfterLogin (actor, homeImmer, token, authorizedScopes) {
+  #setupAfterLogin (actor, homeImmer, token, authorizedScopes, sessionInfo) {
     this.connected = true
     this.profile = ImmersClient.ProfileFromActor(actor)
+    this.sessionInfo = sessionInfo
     this.#store.handle = this.profile.handle
     this.activities = new Activities(actor, homeImmer, this.place, token, this.localImmer)
     this.streaming = new ImmersSocket(homeImmer, token)
