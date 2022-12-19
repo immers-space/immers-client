@@ -278,7 +278,7 @@ export class ImmersClient extends window.EventTarget {
    * Disconnect from User's immer, retaining credentials to reconnect
    */
   disconnect () {
-    this.streaming.disconnect()
+    this.streaming?.disconnect()
     this.streaming = undefined
     this.activities = undefined
     this.connected = false

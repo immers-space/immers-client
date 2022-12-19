@@ -7,6 +7,7 @@
 ### Fixed
 
 * Promise returned by `immersClient.login` will now reject if user denies authorization rather than hanging
+* Fix error when calling `immersClient.logout` or `immersClient.disconnect` if the user is not currently logged in
 
 ## v2.13.2 (2022-12-01)
 
