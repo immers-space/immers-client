@@ -8,6 +8,8 @@
 
 * Promise returned by `immersClient.login` will now reject if user denies authorization rather than hanging
 * Fix error when calling `immersClient.logout` or `immersClient.disconnect` if the user is not currently logged in
+* one-liner now respects `role` query param as documented
+* Fix `Activities.add` to allow specifying a collection just by name instead of full IRI
 
 ## v2.13.2 (2022-12-01)
 
