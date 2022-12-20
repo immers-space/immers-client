@@ -238,7 +238,7 @@ export class Activities {
    * Add something to a user collection. The object of this must be an activity,
    * use e.g. the Create actvitiy for a Model object to add it to the 'avatars' collection
    * @param  {(Activities.IRI|Activities.APObject)} activity - id or object of the activity to be added
-   * @param  {(Activities.IRI|Activities.string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
+   * @param  {(Activities.IRI|string)} target - Collection identifier from actor.streams, or collection name to be converted into an identifier
    */
   add (activity, target) {
     return this.postActivity({
@@ -247,7 +247,7 @@ export class Activities {
       object: typeof activity === 'string' ? activity : activity.id,
       target: target.startsWith('https://')
         ? target
-        : `https://${getURLPart(this.homeImmer, 'host')})/collection/${this.actor.preferredUsername}/${target}`
+        : `https://${getURLPart(this.homeImmer, 'host')}/collection/${this.actor.preferredUsername}/${target}`
     })
   }
 
