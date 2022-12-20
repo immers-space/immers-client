@@ -23,6 +23,9 @@ try {
       if (scriptArgs.save === 'true') {
         hud.setAttribute('allow-storage', 'true')
       }
+      if (scriptArgs.role) {
+        hud.setAttribute('access-role', scriptArgs.role)
+      }
       document.body.appendChild(hud)
     }
   }
