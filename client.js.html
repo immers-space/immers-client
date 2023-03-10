@@ -159,8 +159,10 @@ import { clearStore, createStore } from './store.js'
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  * @property {string} messageHTML - Sanitized HTML message content. Safe to insert into DOM. Media wrapped in IMG/VIDEO will have class immers-message-media
  * @property {string} [mediaType] - 'image' or 'video' if the message is a media object
- * @property {string} [mediaURL] - source url if the message is a media object
- * (messageHTML will contain appropriate tags to display the media, but mediaURL can be used if you need custom display)
+ * @property {string} [url] - source url if the message is a media object
+ * (messageHTML will contain appropriate tags to display the media, but url can be used if you need custom display)
+ * @property {Destination} [destination] - location tied to the message, if available
+ * @property {object} _originalActivity - the unmodified ActivityPub activity that is the source of the message
  */
 
 /**
@@ -573,7 +575,8 @@ export class ImmersClient extends window.EventTarget {
    * correct MIME. When video is a url, an existing video is shared without
    * re-uploading. It's better to upload a file so that the user's home
    * immer can ensure it remains available.
-   * privacy level determines who receives and can acccess the message.
+   *
+   * Privacy level determines who receives and can access the message.
    * direct: Only those named in `to` receive the message.
    * friends: Direct plus friends list.
    * public: Direct plus Friends plus accessible via URL for sharing.
@@ -584,6 +587,28 @@ export class ImmersClient extends window.EventTarget {
    */
   sendVideo (video, privacy, to = []) {
     return this.activities.video(video, to, privacy)
+  }
+
+  /**
+   * Upload and optionally share a 3D model.
+   * GLB is preferred. Other single-file model formats can be uploaded,
+   * but may not be supported when shared to other immers. The blob's
+   * type attribute must contain the correct MIME.
+   *
+   * The privacy and to arguments determine who receives and can access a post featuring the uploaded model.
+   * For some uses, like collecting a new avatar, you may omit these to not share a post
+   * (this user will still be able to see the model in their outbox).
+   * direct: Only those named in `to` receive the message.
+   * friends: Direct plus friends list.
+   * public: Direct plus Friends plus accessible via URL for sharing.
+   * @param {string} name - Label for the model
+   * @param  {(File|Blob)} glb - the 3D model file
+   * @param  {(File|Blob)} [icon] - optional 2d image preview for the model
+   * @param {string} [privacy] - 'direct', 'friends', or 'public'
+   * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   */
+  async sendModel (name, glb, icon, privacy = 'direct', to = []) {
+    return this.activities.model(name, glb, icon, to, privacy)
   }
 
   /**
@@ -1101,7 +1126,11 @@ export class ImmersClient extends window.EventTarget {
       id: activity.id,
       type: 'other',
       sender: ImmersClient.ProfileFromActor(activity.actor),
-      timestamp: activity.published ? new Date(activity.published) : new Date()
+      timestamp: activity.published ? new Date(activity.published) : new Date(),
+      _originalActivity: activity
+    }
+    if (activity.context?.type === 'Place') {
+      message.destination = ImmersClient.DestinationFromPlace(activity.context)
     }
     message.__unsafeMessageHTML = activity.object?.content || activity.content
     switch (activity.type) {
