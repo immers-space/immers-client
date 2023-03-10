@@ -3,6 +3,7 @@
 ### Added
 
 * New CSS custom properties for immers hud, `--main-margin`, `--inner-margin`, `--handle-input-width`
+* Additional props on Messages: `destination` and `_originalActivity`
 
 ### Fixed
 

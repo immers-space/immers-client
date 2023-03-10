@@ -60,7 +60,9 @@ import { clearStore, createStore } from './store.js'
  * @property {string} messageHTML - Sanitized HTML message content. Safe to insert into DOM. Media wrapped in IMG/VIDEO will have class immers-message-media
  * @property {string} [mediaType] - 'image' or 'video' if the message is a media object
  * @property {string} [url] - source url if the message is a media object
- * (messageHTML will contain appropriate tags to display the media, but mediaURL can be used if you need custom display)
+ * (messageHTML will contain appropriate tags to display the media, but url can be used if you need custom display)
+ * @property {Destination} [destination] - location tied to the message, if available
+ * @property {object} _originalActivity - the unmodified ActivityPub activity that is the source of the message
  */
 
 /**
@@ -473,7 +475,8 @@ export class ImmersClient extends window.EventTarget {
    * correct MIME. When video is a url, an existing video is shared without
    * re-uploading. It's better to upload a file so that the user's home
    * immer can ensure it remains available.
-   * privacy level determines who receives and can acccess the message.
+   *
+   * Privacy level determines who receives and can access the message.
    * direct: Only those named in `to` receive the message.
    * friends: Direct plus friends list.
    * public: Direct plus Friends plus accessible via URL for sharing.
@@ -1001,7 +1004,11 @@ export class ImmersClient extends window.EventTarget {
       id: activity.id,
       type: 'other',
       sender: ImmersClient.ProfileFromActor(activity.actor),
-      timestamp: activity.published ? new Date(activity.published) : new Date()
+      timestamp: activity.published ? new Date(activity.published) : new Date(),
+      _originalActivity: activity
+    }
+    if (activity.context?.type === 'Place') {
+      message.destination = ImmersClient.DestinationFromPlace(activity.context)
     }
     message.__unsafeMessageHTML = activity.object?.content || activity.content
     switch (activity.type) {
