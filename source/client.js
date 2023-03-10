@@ -490,6 +490,28 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
+   * Upload and optionally share a 3D model.
+   * GLB is preferred. Other single-file model formats can be uploaded,
+   * but may not be supported when shared to other immers. The blob's
+   * type attribute must contain the correct MIME.
+   *
+   * The privacy and to arguments determine who receives and can access a post featuring the uploaded model.
+   * For some uses, like collecting a new avatar, you may omit these to not share a post
+   * (this user will still be able to see the model in their outbox).
+   * direct: Only those named in `to` receive the message.
+   * friends: Direct plus friends list.
+   * public: Direct plus Friends plus accessible via URL for sharing.
+   * @param {string} name - Label for the model
+   * @param  {(File|Blob)} glb - the 3D model file
+   * @param  {(File|Blob)} [icon] - optional 2d image preview for the model
+   * @param {string} [privacy] - 'direct', 'friends', or 'public'
+   * @param {string[]} [to] - Addressees. Accepts Immers handles (username[domain.name]) and ActivityPub IRIs
+   */
+  async sendModel (name, glb, icon, privacy = 'direct', to = []) {
+    return this.activities.model(name, glb, icon, to, privacy)
+  }
+
+  /**
    * This method will either initiate a new friend request or,
    * if a request has already been received from the target user,
    * accept a pending friend request. To create a friend connection,
