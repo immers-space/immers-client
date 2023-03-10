@@ -1,17 +1,27 @@
 import htmlTemplate from './ImmersHUD.html'
 import styles from './ImmersHUD.css'
-import { ImmersClient, Destination } from '../client'
+import { ImmersClient } from '../client'
 import { roles } from '../authUtils'
 
 /**
  * Web Component heads-up display for Immers profile login.
- * Unobtrusively connects your Immersive Web experience to the Immers Space
- * metaverse, allowing immersers to connect with their profiles from your site
+ * Unobtrusively connects your Immersive Web experience to Immers Space,
+ * allowing immersers to connect with their profiles from your site
  * and share your site with their friends. Grants access to profile information
  * so you can bring users' preferred identity into your experience.
  *
  * The HTML attributes are listed in the Properties table below.
  * Properties you can access from the element object directly are listed under Members.
+ *
+ * The following CSS properties can be set on the immers-hud:
+ *
+ * color: text color for floating text
+ *
+ * --main-margin: distance from edge of window in overlay mode
+ *
+ * --inner-margin: gap between elements
+ *
+ * --handle-input-width: size of the handle input
  *
  * @class ImmersHUD
  *
@@ -22,8 +32,8 @@ import { roles } from '../authUtils'
  * @prop {string} [access-role] - Requested authorization scope from {@link roles}. Users are given the option to alter this and grant a different level. (default: modAdditive)
  * @prop {string} [destination-name] Title for your experience (default: meta[og:description], document.title)
  * @prop {string} [destination-url] Sharable URL for your experience (default: current url)
- * @prop {strong} [destination-description] Social share preview test (default meta[og:description], meta[twitter:description])
- * @prop {strong} [destination-image] Image url for social share previews (default: meta[og:image], meta[twitter:image])
+ * @prop {string} [destination-description] Social share preview test (default meta[og:description], meta[twitter:description])
+ * @prop {string} [destination-image] Image url for social share previews (default: meta[og:image], meta[twitter:image])
  * @prop {string} [local-immer] Origin of your local Immers Server, if you have one
  * @prop {boolean} [allow-storage] Enable local storage of user identity to reconnect when returning to page
  * @prop {'true'|'false'} open - Toggles between icon and full HUD view (default: true is user's handle is saved but login is needed, false otherwise)
@@ -69,7 +79,7 @@ export class ImmersHUD extends window.HTMLElement {
       return
     }
     // Immers client setup
-    /** @type {Destination} */
+    /** @type {import('../client').Destination} */
     const destination = {
       name: this.getAttribute('destination-name') || this.#meta('og:title') || document.title,
       url: this.getAttribute('destination-url') || window.location.href

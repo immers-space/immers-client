@@ -1,3 +1,14 @@
+## v2.15.0 (2023-03-10)
+
+### Added
+
+* New CSS custom properties for immers hud, `--main-margin`, `--inner-margin`, `--handle-input-width`
+
+### Fixed
+
+* `<immers-hud>` no longer overlows screen width on mobile displays
+* Wrong property name in Message typedoc, media urls are in the `url` property not `mediaUrl`
+
 ## V2.14.0 (2022-12-20)
 
 ### Added

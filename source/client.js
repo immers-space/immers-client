@@ -59,7 +59,7 @@ import { clearStore, createStore } from './store.js'
  * You must sanitize this string before inserting into the DOM to avoid XSS attacks.
  * @property {string} messageHTML - Sanitized HTML message content. Safe to insert into DOM. Media wrapped in IMG/VIDEO will have class immers-message-media
  * @property {string} [mediaType] - 'image' or 'video' if the message is a media object
- * @property {string} [mediaURL] - source url if the message is a media object
+ * @property {string} [url] - source url if the message is a media object
  * (messageHTML will contain appropriate tags to display the media, but mediaURL can be used if you need custom display)
  */
 

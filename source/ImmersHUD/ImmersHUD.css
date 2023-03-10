@@ -1,6 +1,10 @@
 :host {
   padding: 3px;
   display: flex;
+  max-width: 100vw;
+  --main-margin: 10px;
+  --inner-margin: 10px;
+  --handle-input-width: 250px;
 }
 
 :host([position]) {
@@ -8,19 +12,19 @@
 }
 
 :host([position^=bottom]) {
-  bottom: 10px;
+  bottom: var(--main-margin);
 }
 
 :host([position^=top]) {
-  top: 10px;
+  top: var(--main-margin);
 }
 
 :host([position$=left]) {
-  left: 10px;
+  left: var(--main-margin);
 }
 
 :host([position$=right]) {
-  right: 10px;
+  right: var(--main-margin);
 }
 
 :host([position$=right]) .immers-info-wrapper {
@@ -28,11 +32,11 @@
 }
 
 :host([position$=left]) .immers-info-wrapper>:first-child {
-  margin-right: 10px;
+  margin-right: var(--inner-margin);
 }
 
 :host([position$=right]) .immers-info-wrapper>:first-child {
-  margin-left: 10px;
+  margin-left: var(--inner-margin);
 }
 
 .immers-info-wrapper {
@@ -65,6 +69,7 @@
   background-repeat: no-repeat;
   cursor: pointer;
   border-radius: 50px;
+  flex-shrink: 0;
 }
 
 #notification {
@@ -81,7 +86,7 @@
 #login-container, #status-container {
   display: flex;
   align-items: flex-end;
-  gap: 10px;
+  gap: var(--inner-margin);
 }
 
 .immers-input, .immers-button {
@@ -115,7 +120,11 @@
 }
 
 .immers-login-input {
-  width: 211px;
+  width: var(--handle-input-width);
+}
+
+.immers-login-button::after {
+  content: 'Immers Login';
 }
 
 .immers-button:hover, .immers-info-logo:hover {
@@ -146,4 +155,16 @@
 .vertical {
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 768px) {
+  :host {
+    --main-margin: 5px;
+    --inner-margin: 5px;
+    --handle-input-width: 200px;
+  }
+
+  .immers-login-button::after {
+    content: 'Login';
+  }
 }
