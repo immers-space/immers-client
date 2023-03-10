@@ -79,7 +79,6 @@ export class ImmersHUD extends window.HTMLElement {
       return
     }
     // Immers client setup
-    /** @type {import('../client').Destination} */
     const destination = {
       name: this.getAttribute('destination-name') || this.#meta('og:title') || document.title,
       url: this.getAttribute('destination-url') || window.location.href
