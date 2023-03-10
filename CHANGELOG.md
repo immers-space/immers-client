@@ -1,3 +1,16 @@
+## v2.15.0 (2023-03-10)
+
+### Added
+
+* New CSS custom properties for immers hud, `--main-margin`, `--inner-margin`, `--handle-input-width`
+* Additional props on Messages: `destination` and `_originalActivity`
+* `ImmersClient.sendModel` high-level function for uploading and optionally sharing 3d models
+
+### Fixed
+
+* `<immers-hud>` no longer overflows screen width on mobile displays
+* Wrong property name in Message typedoc, media urls are in the `url` property not `mediaUrl`
+
 ## V2.14.0 (2022-12-20)
 
 ### Added
