@@ -1,4 +1,4 @@
-## Unreleased
+## v2.16.0 (2023-03-29)
 
 ### Added
 
@@ -7,7 +7,7 @@ for users from the local immer
 
 ### Security
 
-* Update jsdoc and better-docs to resolve npm audits
+* Update jsdoc, better-docs and other deps to resolve npm audits
 
 ## v2.15.0 (2023-03-10)
 
