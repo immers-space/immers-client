@@ -5,6 +5,10 @@
 * `ImmersClient.logout` gains optional `alsoLogoutFromImmer` argument to fully terminate login sessions
 for users from the local immer
 
+### Security
+
+* Update jsdoc and better-docs to resolve npm audits
+
 ## v2.15.0 (2023-03-10)
 
 ### Added
