@@ -9,7 +9,7 @@
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="./build/entry.js"></script>
+  <script src="build/entry.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,7 +79,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#SCOPES">SCOPES</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Globals</h3><ul><li><a href="global.html#AuthResult">AuthResult</a></li><li><a href="global.html#Destination">Destination</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#FriendStatus">FriendStatus</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#ImmersClientNewMessageEvent">ImmersClientNewMessageEvent</a></li><li><a href="global.html#Message">Message</a></li><li><a href="global.html#ParsedHandle">ParsedHandle</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#SCOPES">SCOPES</a></li><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                 
             </nav>
         </div>
@@ -1183,1074 +1183,6 @@ during the authorization process.</p>
         <div class='vertical-section'>
             <h1>Methods</h1>
             <div class="members">
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".DestinationFromPlace">
-        <a class="href-link" href="#.DestinationFromPlace">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                DestinationFromPlace<span class="signature">(place)</span><span class="type-signature"> &rarr; {<a href="global.html#Destination">Destination</a>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Extract a Destination from a place object</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>place</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line961">line 961</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Destination">Destination</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".FriendsSorter">
-        <a class="href-link" href="#.FriendsSorter">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                FriendsSorter<span class="signature">(a, b)</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Array.sort compareFunction to sort a friends list putting online
-friends at the top and the rest by most recent update</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>a</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>b</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line943">line 943</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".FriendStatusFromActivity">
-        <a class="href-link" href="#.FriendStatusFromActivity">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                FriendStatusFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#FriendStatus">FriendStatus</a>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Extract friend status information from their most recent location activity</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>activity</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line982">line 982</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".MessageFromActivity">
-        <a class="href-link" href="#.MessageFromActivity">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                MessageFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#Message">Message</a>|null}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Extract a Message from an activity object</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>activity</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1036">line 1036</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Message">Message</a></code>
-|
-
-<code class="param-type">null</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".ProfileFromActor">
-        <a class="href-link" href="#.ProfileFromActor">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                ProfileFromActor<span class="signature">(actor)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Convert ActivityPub Actor format to Immers profile</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>actor</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="Activities.html#.APActor">Activities.APActor</a></code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>ActivityPub Actor object</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1101">line 1101</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type"><a href="global.html#Profile">Profile</a></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id=".URLFromProperty">
-        <a class="href-link" href="#.URLFromProperty">#</a>
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            
-                URLFromProperty<span class="signature">(prop)</span><span class="type-signature"> &rarr; {string|undefined}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Links in ActivityPub objects can take a variety of forms.
-Find and return the URL string.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>prop</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type"><a href="Activities.html#.APObject">Activities.APObject</a></code>
-|
-
-<code class="param-type">object</code>
-|
-
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client.js.html" class="button">View Source</a>
-            <span>
-                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1126">line 1126</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>URL string, if present</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">string</code>
-|
-
-<code class="param-type">undefined</code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
             
                 <div class="member">
 
@@ -8416,6 +7348,1074 @@ client.sendChatMessage('Hey friends, I am connected!', 'friends')</code></pre>
 
 </div>
             
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".DestinationFromPlace">
+        <a class="href-link" href="#.DestinationFromPlace">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                DestinationFromPlace<span class="signature">(place)</span><span class="type-signature"> &rarr; {<a href="global.html#Destination">Destination</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Extract a Destination from a place object</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>place</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APPlace">Activities.APPlace</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line961">line 961</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Destination">Destination</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".FriendStatusFromActivity">
+        <a class="href-link" href="#.FriendStatusFromActivity">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                FriendStatusFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#FriendStatus">FriendStatus</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Extract friend status information from their most recent location activity</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>activity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line982">line 982</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".FriendsSorter">
+        <a class="href-link" href="#.FriendsSorter">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                FriendsSorter<span class="signature">(a, b)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Array.sort compareFunction to sort a friends list putting online
+friends at the top and the rest by most recent update</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>a</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>b</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="global.html#FriendStatus">FriendStatus</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line943">line 943</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".MessageFromActivity">
+        <a class="href-link" href="#.MessageFromActivity">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                MessageFromActivity<span class="signature">(activity)</span><span class="type-signature"> &rarr; {<a href="global.html#Message">Message</a>|null}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Extract a Message from an activity object</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>activity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActivity">Activities.APActivity</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1036">line 1036</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Message">Message</a></code>
+|
+
+<code class="param-type">null</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".ProfileFromActor">
+        <a class="href-link" href="#.ProfileFromActor">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                ProfileFromActor<span class="signature">(actor)</span><span class="type-signature"> &rarr; {<a href="global.html#Profile">Profile</a>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Convert ActivityPub Actor format to Immers profile</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>actor</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APActor">Activities.APActor</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>ActivityPub Actor object</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1101">line 1101</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type"><a href="global.html#Profile">Profile</a></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id=".URLFromProperty">
+        <a class="href-link" href="#.URLFromProperty">#</a>
+        
+            
+                <span class='tag'>static</span>
+            
+        
+        <span class="code-name">
+            
+                URLFromProperty<span class="signature">(prop)</span><span class="type-signature"> &rarr; {string|undefined}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Links in ActivityPub objects can take a variety of forms.
+Find and return the URL string.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>prop</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Activities.html#.APObject">Activities.APObject</a></code>
+|
+
+<code class="param-type">object</code>
+|
+
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="client.js.html" class="button">View Source</a>
+            <span>
+                <a href="client.js.html">client.js</a>, <a href="client.js.html#line1126">line 1126</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>URL string, if present</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">string</code>
+|
+
+<code class="param-type">undefined</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
             </div>
         </div>
     
@@ -8434,7 +8434,7 @@ client.sendChatMessage('Hey friends, I am connected!', 'friends')</code></pre>
             
             <footer class="footer">
                 <div class="content has-text-centered">
-                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
                     <p class="sidebar-created-by">
                         <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
                         <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
