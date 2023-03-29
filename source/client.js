@@ -292,11 +292,24 @@ export class ImmersClient extends window.EventTarget {
   }
 
   /**
-   * Disconnect from User's immer and delete any traces of user identity
+   * Disconnect from User's immer and delete any traces of user identity.
+   * If the user is from the local immer on the same apex domain
+   * ({@link https://github.com/immers-space/immers#api-access more info}),
+   * alsoLogoutFromImmer can cause the
+   * login session on the immer to be terminated as well for a complete logout.
+   * @param {boolean} [alsoLogoutFromImmer] - terminate the login session on the local immer as well
+   * @returns {Promise<void>}
    */
-  logout () {
+  async logout (alsoLogoutFromImmer) {
+    const usersImmer = this.profile.homeImmer
     clearStore(this.#store)
     this.disconnect()
+    if (alsoLogoutFromImmer && this.localImmer === usersImmer) {
+      await fetch(`https://${this.localImmer}/auth/logout`, {
+        method: 'POST',
+        credentials: 'include'
+      }).catch(err => console.warn('Error logging out from immer', err))
+    }
   }
 
   /**
