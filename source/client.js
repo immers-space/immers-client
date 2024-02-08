@@ -189,16 +189,18 @@ export class ImmersClient extends window.EventTarget {
 
   /**
    * Initialize client with an existing credential,
-   * e.g. one obtained through a service account
+   * e.g. one obtained through a service account or one returned from {@link catchToken}
+   * when performing a redirect based OAuth flow
    * @param  {string} token - OAuth2 Access Token
    * @param  {string} homeImmer - Domain (host) for user's home immer
    * @param  {(string|string[])} authorizedScopes - Scopes authorized for the token
+   * @param {object} [sessionInfo] - optional session data provided alongside token
    * @returns {Promise<boolean>} true if the login was successful
    */
-  loginWithToken (token, homeImmer, authorizedScopes) {
+  loginWithToken (token, homeImmer, authorizedScopes, sessionInfo) {
     homeImmer = getURLPart(homeImmer, 'origin')
     authorizedScopes = preprocessScopes(authorizedScopes)
-    this.#store.credential = { token, homeImmer, authorizedScopes }
+    this.#store.credential = { token, homeImmer, authorizedScopes, sessionInfo }
     return this.restoreSession()
   }
 

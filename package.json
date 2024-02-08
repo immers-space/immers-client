@@ -11,7 +11,7 @@
     "test": "standard",
     "doc": "jsdoc -c jsdoc.config.json -d doc -r source/. -R README.md && cp -R readme_files doc/",
     "build": "webpack --config webpack.prod.js",
-    "type": "tsc index.js source/**/*.js -t es2020 --declaration --skipLibCheck --allowJs --emitDeclarationOnly --moduleResolution node --outDir types",
+    "type": "tsc index.js -t es2020 --declaration --skipLibCheck --allowJs --emitDeclarationOnly --moduleResolution node --outDir types",
     "dev": "webpack serve --open --config webpack.dev.js",
     "prepare": "npm run type && npm run build"
   },

@@ -42,8 +42,20 @@ export const allScopes = [
 export const roles = ['public', 'friends', 'modAdditive', 'modFull']
 
 /**
+ * @typedef {object} TokenResult
+ * @property {string} token OAuth access token
+ * @property {string} homeImmer User's home Immers Server origin
+ * @property {Array<string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
+ * @property {object} sessionInfo Any other params returned from the authorization server with the token
+ */
+/**
  * Retrieve OAuth access token and authorization details from URL after
- * redirect and pass it back to the opening window if in a pop-up
+ * redirect and pass it back to the opening window if in a pop-up. Returns true
+ * if a token was found and passed from popup to opener. Returns the token response
+ * data if a token was found but the window is not a popup
+ * (e.g. to pass on to [ImmersClient.loginWithToken]{@link ImmersClient#loginWithToken}).
+ * Returns false if no token found.
+ * @returns {boolean | TokenResult}
  */
 export function catchToken () {
   const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -58,16 +70,23 @@ export function catchToken () {
     const sessionInfo = Object.fromEntries(hashParams)
     window.location.hash = ''
     // If this is an oauth popup, pass the results back up and close
-    // todo check origin
-    if (window.opener) {
-      window.opener.postMessage({
-        type: 'ImmersAuth',
-        token,
-        homeImmer,
-        authorizedScopes,
-        sessionInfo
-      })
-      return true
+    try {
+      if (window.opener?.location.origin === window.location.origin) {
+        window.opener.postMessage({
+          type: 'ImmersAuth',
+          token,
+          homeImmer,
+          authorizedScopes,
+          sessionInfo
+        })
+        return true
+      }
+    } catch {}
+    return {
+      token,
+      homeImmer,
+      authorizedScopes,
+      sessionInfo
     }
   } else if (hashParams.has('error')) {
     window.opener?.postMessage({ type: 'ImmersAuth', error: hashParams.get('error') })

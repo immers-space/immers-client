@@ -10,7 +10,7 @@ try {
   console.warn(`Unable to process query arguments to script, ${err.message}`)
 }
 (async function () {
-  if (catchToken()) {
+  if (catchToken() === true) {
     // token was passed to opener window; this is just a popup
     return
   }
