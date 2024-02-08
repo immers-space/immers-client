@@ -1,3 +1,10 @@
+## Unreleased
+
+### Changed
+
+* `catchToken` will now return the token and associated data if it does not detect an opener window to pass the data to
+* `ImmersClient.loginWithToken` now also accepts sessionInfo parameter to be fully equivalent with regular login
+
 ## v2.16.0 (2023-03-29)
 
 ### Added

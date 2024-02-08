@@ -52,7 +52,9 @@ export const roles = ['public', 'friends', 'modAdditive', 'modFull']
  * Retrieve OAuth access token and authorization details from URL after
  * redirect and pass it back to the opening window if in a pop-up. Returns true
  * if a token was found and passed from popup to opener. Returns the token response
- * data if a token was found but the window is not a popup. Returns false if no token found.
+ * data if a token was found but the window is not a popup
+ * (e.g. to pass on to [ImmersClient.loginWithToken]{@link ImmersClient#loginWithToken}).
+ * Returns false if no token found.
  * @returns {boolean | TokenResult}
  */
 export function catchToken () {
