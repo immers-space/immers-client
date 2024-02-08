@@ -81,7 +81,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Globals</h3><ul><li><a href="global.html#AuthResult">AuthResult</a></li><li><a href="global.html#Destination">Destination</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#FriendStatus">FriendStatus</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#ImmersClientNewMessageEvent">ImmersClientNewMessageEvent</a></li><li><a href="global.html#Message">Message</a></li><li><a href="global.html#ParsedHandle">ParsedHandle</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#SCOPES">SCOPES</a></li><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul><h3><a href="global.html">Global</a></h3></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Activities.html">Activities</a></li></ul><h3>Classes</h3><ul><li><a href="ImmersClient.html">ImmersClient</a></li><li><a href="ImmersHUD.html">ImmersHUD</a></li><li><a href="ImmersSocket_ImmersSocket.html">ImmersSocket</a></li></ul><h3>Events</h3><ul><li><a href="global.html#event:immers-client-blocked-update">immers-client-blocked-update</a></li><li><a href="global.html#event:immers-client-connected">immers-client-connected</a></li><li><a href="global.html#event:immers-client-disconnected">immers-client-disconnected</a></li><li><a href="global.html#event:immers-client-friends-update">immers-client-friends-update</a></li><li><a href="global.html#event:immers-client-new-message">immers-client-new-message</a></li><li><a href="global.html#event:immers-client-profile-update">immers-client-profile-update</a></li></ul><h3>Globals</h3><ul><li><a href="global.html#AuthResult">AuthResult</a></li><li><a href="global.html#Destination">Destination</a></li><li><a href="global.html#DestinationOAuthPopup">DestinationOAuthPopup</a></li><li><a href="global.html#FriendStatus">FriendStatus</a></li><li><a href="global.html#ImmerOAuthPopup">ImmerOAuthPopup</a></li><li><a href="global.html#ImmersClientNewMessageEvent">ImmersClientNewMessageEvent</a></li><li><a href="global.html#Message">Message</a></li><li><a href="global.html#ParsedHandle">ParsedHandle</a></li><li><a href="global.html#Profile">Profile</a></li><li><a href="global.html#SCOPES">SCOPES</a></li><li><a href="global.html#TokenResult">TokenResult</a></li><li><a href="global.html#allScopes">allScopes</a></li><li><a href="global.html#catchToken">catchToken</a></li><li><a href="global.html#getURLPart">getURLPart</a></li><li><a href="global.html#htmlAnchorForPlace">htmlAnchorForPlace</a></li><li><a href="global.html#oauthPopup">oauthPopup</a></li><li><a href="global.html#parseHandle">parseHandle</a></li><li><a href="global.html#roles">roles</a></li></ul><h3><a href="global.html">Global</a></h3></div>
                 
             </nav>
         </div>
@@ -142,8 +142,20 @@ export const allScopes = [
 export const roles = ['public', 'friends', 'modAdditive', 'modFull']
 
 /**
+ * @typedef {object} TokenResult
+ * @property {string} token OAuth access token
+ * @property {string} homeImmer User's home Immers Server origin
+ * @property {Array&lt;string>} authorizedScopes Scopes granted by user (may differ from requested scopes)
+ * @property {object} sessionInfo Any other params returned from the authorization server with the token
+ */
+/**
  * Retrieve OAuth access token and authorization details from URL after
- * redirect and pass it back to the opening window if in a pop-up
+ * redirect and pass it back to the opening window if in a pop-up. Returns true
+ * if a token was found and passed from popup to opener. Returns the token response
+ * data if a token was found but the window is not a popup
+ * (e.g. to pass on to [ImmersClient.loginWithToken]{@link ImmersClient#loginWithToken}).
+ * Returns false if no token found.
+ * @returns {boolean | TokenResult}
  */
 export function catchToken () {
   const hashParams = new URLSearchParams(window.location.hash.substring(1))
@@ -158,16 +170,23 @@ export function catchToken () {
     const sessionInfo = Object.fromEntries(hashParams)
     window.location.hash = ''
     // If this is an oauth popup, pass the results back up and close
-    // todo check origin
-    if (window.opener) {
-      window.opener.postMessage({
-        type: 'ImmersAuth',
-        token,
-        homeImmer,
-        authorizedScopes,
-        sessionInfo
-      })
-      return true
+    try {
+      if (window.opener?.location.origin === window.location.origin) {
+        window.opener.postMessage({
+          type: 'ImmersAuth',
+          token,
+          homeImmer,
+          authorizedScopes,
+          sessionInfo
+        })
+        return true
+      }
+    } catch {}
+    return {
+      token,
+      homeImmer,
+      authorizedScopes,
+      sessionInfo
     }
   } else if (hashParams.has('error')) {
     window.opener?.postMessage({ type: 'ImmersAuth', error: hashParams.get('error') })
