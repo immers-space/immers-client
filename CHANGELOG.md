@@ -1,4 +1,4 @@
-## Unreleased
+## v2.17.0 (2024-02-08)
 
 ### Changed
 
